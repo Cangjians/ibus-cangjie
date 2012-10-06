@@ -1,0 +1,25 @@
+This is an IBus engine for users of the Cangjie and Quick input methods.
+
+It is primarily intended to Hong Kong people who want to input Traditional
+Chinese, as they are (by far) the majority of Cangjie and Quick users.
+
+However, it should work for others as well (e.g to input Simplified Chinese).
+
+Getting the source code
+=======================
+
+  TODO...
+
+Installing
+==========
+
+  TODO...
+
+Legal
+=====
+
+This software is released under the terms of the GNU Lesser General Public
+License (LGPL) version 3 or any later version.
+
+We won't ask you to sign a copyright assignment or any other long and tedious
+legal document, so just send us your patches!
