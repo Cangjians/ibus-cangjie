@@ -1,0 +1,77 @@
+<!--
+Copyright (c) 2012 - The IBus Cangjie authors
+
+This file is part of ibus-cangjie, the IBus Cangjie input method engine. 
+
+ibus-cangjie is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+ibus-cangjie is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with ibus-cangjie.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<?xml version=\"1.0\" encoding=\"utf-8\"?>
+<component>
+  <name>org.freedesktop.IBus.Cangjie</name>
+  <description>Cangjie Component</description>
+  <exec>${libexecdir}/ibus-engine-cangjie --ibus</exec>
+  <version>@VERSION@</version>
+  <author>The IBus Cangjie authors</author>
+  <license>LGPLv3+</license>
+  <homepage>http://no.home.page.yet/</homepage>
+  <textdomain>ibus-cangjie</textdomain>
+
+  <engines>
+    <engine>
+      <name>cangjie3</name>
+      <longname>Cangjie Classic</longname>
+      <description>Cangjie Input Method, version 3, as used on other operating systems</description>
+      <language>zh_HK</language>
+      <layout>us</layout>
+      <symbol>倉頡</symbol>  
+      <license>LGPLv3+</license>
+      <author>The IBus Cangjie authors</author>
+      <rank>0</rank>
+    </engine>
+    <engine>
+      <name>cangjie5</name>
+      <longname>Cangjie</longname>
+      <description>Cangjie Input Method, version 5</description>
+      <language>zh_HK</language>
+      <layout>us</layout>
+      <symbol>倉頡</symbol>  
+      <license>LGPLv3+</license>
+      <author>The IBus Cangjie authors</author>
+      <rank>0</rank>
+    </engine>
+    <engine>
+      <name>quick3</name>
+      <longname>Quick Classic</longname>
+      <description>Quick Input Method, version 3, as used on other operating systems</description>
+      <language>zh_HK</language>
+      <layout>us</layout>
+      <symbol>速成</symbol>  
+      <license>LGPLv3+</license>
+      <author>The IBus Cangjie authors</author>
+      <rank>0</rank>
+    </engine>
+    <engine>
+      <name>quick5</name>
+      <longname>Quick</longname>
+      <description>Quick Input Method, version 5</description>
+      <language>zh_HK</language>
+      <layout>us</layout>
+      <symbol>速成</symbol>  
+      <license>LGPLv3+</license>
+      <author>The IBus Cangjie authors</author>
+      <rank>0</rank>
+    </engine>
+  </engines>
+</component>
