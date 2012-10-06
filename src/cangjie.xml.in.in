@@ -1,7 +1,7 @@
 <!--
 Copyright (c) 2012 - The IBus Cangjie authors
 
-This file is part of ibus-cangjie, the IBus Cangjie input method engine. 
+This file is part of ibus-cangjie, the IBus Cangjie input method engine.
 
 ibus-cangjie is free software: you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as published by
@@ -35,7 +35,7 @@ along with ibus-cangjie.  If not, see <http://www.gnu.org/licenses/>.
       <description>Cangjie Input Method, version 3, as used on other operating systems</description>
       <language>zh_HK</language>
       <layout>us</layout>
-      <symbol>倉頡</symbol>  
+      <symbol>倉頡</symbol>
       <license>LGPLv3+</license>
       <author>The IBus Cangjie authors</author>
       <rank>0</rank>
@@ -46,7 +46,7 @@ along with ibus-cangjie.  If not, see <http://www.gnu.org/licenses/>.
       <description>Cangjie Input Method, version 5</description>
       <language>zh_HK</language>
       <layout>us</layout>
-      <symbol>倉頡</symbol>  
+      <symbol>倉頡</symbol>
       <license>LGPLv3+</license>
       <author>The IBus Cangjie authors</author>
       <rank>0</rank>
@@ -57,7 +57,7 @@ along with ibus-cangjie.  If not, see <http://www.gnu.org/licenses/>.
       <description>Quick Input Method, version 3, as used on other operating systems</description>
       <language>zh_HK</language>
       <layout>us</layout>
-      <symbol>速成</symbol>  
+      <symbol>速成</symbol>
       <license>LGPLv3+</license>
       <author>The IBus Cangjie authors</author>
       <rank>0</rank>
@@ -68,7 +68,7 @@ along with ibus-cangjie.  If not, see <http://www.gnu.org/licenses/>.
       <description>Quick Input Method, version 5</description>
       <language>zh_HK</language>
       <layout>us</layout>
-      <symbol>速成</symbol>  
+      <symbol>速成</symbol>
       <license>LGPLv3+</license>
       <author>The IBus Cangjie authors</author>
       <rank>0</rank>
