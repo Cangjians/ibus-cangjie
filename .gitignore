@@ -18,6 +18,6 @@ Rules-quot
 Makevars.template
 ABOUT-NLS
 ltmain.sh
-src/*.xml
-src/*.xml.in
+data/*.xml
+data/*.xml.in
 src/ibus-engine-cangjie

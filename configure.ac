@@ -32,8 +32,9 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Define to the read-only 
 # OUTPUT files
 AC_CONFIG_FILES([
   Makefile
+  data/Makefile
+  data/cangjie.xml.in
   src/Makefile
-  src/cangjie.xml.in
   src/ibus-engine-cangjie
   po/Makefile.in
 ])
