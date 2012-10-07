@@ -11,6 +11,7 @@ m4
 missing
 py-compile
 stamp-h1
+stamp-it
 Rules-quot
 *.sed
 *.sin
@@ -18,6 +19,9 @@ Rules-quot
 Makevars.template
 ABOUT-NLS
 ltmain.sh
+data/*.desktop
 data/*.xml
 data/*.xml.in
 src/ibus-engine-cangjie
+*.swp
+.intltool-merge-cache
