@@ -11,6 +11,8 @@ AM_INIT_AUTOMAKE([1.11 no-dist-gzip dist-xz tar-ustar foreign])
 
 m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
+IT_PROG_INTLTOOL([0.35.0])
+
 # i18n
 AM_GNU_GETTEXT([external])
 AM_GNU_GETTEXT_VERSION(0.17)

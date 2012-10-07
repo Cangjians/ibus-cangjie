@@ -1,6 +1,11 @@
 component_DATA = cangjie.xml
 componentdir = $(datadir)/ibus/component
 
+desktop_in_files = ibus-setup-cangjie.desktop.in
+desktop_DATA = ibus-setup-cangjie.desktop
+desktopdir = $(datadir)/applications
+@INTLTOOL_DESKTOP_RULE@
+
 CLEANFILES = \
 	$(NULL)
 
