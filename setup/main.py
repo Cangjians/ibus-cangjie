@@ -18,11 +18,11 @@
 
 import gettext
 import locale
-import os
 import sys
 
-import gtk
-import ibus
+from gi.repository import GLib
+from gi.repository import Gtk
+from gi.repository import IBus
 
 import config
 
@@ -30,14 +30,15 @@ import config
 _ = lambda a : gettext.dgettext(config.gettext_package, a)
 
 
-class Setup():
+class Setup(object):
     def __init__ (self, bus):
         self.__bus = bus
         self.__config = self.__bus.get_config()
         self.__config.connect("value-changed", self.on_value_changed, None)
 
-        ui_file = os.path.join(os.path.dirname(__file__), "setup.ui")
-        self.__builder = gtk.Builder()
+        ui_file = GLib.build_filenamev([GLib.path_get_dirname(__file__),
+                                       "setup.ui"])
+        self.__builder = Gtk.Builder()
         self.__builder.set_translation_domain(config.gettext_package)
         self.__builder.add_from_file(ui_file)
 
@@ -67,12 +68,13 @@ if __name__ == "__main__":
     locale.bind_textdomain_codeset(config.gettext_package, "UTF-8")
 
     try:
-        bus = ibus.Bus()
+        bus = IBus.Bus()
+
     except:
         message = [_("IBus daemon is not running."),
                    _("Cangjie engine settings cannot be saved.")]
-        dialog = gtk.MessageDialog(type = gtk.MESSAGE_ERROR,
-                                   buttons = gtk.BUTTONS_CLOSE,
+        dialog = Gtk.MessageDialog(type = Gtk.MessageType.ERROR,
+                                   buttons = Gtk.ButtonsType.CLOSE,
                                    message_format = "\n".join(message))
         dialog.run()
         sys.exit(1)
