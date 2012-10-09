@@ -30,6 +30,10 @@ import config
 _ = lambda a : gettext.dgettext(config.gettext_package, a)
 
 
+# TODO: share that with the engine
+punctuation_options = ("Chinese", "English")
+
+
 class Setup(object):
     def __init__ (self, bus):
         self.__bus = bus
@@ -41,6 +45,34 @@ class Setup(object):
         self.__builder = Gtk.Builder()
         self.__builder.set_translation_domain(config.gettext_package)
         self.__builder.add_from_file(ui_file)
+
+        combo = self.__builder.get_object("punctuation_chars")
+        for item in punctuation_options:
+            combo.append_text(item)
+
+        v = self.__read("punctuation_chars")
+        if v is None:
+            v = GLib.Variant("s", "Chinese")
+            self.__write("punctuation_chars", v)
+        combo.set_active(punctuation_options.index(v.get_string()))
+
+        combo.connect("changed", self.on_combo_changed, "punctuation_chars")
+
+        buttons = (("use_new_version", False), ("include_simplified", False),
+                   ("adapt_to_input", False), ("auto_next_chars", False),
+                   )
+
+        for setting_name, setting_default in buttons:
+            button = self.__builder.get_object(setting_name)
+
+            v = self.__read(setting_name)
+            if v is None:
+                v = GLib.Variant('b', setting_default)
+                self.__write(setting_name, v)
+
+            button.set_active(v)
+
+            button.connect("toggled", self.on_button_toggled, setting_name)
 
         # setup dialog
         self.__window = self.__builder.get_object("setup_dialog")
@@ -55,6 +87,12 @@ class Setup(object):
         if section == "engine/Cangjie":
             print("[%s] Option %s was set to %s" % (section, name, value))
             print("     Data: %s" % data)
+
+    def on_button_toggled(self, button, setting_name):
+        self.__write(setting_name, GLib.Variant('b', button.get_active()))
+
+    def on_combo_changed(self, combo, setting_name):
+        self.__write(setting_name, GLib.Variant('s', combo.get_active_text()))
 
     def __read(self, name):
         return self.__config.get_value("engine/Cangjie", name)
