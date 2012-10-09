@@ -30,3 +30,7 @@ data/*.xml.in
 src/ibus-engine-cangjie
 *.swp
 .intltool-merge-cache
+setup/config.py
+*.pyc
+*.pyo
+setup/ibus-setup-cangjie
