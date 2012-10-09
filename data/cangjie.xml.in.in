@@ -30,20 +30,9 @@ along with ibus-cangjie.  If not, see <http://www.gnu.org/licenses/>.
 
   <engines>
     <engine>
-      <name>cangjie3</name>
-      <longname>Cangjie Classic</longname>
-      <description>Cangjie Input Method, version 3, as used on other operating systems</description>
-      <language>zh_HK</language>
-      <layout>us</layout>
-      <symbol>倉頡</symbol>
-      <license>LGPLv3+</license>
-      <author>The IBus Cangjie authors</author>
-      <rank>0</rank>
-    </engine>
-    <engine>
-      <name>cangjie5</name>
+      <name>cangjie</name>
       <longname>Cangjie</longname>
-      <description>Cangjie Input Method, version 5</description>
+      <description>Cangjie Input Method</description>
       <language>zh_HK</language>
       <layout>us</layout>
       <symbol>倉頡</symbol>
@@ -52,20 +41,9 @@ along with ibus-cangjie.  If not, see <http://www.gnu.org/licenses/>.
       <rank>0</rank>
     </engine>
     <engine>
-      <name>quick3</name>
-      <longname>Quick Classic</longname>
-      <description>Quick Input Method, version 3, as used on other operating systems</description>
-      <language>zh_HK</language>
-      <layout>us</layout>
-      <symbol>速成</symbol>
-      <license>LGPLv3+</license>
-      <author>The IBus Cangjie authors</author>
-      <rank>0</rank>
-    </engine>
-    <engine>
-      <name>quick5</name>
+      <name>quick</name>
       <longname>Quick</longname>
-      <description>Quick Input Method, version 5</description>
+      <description>Quick Input Method</description>
       <language>zh_HK</language>
       <layout>us</layout>
       <symbol>速成</symbol>
