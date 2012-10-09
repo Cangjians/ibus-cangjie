@@ -59,10 +59,9 @@
               </packing>
             </child>
             <child>
-              <object class="GtkComboBoxText" id="punctuation_chars">
+              <object class="GtkComboBox" id="punctuation_chars">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="entry_text_column">0</property>
               </object>
               <packing>
                 <property name="expand">False</property>

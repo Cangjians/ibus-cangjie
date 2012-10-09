@@ -31,7 +31,7 @@ _ = lambda a : gettext.dgettext(config.gettext_package, a)
 
 
 # TODO: share that with the engine
-punctuation_options = ("Chinese", "English")
+punctuation_options = {0: "Chinese (full width)", 1: "English (half width)"}
 
 
 class Setup(object):
@@ -47,14 +47,20 @@ class Setup(object):
         self.__builder.add_from_file(ui_file)
 
         combo = self.__builder.get_object("punctuation_chars")
-        for item in punctuation_options:
-            combo.append_text(item)
+
+        store = Gtk.ListStore(int, str)
+        for k, v in punctuation_options.items():
+            store.append((k, v))
+        combo.set_model(store)
+        cell = Gtk.CellRendererText()
+        combo.pack_start(cell, True)
+        combo.add_attribute(cell, "text", 1)
 
         v = self.__read("punctuation_chars")
         if v is None:
-            v = GLib.Variant("s", "Chinese")
+            v = GLib.Variant("i", 0)
             self.__write("punctuation_chars", v)
-        combo.set_active(punctuation_options.index(v.get_string()))
+        combo.set_active(v.unpack())
 
         combo.connect("changed", self.on_combo_changed, "punctuation_chars")
 
@@ -92,7 +98,9 @@ class Setup(object):
         self.__write(setting_name, GLib.Variant('b', button.get_active()))
 
     def on_combo_changed(self, combo, setting_name):
-        self.__write(setting_name, GLib.Variant('s', combo.get_active_text()))
+        tree_iter = combo.get_active_iter()
+        model = combo.get_model()
+        self.__write(setting_name, GLib.Variant('i', model[tree_iter][0]))
 
     def __read(self, name):
         return self.__config.get_value("engine/Cangjie", name)
