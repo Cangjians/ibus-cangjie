@@ -3,7 +3,12 @@ Makefile.in
 Makefile.in.in
 *.m4
 autom4te.cache
-config.*
+config.h*
+config.sub
+config.guess
+config.status
+config.log
+config.rpath
 configure
 install-sh
 ltmail.sh
