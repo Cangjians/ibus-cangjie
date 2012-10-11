@@ -4,6 +4,7 @@ ACLOCAL_AMFLAGS  = -I m4 ${ACLOCAL_FLAGS}
 SUBDIRS = \
 	data \
 	src \
+	setup \
 	po \
 	$(NULL)
 
@@ -29,7 +30,9 @@ superclean:
 	       data/ibus-setup-cangjie.desktop \
 	       data/Makefile data/Makefile.in
 	
-	rm -fr src/ibus-engine-cangjie src/Makefile src/Makefile.in
+	rm -fr src/ibus-engine-cangjie src/Makefile src/Makefile.in *.pyc
+	
+	rm -fr setup/config.py setup/ibus-setup-cangjie setup/*.pyc
 	
 	rm -fr po/Makefile po/Makefile.in po/Makefile.in.in \
 	       po/Makevars.template po/POTFILES po/Rules-quot po/*.sed \

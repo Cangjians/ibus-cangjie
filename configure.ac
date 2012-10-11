@@ -37,8 +37,6 @@ AC_CONFIG_FILES([
   data/Makefile
   data/cangjie.xml.in
   setup/Makefile
-  setup/config.py
-  setup/ibus-setup-cangjie
   src/Makefile
   src/ibus-engine-cangjie
   po/Makefile.in
