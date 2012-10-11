@@ -5,7 +5,7 @@ engine_cangjie_PYTHON = \
 	$(NULL)
 engine_cangjiedir = $(datadir)/ibus-cangjie
 
-bin_SCRIPTS = ibus-engine-cangjie
+libexec_SCRIPTS = ibus-engine-cangjie
 
 CLEANFILES = \
 	*.pyc \
