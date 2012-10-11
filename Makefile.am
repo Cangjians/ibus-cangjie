@@ -27,7 +27,7 @@ superclean:
 	       py-compile stamp-h1
 	
 	rm -fr data/cangjie.xml data/cangjie.xml.in \
-	       data/ibus-setup-cangjie.desktop \
+	       data/*.desktop data/*.desktop.in \
 	       data/Makefile data/Makefile.in
 	
 	rm -fr src/ibus-engine-cangjie src/Makefile src/Makefile.in *.pyc
