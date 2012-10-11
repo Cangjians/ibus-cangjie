@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+_Name=Quick settings
+_Comment=Set preferences for the Quick input method
+Exec=${libexecdir}/ibus-setup-cangjie quick
+Icon=ibus-setup-quick
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=Settings;
+NotShowIn=GNOME;

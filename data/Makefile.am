@@ -1,8 +1,12 @@
 component_DATA = cangjie.xml
 componentdir = $(datadir)/ibus/component
 
-desktop_in_files = ibus-setup-cangjie.desktop.in
-desktop_DATA = ibus-setup-cangjie.desktop
+desktop_in_files = \
+	ibus-setup-cangjie.desktop.in \
+	ibus-setup-quick.desktop.in
+desktop_DATA = \
+	ibus-setup-cangjie.desktop \
+	ibus-setup-quick.desktop
 desktopdir = $(datadir)/applications
 @INTLTOOL_DESKTOP_RULE@
 
@@ -14,6 +18,15 @@ EXTRA_DIST = \
 	$(NULL)
 
 cangjie.xml: cangjie.xml.in
+	$(AM_V_GEN) \
+	( \
+		libexecdir=${libexecdir}; \
+		pkgdatadir=${pkgdatadir}; \
+		s=`cat $<`; \
+		eval "echo \"$${s}\""; \
+	) > $@
+
+%.desktop.in: %.desktop.in.in
 	$(AM_V_GEN) \
 	( \
 		libexecdir=${libexecdir}; \
