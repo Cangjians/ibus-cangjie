@@ -16,16 +16,12 @@
 # along with ibus-cangjie.  If not, see <http://www.gnu.org/licenses/>.
 
 
-import argparse
 import gettext
-import locale
-import sys
 
 from gi.repository import GLib
 from gi.repository import Gtk
-from gi.repository import IBus
 
-import config
+from . import config
 
 
 _ = lambda a : gettext.dgettext(config.gettext_package, a)
@@ -110,27 +106,3 @@ class Setup(object):
 
     def __write(self, name, v):
         return self.__config.set_value(self.__config_section, name, v)
-
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Cangjie input method setup")
-    parser.add_argument("engine", help="Input method engine to set up",
-                        choices=("cangjie", "quick"))
-    args = parser.parse_args()
-
-    locale.bindtextdomain(config.gettext_package, config.localedir)
-    locale.bind_textdomain_codeset(config.gettext_package, "UTF-8")
-
-    try:
-        bus = IBus.Bus()
-
-    except:
-        message = [_("IBus daemon is not running."),
-                   _("Cangjie engine settings cannot be saved.")]
-        dialog = Gtk.MessageDialog(type = Gtk.MessageType.ERROR,
-                                   buttons = Gtk.ButtonsType.CLOSE,
-                                   message_format = "\n".join(message))
-        dialog.run()
-        sys.exit(1)
-
-    Setup(bus, args.engine).run()

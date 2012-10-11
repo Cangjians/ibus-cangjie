@@ -1,4 +1,5 @@
 setup_cangjie_PYTHON = \
+	__init__.py \
 	main.py \
 	config.py \
 	setup.ui \
