@@ -18,8 +18,8 @@
 # Note: This script is only used to manually start the engine, the IBus daemon
 # will normally just load the XML file.
 
+import argparse
 import locale
-import getopt
 import os
 import sys
 
@@ -57,41 +57,20 @@ class IMApp(object):
 def launch_engine(exec_by_ibus):
     IMApp(exec_by_ibus).run()
 
-def print_help(out, v = 0):
-    print >> out, "-i, --ibus             executed by ibus."
-    print >> out, "-h, --help             show this message."
-    print >> out, "-d, --daemonize        daemonize ibus"
-    sys.exit(v)
-
 def main():
     try:
         locale.setlocale(locale.LC_ALL, "")
     except:
         pass
 
-    exec_by_ibus = False
-    daemonize = False
+    parser = argparse.ArgumentParser(description="Cangjie input method engine")
+    parser.add_argument("--ibus", "-i", action="store_true",
+                        help="let the engine know it is executed by IBus")
+    parser.add_argument("--daemonize", "-d", action="store_true",
+                        help="daemonize the engine")
+    args = parser.parse_args()
 
-    shortopt = "ihd"
-    longopt = ["ibus", "help", "daemonize"]
-
-    try:
-        opts, args = getopt.getopt(sys.argv[1:], shortopt, longopt)
-    except getopt.GetoptError, err:
-        print_help(sys.stderr, 1)
-
-    for o, a in opts:
-        if o in ("-h", "--help"):
-            print_help(sys.stdout)
-        elif o in ("-d", "--daemonize"):
-            daemonize = True
-        elif o in ("-i", "--ibus"):
-            exec_by_ibus = True
-        else:
-            print >> sys.stderr, "Unknown argument: %s" % o
-            print_help(sys.stderr, 1)
-
-    if daemonize:
+    if args.daemonize:
         if os.fork():
             sys.exit()
 
