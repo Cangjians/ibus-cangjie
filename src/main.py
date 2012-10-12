@@ -27,7 +27,7 @@ import ibus
 import factory
 
 class IMApp(object):
-    def __init__(self, exec_by_ibus):
+    def __init__(self, exec_by_ibus, engine_name):
         self.__component = ibus.Component("org.freedesktop.IBus.Cangjie",
                                           "Cangjie Component",
                                           "0.1.0",
@@ -63,10 +63,12 @@ if __name__ == "__main__":
                         help="let the engine know it is executed by IBus")
     parser.add_argument("--daemonize", "-d", action="store_true",
                         help="daemonize the engine")
+    parser.add_argument("engine", choices=("cangjie", "quick"),
+                        help="Input method engine to use")
     args = parser.parse_args()
 
     if args.daemonize:
         if os.fork():
             sys.exit()
 
-    IMApp(args.ibus).run()
+    IMApp(args.ibus, args.engine).run()
