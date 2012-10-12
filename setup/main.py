@@ -81,7 +81,7 @@ class Setup(object):
 
         # setup dialog
         self.__window = self.__builder.get_object("setup_dialog")
-        self.__window.set_title("Preferences for %s" % engine.capitalize())
+        self.__window.set_title("%s settings" % engine.capitalize())
         self.__window.show()
 
     def run(self):
