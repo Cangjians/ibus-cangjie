@@ -15,8 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with ibus-cangjie.  If not, see <http://www.gnu.org/licenses/>.
 
-# Note: This script is only used to manually start the engine, the IBus daemon
-# will normally just load the XML file.
 
 import argparse
 import locale
