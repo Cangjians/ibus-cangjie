@@ -22,27 +22,30 @@ import os
 import sys
 
 from gi.repository import GLib
+from gi.repository import GObject
 from gi.repository import IBus
 
-import engine
+from engine import *
 
 
 class IMApp(object):
     def __init__(self, exec_by_ibus, engine_name):
-        self.__component = IBus.Component("org.freedesktop.IBus.Cangjie",
-                                          "Cangjie Component",
-                                          "0.1.0",
-                                          "LGPLv3+",
-                                          "The IBus Cangjie authors")
-
-        # TODO: Add the engines, based on the XML file
+        # FIXME: Don't hardcode this path
+        component_path = "/usr/share/ibus/component/%s.xml" % engine_name
+        self.__component = IBus.Component.new_from_file(component_path)
 
         self.__mainloop = GLib.MainLoop()
+
         self.__bus = IBus.Bus()
         self.__bus.connect("disconnected", self.__bus_disconnected_cb)
+
         self.__factory = IBus.Factory(self.__bus.__get_connection())
+        engine_classtype = "Engine%s" % engine_name.capitalize()
+        self.__factory.add_engine(engine_name,
+                                  GObject.type_from_name(engine_classtype))
+
         if exec_by_ibus:
-            self.__bus.request_name("org.freedesktop.IBus.Cangjie", 0)
+            self.__bus.request_name(self.__component.get_name(), 0)
         else:
             self.__bus.register_component(self.__component)
 

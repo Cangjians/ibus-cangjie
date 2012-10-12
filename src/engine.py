@@ -16,12 +16,13 @@
 # along with ibus-cangjie.  If not, see <http://www.gnu.org/licenses/>.
 
 
+__all__ = ["EngineCangjie", "EngineQuick"]
+
+
 from gi.repository import IBus
 
 
 class Engine(IBus.Engine):
-    __gtype_name__ = "EngineCangjie"
-
     def __init__(self):
         super(Engine, self).__init__()
         # TODO: Implement the specific stuff
@@ -41,3 +42,10 @@ class Engine(IBus.Engine):
             self.page_down_lookup_table()
             return True
         return False
+
+
+class EngineCangie(Engine):
+    __gtype_name__ = "EngineCangjie"
+
+class EngineQuick(Engine):
+    __gtype_name__ = "EngineQuick"
