@@ -21,14 +21,15 @@ import locale
 import os
 import sys
 
-import gobject
-import ibus
+from gi.repository import GLib
+from gi.repository import IBus
 
-import factory
+import engine
+
 
 class IMApp(object):
     def __init__(self, exec_by_ibus, engine_name):
-        self.__component = ibus.Component("org.freedesktop.IBus.Cangjie",
+        self.__component = IBus.Component("org.freedesktop.IBus.Cangjie",
                                           "Cangjie Component",
                                           "0.1.0",
                                           "LGPLv3+",
@@ -36,10 +37,10 @@ class IMApp(object):
 
         # TODO: Add the engines, based on the XML file
 
-        self.__mainloop = gobject.MainLoop()
-        self.__bus = ibus.Bus()
+        self.__mainloop = GLib.MainLoop()
+        self.__bus = IBus.Bus()
         self.__bus.connect("disconnected", self.__bus_disconnected_cb)
-        self.__factory = factory.EngineFactory(self.__bus)
+        self.__factory = IBus.Factory(self.__bus.__get_connection())
         if exec_by_ibus:
             self.__bus.request_name("org.freedesktop.IBus.Cangjie", 0)
         else:
@@ -71,4 +72,5 @@ if __name__ == "__main__":
         if os.fork():
             sys.exit()
 
+    IBus.init()
     IMApp(args.ibus, args.engine).run()

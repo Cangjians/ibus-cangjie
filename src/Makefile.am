@@ -1,6 +1,5 @@
 engine_cangjie_PYTHON = \
 	engine.py \
-	factory.py \
 	main.py \
 	$(NULL)
 engine_cangjiedir = $(datadir)/ibus-cangjie

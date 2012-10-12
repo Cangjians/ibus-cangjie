@@ -16,15 +16,17 @@
 # along with ibus-cangjie.  If not, see <http://www.gnu.org/licenses/>.
 
 
-import ibus
+from gi.repository import IBus
 
 
-class Engine(ibus.EngineBase):
-    def __init__(self, bus, object_path):
-        super(Engine, self).__init__(bus, object_path)
+class Engine(IBus.Engine):
+    __gtype_name__ = "EngineCangjie"
+
+    def __init__(self):
+        super(Engine, self).__init__()
         # TODO: Implement the specific stuff
 
-    def process_key_event(self, keyval, keycode, state):
+    def do_process_key_event(self, keyval, keycode, state):
         # TODO: Implement that stuff
         pass
 
