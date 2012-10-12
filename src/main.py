@@ -18,15 +18,17 @@
 # Note: This script is only used to manually start the engine, the IBus daemon
 # will normally just load the XML file.
 
+import locale
+import getopt
 import os
 import sys
-import getopt
-import ibus
-import factory
-import gobject
-import locale
 
-class IMApp:
+import gobject
+import ibus
+
+import factory
+
+class IMApp(object):
     def __init__(self, exec_by_ibus):
         self.__component = ibus.Component("org.freedesktop.IBus.Cangjie",
                                           "Cangjie Component",
