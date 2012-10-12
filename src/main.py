@@ -54,10 +54,7 @@ class IMApp(object):
         self.__mainloop.quit()
 
 
-def launch_engine(exec_by_ibus):
-    IMApp(exec_by_ibus).run()
-
-def main():
+if __name__ == "__main__":
     try:
         locale.setlocale(locale.LC_ALL, "")
     except:
@@ -74,7 +71,4 @@ def main():
         if os.fork():
             sys.exit()
 
-    launch_engine(exec_by_ibus)
-
-if __name__ == "__main__":
-    main()
+    IMApp(args.ibus).run()
