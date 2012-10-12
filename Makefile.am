@@ -26,7 +26,7 @@ superclean:
 	       install-sh ltmain.sh m4 Makefile Makefile.in missing   \
 	       py-compile stamp-h1
 	
-	rm -fr data/cangjie.xml data/cangjie.xml.in \
+	rm -fr data/*.xml data/*.xml.in \
 	       data/*.desktop data/*.desktop.in \
 	       data/Makefile data/Makefile.in
 	

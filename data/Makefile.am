@@ -1,4 +1,6 @@
-component_DATA = cangjie.xml
+component_DATA = \
+	cangjie.xml \
+	quick.xml
 componentdir = $(datadir)/ibus/component
 
 desktop_in_files = \
@@ -15,9 +17,10 @@ CLEANFILES = \
 
 EXTRA_DIST = \
 	cangjie.xml.in.in \
+	quick.xml.in.in \
 	$(NULL)
 
-cangjie.xml: cangjie.xml.in
+%.xml: %.xml.in
 	$(AM_V_GEN) \
 	( \
 		libexecdir=${libexecdir}; \

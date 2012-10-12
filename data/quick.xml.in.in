@@ -19,9 +19,9 @@ along with ibus-cangjie.  If not, see <http://www.gnu.org/licenses/>.
 
 <?xml version=\"1.0\" encoding=\"utf-8\"?>
 <component>
-  <name>org.freedesktop.IBus.Cangjie</name>
-  <description>Cangjie Component</description>
-  <exec>${libexecdir}/ibus-engine-cangjie --ibus cangjie</exec>
+  <name>org.freedesktop.IBus.Quick</name>
+  <description>Quick Component</description>
+  <exec>${libexecdir}/ibus-engine-cangjie --ibus quick</exec>
   <version>@VERSION@</version>
   <author>The IBus Cangjie authors</author>
   <license>LGPLv3+</license>
@@ -30,12 +30,12 @@ along with ibus-cangjie.  If not, see <http://www.gnu.org/licenses/>.
 
   <engines>
     <engine>
-      <name>cangjie</name>
-      <longname>Cangjie</longname>
-      <description>Cangjie Input Method</description>
+      <name>quick</name>
+      <longname>Quick</longname>
+      <description>Quick Input Method</description>
       <language>zh_HK</language>
       <layout>us</layout>
-      <symbol>倉頡</symbol>
+      <symbol>速成</symbol>
       <license>LGPLv3+</license>
       <author>The IBus Cangjie authors</author>
       <rank>0</rank>
