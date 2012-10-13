@@ -16,6 +16,14 @@ desktopdir = $(datadir)/applications
 @INTLTOOL_DESKTOP_RULE@
 
 CLEANFILES = \
+	cangjie.xml \
+	cangjie.xml.in \
+	quick.xml \
+	quick.xml.in \
+	ibus-setup-cangjie.desktop \
+	ibus-setup-cangjie.desktop.in \
+	ibus-setup-quick.desktop \
+	ibus-setup-quick.desktop.in \
 	$(NULL)
 
 EXTRA_DIST = \

@@ -18,6 +18,7 @@ libexec_SCRIPTS = \
 
 CLEANFILES = \
 	*.pyc \
+	setup/config.py \
 	setup/*.pyc \
 	$(NULL)
 
