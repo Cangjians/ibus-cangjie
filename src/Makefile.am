@@ -1,15 +1,15 @@
-pkgpython_PYTHON = \
+ibus_cangjie_PYTHON = \
 	__init__.py \
 	engine.py \
 	$(NULL)
-pkgpythondir = $(pythondir)/ibus_cangjie
+ibus_cangjiedir = $(pythondir)/ibus_cangjie
 
-pkgpython_setup_PYTHON = \
+setup_PYTHON = \
 	setup/__init__.py \
 	setup/config.py \
 	setup/setup.ui \
 	$(NULL)
-pkgpython_setupdir = $(pythondir)/ibus_cangjie/setup
+setupdir = $(ibus_cangjiedir)/setup
 
 libexec_SCRIPTS = \
 	ibus-engine-cangjie \
