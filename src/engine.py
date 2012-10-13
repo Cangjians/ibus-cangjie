@@ -44,7 +44,7 @@ class Engine(IBus.Engine):
         return False
 
 
-class EngineCangie(Engine):
+class EngineCangjie(Engine):
     __gtype_name__ = "EngineCangjie"
 
 class EngineQuick(Engine):

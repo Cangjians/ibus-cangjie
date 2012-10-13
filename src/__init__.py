@@ -39,7 +39,7 @@ class IMApp(object):
         self.__bus = IBus.Bus()
         self.__bus.connect("disconnected", self.__bus_disconnected_cb)
 
-        self.__factory = IBus.Factory(self.__bus.__get_connection())
+        self.__factory = IBus.Factory.new(self.__bus.get_connection())
         engine_classtype = "Engine%s" % engine_name.capitalize()
         self.__factory.add_engine(engine_name,
                                   GObject.type_from_name(engine_classtype))
