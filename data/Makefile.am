@@ -29,6 +29,8 @@ CLEANFILES = \
 EXTRA_DIST = \
 	cangjie.xml.in.in \
 	quick.xml.in.in \
+	ibus-setup-cangjie.desktop.in.in \
+	ibus-setup-quick.desktop.in.in \
 	$(NULL)
 
 %.xml: %.xml.in

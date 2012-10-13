@@ -24,6 +24,7 @@ CLEANFILES = \
 
 EXTRA_DIST = \
 	ibus-engine-cangjie \
+	setup/config.py.in \
 	setup/ibus-setup-cangjie \
 	$(NULL)
 
