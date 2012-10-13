@@ -27,7 +27,6 @@ ltmain.sh
 data/*.desktop
 data/*.xml
 data/*.xml.in
-src/ibus-engine-cangjie
 *.swp
 .intltool-merge-cache
 src/setup/config.py
