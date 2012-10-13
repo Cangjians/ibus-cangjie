@@ -1,8 +1,8 @@
-engine_cangjie_PYTHON = \
+pkgpython_PYTHON = \
+	__init__.py \
 	engine.py \
-	main.py \
 	$(NULL)
-engine_cangjiedir = $(datadir)/ibus-cangjie
+pkgpythondir = $(pythondir)/ibus_cangjie
 
 libexec_SCRIPTS = ibus-engine-cangjie
 
@@ -11,11 +11,5 @@ CLEANFILES = \
 	$(NULL)
 
 EXTRA_DIST = \
-	ibus-engine-cangjie.in \
+	ibus-engine-cangjie \
 	$(NULL)
-
-test:
-	$(ENV) \
-		LANG=en_US \
-		PYTHONPATH=$(top_srcdir) \
-		$(PYTHON) $(srcdir)/main.py

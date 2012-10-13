@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/python
 #
 # Copyright (c) 2012 - The IBus Cangjie authors
 #
@@ -17,4 +17,32 @@
 # You should have received a copy of the GNU General Public License
 # along with ibus-cangjie.  If not, see <http://www.gnu.org/licenses/>.
 
-exec python @prefix@/share/ibus-cangjie/main.py $@
+import argparse
+import locale
+import os
+import sys
+
+from gi.repository import IBus
+
+from ibus_cangjie import IMApp
+
+try:
+    locale.setlocale(locale.LC_ALL, "")
+except:
+    pass
+
+parser = argparse.ArgumentParser(description="Cangjie input method engine")
+parser.add_argument("--ibus", "-i", action="store_true",
+                    help="let the engine know it is executed by IBus")
+parser.add_argument("--daemonize", "-d", action="store_true",
+                    help="daemonize the engine")
+parser.add_argument("engine", choices=("cangjie", "quick"),
+                    help="Input method engine to use")
+args = parser.parse_args()
+
+if args.daemonize:
+    if os.fork():
+        sys.exit()
+
+IBus.init()
+IMApp(args.ibus, args.engine).run()

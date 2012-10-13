@@ -25,7 +25,7 @@ from gi.repository import GLib
 from gi.repository import GObject
 from gi.repository import IBus
 
-from engine import *
+from .engine import *
 
 
 class IMApp(object):
@@ -54,26 +54,3 @@ class IMApp(object):
 
     def __bus_disconnected_cb(self, bus):
         self.__mainloop.quit()
-
-
-if __name__ == "__main__":
-    try:
-        locale.setlocale(locale.LC_ALL, "")
-    except:
-        pass
-
-    parser = argparse.ArgumentParser(description="Cangjie input method engine")
-    parser.add_argument("--ibus", "-i", action="store_true",
-                        help="let the engine know it is executed by IBus")
-    parser.add_argument("--daemonize", "-d", action="store_true",
-                        help="daemonize the engine")
-    parser.add_argument("engine", choices=("cangjie", "quick"),
-                        help="Input method engine to use")
-    args = parser.parse_args()
-
-    if args.daemonize:
-        if os.fork():
-            sys.exit()
-
-    IBus.init()
-    IMApp(args.ibus, args.engine).run()

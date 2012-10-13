@@ -39,7 +39,6 @@ AC_CONFIG_FILES([
   data/quick.xml.in
   setup/Makefile
   src/Makefile
-  src/ibus-engine-cangjie
   po/Makefile.in
 ])
 
