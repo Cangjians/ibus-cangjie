@@ -30,9 +30,10 @@ superclean:
 	       data/*.desktop data/*.desktop.in \
 	       data/Makefile data/Makefile.in
 	
-	rm -fr src/ibus-engine-cangjie src/Makefile src/Makefile.in *.pyc
+	rm -fr src/ibus-engine-cangjie src/Makefile src/Makefile.in src/*.pyc
 	
-	rm -fr setup/config.py setup/ibus-setup-cangjie setup/*.pyc
+	rm -fr setup/config.py setup/ibus-setup-cangjie setup/*.pyc \
+	       setup/Makefile setup/Makefile.in
 	
 	rm -fr po/Makefile po/Makefile.in po/Makefile.in.in \
 	       po/Makevars.template po/POTFILES po/Rules-quot po/*.sed \
