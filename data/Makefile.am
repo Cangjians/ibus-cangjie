@@ -1,14 +1,17 @@
 component_DATA = \
 	cangjie.xml \
-	quick.xml
+	quick.xml \
+	$(NULL)
 componentdir = $(datadir)/ibus/component
 
 desktop_in_files = \
 	ibus-setup-cangjie.desktop.in \
-	ibus-setup-quick.desktop.in
+	ibus-setup-quick.desktop.in \
+	$(NULL)
 desktop_DATA = \
 	ibus-setup-cangjie.desktop \
-	ibus-setup-quick.desktop
+	ibus-setup-quick.desktop \
+	$(NULL)
 desktopdir = $(datadir)/applications
 @INTLTOOL_DESKTOP_RULE@
 
