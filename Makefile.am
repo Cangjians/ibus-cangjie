@@ -29,9 +29,8 @@ superclean:
 	       data/*.desktop data/*.desktop.in \
 	       data/Makefile data/Makefile.in
 	
-	rm -fr src/Makefile src/Makefile.in src/*.pyc
-	
-	rm -fr src/setup/config.py src/setup/*.pyc
+	rm -fr src/Makefile src/Makefile.in src/*.pyc \
+	       src/setup/config.py src/setup/*.pyc
 	
 	rm -fr po/Makefile po/Makefile.in po/Makefile.in.in \
 	       po/Makevars.template po/POTFILES po/Rules-quot po/*.sed \
