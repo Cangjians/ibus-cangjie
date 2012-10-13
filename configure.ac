@@ -37,7 +37,6 @@ AC_CONFIG_FILES([
   data/Makefile
   data/cangjie.xml.in
   data/quick.xml.in
-  setup/Makefile
   src/Makefile
   po/Makefile.in
 ])

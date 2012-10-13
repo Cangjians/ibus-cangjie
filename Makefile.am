@@ -4,7 +4,6 @@ ACLOCAL_AMFLAGS  = -I m4 ${ACLOCAL_FLAGS}
 SUBDIRS = \
 	data \
 	src \
-	setup \
 	po \
 	$(NULL)
 
@@ -32,8 +31,7 @@ superclean:
 	
 	rm -fr src/Makefile src/Makefile.in src/*.pyc
 	
-	rm -fr setup/config.py setup/ibus-setup-cangjie setup/*.pyc \
-	       setup/Makefile setup/Makefile.in
+	rm -fr src/setup/config.py src/setup/*.pyc
 	
 	rm -fr po/Makefile po/Makefile.in po/Makefile.in.in \
 	       po/Makevars.template po/POTFILES po/Rules-quot po/*.sed \
