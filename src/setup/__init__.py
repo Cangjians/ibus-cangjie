@@ -21,10 +21,10 @@ import gettext
 from gi.repository import GLib
 from gi.repository import Gtk
 
-from ibus_cangjie import config
+from ibus_cangjie.config import gettext_package
 
 
-_ = lambda a : gettext.dgettext(config.gettext_package, a)
+_ = lambda a : gettext.dgettext(gettext_package, a)
 
 
 # TODO: share that with the engine
@@ -42,7 +42,7 @@ class Setup(object):
         ui_file = GLib.build_filenamev([GLib.path_get_dirname(__file__),
                                        "setup.ui"])
         self.__builder = Gtk.Builder()
-        self.__builder.set_translation_domain(config.gettext_package)
+        self.__builder.set_translation_domain(gettext_package)
         self.__builder.add_from_file(ui_file)
 
         combo = self.__builder.get_object("punctuation_chars")
