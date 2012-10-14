@@ -7,7 +7,6 @@ ibus_cangjiedir = $(pythondir)/ibus_cangjie
 
 setup_PYTHON = \
 	setup/__init__.py \
-	setup/setup.ui \
 	$(NULL)
 setupdir = $(ibus_cangjiedir)/setup
 

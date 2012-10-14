@@ -1,3 +1,8 @@
+ibus_cangjie_data_DATA = \
+	setup.ui \
+	$(NULL)
+ibus_cangjie_datadir = $(pkgdatadir)
+
 component_DATA = \
 	cangjie.xml \
 	quick.xml \
@@ -27,6 +32,7 @@ CLEANFILES = \
 	$(NULL)
 
 EXTRA_DIST = \
+	setup.ui \
 	cangjie.xml.in.in \
 	quick.xml.in.in \
 	ibus-setup-cangjie.desktop.in.in \
