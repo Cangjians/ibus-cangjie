@@ -25,7 +25,7 @@ punctuation_options = {0: "Chinese (full width)", 1: "English (half width)"}
 
 class Config(object):
     def __init__(self, bus, engine, on_value_changed_cb, read_only=True):
-        if self.__read_only not in (True, False):
+        if read_only not in (True, False):
             raise ValueError("Argument 'read_only' must be a boolean")
 
         self.__config_section = "engine/%s" % engine.capitalize()
