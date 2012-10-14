@@ -25,6 +25,7 @@ Makevars.template
 ABOUT-NLS
 ltmain.sh
 data/*.desktop
+data/*.desktop.in
 data/*.xml
 data/*.xml.in
 *.swp
