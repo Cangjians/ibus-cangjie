@@ -25,7 +25,7 @@ from gi.repository import GLib
 from gi.repository import GObject
 from gi.repository import IBus
 
-from .config import datadir
+from .config import datadir, Config
 from .engine import *
 
 
@@ -40,6 +40,8 @@ class IMApp(object):
 
         self.__bus = IBus.Bus()
         self.__bus.connect("disconnected", self.__bus_disconnected_cb)
+
+        self.__config = Config(self.__bus, engine_name, lambda x: None)
 
         self.__factory = IBus.Factory.new(self.__bus.get_connection())
         engine_classtype = "Engine%s" % engine_name.capitalize()
