@@ -20,6 +20,8 @@ gettext_package = '@GETTEXT_PACKAGE@'
 localedir = '@LOCALEDIR@'
 datadir = "@PKGDATADIR@"
 
+punctuation_options = {0: "Chinese (full width)", 1: "English (half width)"}
+
 
 class Config(object):
     def __init__(self, bus, engine, on_value_changed_cb, read_only=True):

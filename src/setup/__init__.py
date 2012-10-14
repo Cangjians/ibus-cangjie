@@ -21,14 +21,10 @@ import gettext
 from gi.repository import GLib
 from gi.repository import Gtk
 
-from ibus_cangjie.config import gettext_package, Config
+from ibus_cangjie.config import gettext_package, punctuation_options, Config
 
 
 _ = lambda a : gettext.dgettext(gettext_package, a)
-
-
-# TODO: share that with the engine
-punctuation_options = {0: "Chinese (full width)", 1: "English (half width)"}
 
 
 class Setup(object):
