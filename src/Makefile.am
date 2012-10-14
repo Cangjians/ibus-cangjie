@@ -1,12 +1,12 @@
 ibus_cangjie_PYTHON = \
 	__init__.py \
+	config.py \
 	engine.py \
 	$(NULL)
 ibus_cangjiedir = $(pythondir)/ibus_cangjie
 
 setup_PYTHON = \
 	setup/__init__.py \
-	setup/config.py \
 	setup/setup.ui \
 	$(NULL)
 setupdir = $(ibus_cangjiedir)/setup
@@ -18,17 +18,17 @@ libexec_SCRIPTS = \
 
 CLEANFILES = \
 	*.pyc \
-	setup/config.py \
+	config.py \
 	setup/*.pyc \
 	$(NULL)
 
 EXTRA_DIST = \
+	config.py.in \
 	ibus-engine-cangjie \
-	setup/config.py.in \
 	setup/ibus-setup-cangjie \
 	$(NULL)
 
-setup/config.py: setup/config.py.in Makefile
+config.py: config.py.in Makefile
 	sed -e 's&@SETUP_GETTEXT_PACKAGE@&$(GETTEXT_PACKAGE)&g' \
 	    -e 's&@SETUP_LOCALEDIR@&$(localedir)&g' \
 	    -e 's&@SETUP_PKGDATADIR@&$(pkgdatadir)&g' \

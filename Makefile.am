@@ -30,7 +30,7 @@ superclean:
 	       data/Makefile data/Makefile.in
 	
 	rm -fr src/Makefile src/Makefile.in src/*.pyc \
-	       src/setup/config.py src/setup/*.pyc
+	       src/config.py src/setup/*.pyc
 	
 	rm -fr po/Makefile po/Makefile.in po/Makefile.in.in \
 	       po/Makevars.template po/POTFILES po/Rules-quot po/*.sed \

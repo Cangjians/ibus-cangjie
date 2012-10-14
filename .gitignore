@@ -29,6 +29,6 @@ data/*.xml
 data/*.xml.in
 *.swp
 .intltool-merge-cache
-src/setup/config.py
+src/config.py
 *.pyc
 *.pyo

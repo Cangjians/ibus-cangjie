@@ -21,7 +21,7 @@ import gettext
 from gi.repository import GLib
 from gi.repository import Gtk
 
-from . import config
+from ibus_cangjie import config
 
 
 _ = lambda a : gettext.dgettext(config.gettext_package, a)
