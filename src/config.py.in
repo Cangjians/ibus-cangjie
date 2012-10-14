@@ -16,7 +16,7 @@
 # along with ibus-cangjie.  If not, see <http://www.gnu.org/licenses/>.
 
 
-gettext_package = '@GETTEXT_PACKAGE@'
+gettext_package = '@CANGJIE_GETTEXT_PACKAGE@'
 localedir = '@LOCALEDIR@'
 datadir = "@PKGDATADIR@"
 

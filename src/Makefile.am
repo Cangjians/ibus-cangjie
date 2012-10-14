@@ -29,7 +29,6 @@ EXTRA_DIST = \
 	$(NULL)
 
 config.py: config.py.in Makefile
-	sed -e 's&@SETUP_GETTEXT_PACKAGE@&$(GETTEXT_PACKAGE)&g' \
-	    -e 's&@SETUP_LOCALEDIR@&$(localedir)&g' \
-	    -e 's&@SETUP_PKGDATADIR@&$(pkgdatadir)&g' \
-	    -e 's&@SETUP_PKGLIBDIR@&$(pkglibdir)&g' $< > $@
+	sed -e 's&@CANGJIE_GETTEXT_PACKAGE@&$(GETTEXT_PACKAGE)&g' \
+	    -e 's&@LOCALEDIR@&$(localedir)&g' \
+	    -e 's&@PKGDATADIR@&$(pkgdatadir)&g' $< > $@
