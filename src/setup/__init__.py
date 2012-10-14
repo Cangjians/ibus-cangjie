@@ -21,7 +21,7 @@ import gettext
 from gi.repository import GLib
 from gi.repository import Gtk
 
-from ibus_cangjie.config import gettext_package
+from ibus_cangjie.config import gettext_package, Config
 
 
 _ = lambda a : gettext.dgettext(gettext_package, a)
@@ -33,11 +33,8 @@ punctuation_options = {0: "Chinese (full width)", 1: "English (half width)"}
 
 class Setup(object):
     def __init__ (self, bus, engine):
-        self.__bus = bus
-        self.__config_section = "engine/%s" % engine.capitalize()
-
-        self.__config = self.__bus.get_config()
-        self.__config.connect("value-changed", self.on_value_changed, None)
+        self.__config = Config(bus, engine, self.on_value_changed,
+                               read_only=False)
 
         ui_file = GLib.build_filenamev([GLib.path_get_dirname(__file__),
                                        "setup.ui"])
@@ -55,10 +52,10 @@ class Setup(object):
         combo.pack_start(cell, True)
         combo.add_attribute(cell, "text", 1)
 
-        v = self.__read("punctuation_chars")
+        v = self.__config.read("punctuation_chars")
         if v is None:
             v = GLib.Variant("i", 0)
-            self.__write("punctuation_chars", v)
+            self.__config.write("punctuation_chars", v)
         combo.set_active(v.unpack())
 
         combo.connect("changed", self.on_combo_changed, "punctuation_chars")
@@ -70,10 +67,10 @@ class Setup(object):
         for setting_name, setting_default in buttons:
             button = self.__builder.get_object(setting_name)
 
-            v = self.__read(setting_name)
+            v = self.__config.read(setting_name)
             if v is None:
                 v = GLib.Variant('b', setting_default)
-                self.__write(setting_name, v)
+                self.__config.write(setting_name, v)
 
             button.set_active(v)
 
@@ -94,15 +91,9 @@ class Setup(object):
             print("     Data: %s" % data)
 
     def on_button_toggled(self, button, setting_name):
-        self.__write(setting_name, GLib.Variant('b', button.get_active()))
+        self.__config.write(setting_name, GLib.Variant('b', button.get_active()))
 
     def on_combo_changed(self, combo, setting_name):
         tree_iter = combo.get_active_iter()
         model = combo.get_model()
-        self.__write(setting_name, GLib.Variant('i', model[tree_iter][0]))
-
-    def __read(self, name):
-        return self.__config.get_value(self.__config_section, name)
-
-    def __write(self, name, v):
-        return self.__config.set_value(self.__config_section, name, v)
+        self.__config.write(setting_name, GLib.Variant('i', model[tree_iter][0]))
