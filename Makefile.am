@@ -61,8 +61,8 @@ ibus_cangjie_setup_PYTHON = \
 ibus_cangjie_setupdir = $(ibus_cangjiedir)/setup
 
 libexec_SCRIPTS = \
-	src/ibus-engine-cangjie \
-	src/setup/ibus-setup-cangjie \
+	scripts/ibus-engine-cangjie \
+	scripts/ibus-setup-cangjie \
 	$(NULL)
 
 src/config.py: src/config.py.in Makefile
@@ -95,9 +95,9 @@ EXTRA_DIST = \
 	data/quick.xml.in.in \
 	data/ibus-setup-cangjie.desktop.in.in \
 	data/ibus-setup-quick.desktop.in.in \
+	scripts/ibus-engine-cangjie \
+	scripts/ibus-setup-cangjie \
 	src/config.py.in \
-	src/ibus-engine-cangjie \
-	src/setup/ibus-setup-cangjie \
 	$(NULL)
 
 noinst_DIST = \
