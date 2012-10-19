@@ -5,6 +5,9 @@ Chinese, as they are (by far) the majority of Cangjie and Quick users.
 
 However, it should work for others as well (e.g to input Simplified Chinese).
 
+Note that the actual input logic is handled by libcangjie:
+    https://github.com/wanleung/libcangjie/
+
 Getting the source code
 =======================
 
