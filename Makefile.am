@@ -50,10 +50,10 @@ desktopdir = $(datadir)/applications
 # -- src/ ----------------------------
 ibus_cangjie_PYTHON = \
 	src/__init__.py \
-	src/config.py \
 	src/engine.py \
 	$(NULL)
 ibus_cangjiedir = $(pythondir)/ibus_cangjie
+nodist_ibus_cangjie_PYTHON = src/config.py
 
 ibus_cangjie_setup_PYTHON = \
 	src/setup/__init__.py \
