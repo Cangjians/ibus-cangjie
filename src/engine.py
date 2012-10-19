@@ -25,23 +25,10 @@ from gi.repository import IBus
 class Engine(IBus.Engine):
     def __init__(self):
         super(Engine, self).__init__()
-        # TODO: Implement the specific stuff
 
     def do_process_key_event(self, keyval, keycode, state):
         # TODO: Implement that stuff
         pass
-
-    def page_up(self):
-        if self.__lookup_table.page_up():
-            self.page_up_lookup_table()
-            return True
-        return False
-
-    def page_down(self):
-        if self.__lookup_table.page_down():
-            self.page_down_lookup_table()
-            return True
-        return False
 
 
 class EngineCangjie(Engine):
