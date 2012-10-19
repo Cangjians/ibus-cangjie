@@ -25,7 +25,7 @@ along with ibus-cangjie.  If not, see <http://www.gnu.org/licenses/>.
   <version>@VERSION@</version>
   <author>The IBus Cangjie authors</author>
   <license>LGPLv3+</license>
-  <homepage>http://no.home.page.yet/</homepage>
+  <homepage>https://github.com/bochecha/ibus-cangjie</homepage>
   <textdomain>ibus-cangjie</textdomain>
 
   <engines>
