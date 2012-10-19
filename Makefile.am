@@ -1,22 +1,110 @@
 # Point to our macro directory and pick up user flags from the environment
 ACLOCAL_AMFLAGS  = -I m4 ${ACLOCAL_FLAGS}
 
-SUBDIRS = \
-	data \
-	src \
-	po \
+# Keep recursive, the tools depend on it
+SUBDIRS = po
+
+
+# -- data/ ---------------------------
+ibus_cangjie_data_DATA = \
+	data/setup.ui \
+	$(NULL)
+ibus_cangjie_datadir = $(pkgdatadir)
+
+component_DATA = \
+	data/cangjie.xml \
+	data/quick.xml \
+	$(NULL)
+componentdir = $(datadir)/ibus/component
+
+desktop_in_files = \
+	data/ibus-setup-cangjie.desktop.in \
+	data/ibus-setup-quick.desktop.in \
+	$(NULL)
+desktop_DATA = \
+	data/ibus-setup-cangjie.desktop \
+	data/ibus-setup-quick.desktop \
+	$(NULL)
+desktopdir = $(datadir)/applications
+@INTLTOOL_DESKTOP_RULE@
+
+%.xml: %.xml.in
+	$(AM_V_GEN) \
+	( \
+		libexecdir=${libexecdir}; \
+		pkgdatadir=${pkgdatadir}; \
+		s=`cat $<`; \
+		eval "echo \"$${s}\""; \
+	) > $@
+
+%.desktop.in: %.desktop.in.in
+	$(AM_V_GEN) \
+	( \
+		libexecdir=${libexecdir}; \
+		pkgdatadir=${pkgdatadir}; \
+		s=`cat $<`; \
+		eval "echo \"$${s}\""; \
+	) > $@
+
+
+# -- src/ ----------------------------
+ibus_cangjie_PYTHON = \
+	src/__init__.py \
+	src/config.py \
+	src/engine.py \
+	$(NULL)
+ibus_cangjiedir = $(pythondir)/ibus_cangjie
+
+ibus_cangjie_setup_PYTHON = \
+	src/setup/__init__.py \
+	$(NULL)
+ibus_cangjie_setupdir = $(ibus_cangjiedir)/setup
+
+libexec_SCRIPTS = \
+	src/ibus-engine-cangjie \
+	src/setup/ibus-setup-cangjie \
+	$(NULL)
+
+src/config.py: src/config.py.in Makefile
+	$(MKDIR_P) src
+	sed -e 's&@CANGJIE_GETTEXT_PACKAGE@&$(GETTEXT_PACKAGE)&g' \
+	    -e 's&@LOCALEDIR@&$(localedir)&g' \
+	    -e 's&@PKGDATADIR@&$(pkgdatadir)&g' $< > $@
+
+BUILT_SOURCES = src/config.py
+
+# -- Common --------------------------
+CLEANFILES = \
+	data/cangjie.xml \
+	data/cangjie.xml.in \
+	data/quick.xml \
+	data/quick.xml.in \
+	data/ibus-setup-cangjie.desktop \
+	data/ibus-setup-cangjie.desktop.in \
+	data/ibus-setup-quick.desktop \
+	data/ibus-setup-quick.desktop.in \
+	src/*.pyc \
+	src/config.py \
+	src/setup/*.pyc \
 	$(NULL)
 
 EXTRA_DIST = \
 	autogen.sh \
+	data/setup.ui \
+	data/cangjie.xml.in.in \
+	data/quick.xml.in.in \
+	data/ibus-setup-cangjie.desktop.in.in \
+	data/ibus-setup-quick.desktop.in.in \
+	src/config.py.in \
+	src/ibus-engine-cangjie \
+	src/setup/ibus-setup-cangjie \
 	$(NULL)
 
 noinst_DIST = \
 	$(NULL)
 
-
 DISTCLEANFILES = \
-	po/stamp-it \
+	src/config.py \
 	$(NULL)
 
 # Custom targets
@@ -24,13 +112,6 @@ superclean:
 	rm -fr ABOUT-NLS aclocal.m4 autom4te.cache config.* configure \
 	       install-sh ltmain.sh m4 Makefile Makefile.in missing   \
 	       py-compile stamp-h1
-	
-	rm -fr data/*.xml data/*.xml.in \
-	       data/*.desktop data/*.desktop.in \
-	       data/Makefile data/Makefile.in
-	
-	rm -fr src/Makefile src/Makefile.in src/*.pyc \
-	       src/config.py src/setup/*.pyc
 	
 	rm -fr po/Makefile po/Makefile.in po/Makefile.in.in \
 	       po/Makevars.template po/POTFILES po/Rules-quot po/*.sed \

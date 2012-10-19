@@ -8,6 +8,7 @@ AC_SUBST([PACKAGE_NAME], ["$PACKAGE_NAME"])
 AC_SUBST([PACKAGE_VERSION], ["$PACKAGE_VERSION"])
 
 AM_INIT_AUTOMAKE([1.11 no-dist-gzip dist-xz tar-ustar foreign])
+AC_PROG_MKDIR_P
 
 m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
@@ -26,18 +27,11 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE",
 PKG_CHECK_MODULES(IBUS, [ibus-1.0 >= 1.3.0])
 AM_PATH_PYTHON([2.5])
 
-# define GETTEXT_* variables
-GETTEXT_PACKAGE="$PACKAGE_NAME"
-AC_SUBST(GETTEXT_PACKAGE)
-AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Define to the read-only architecture-independent data directory.])
-
 # OUTPUT files
 AC_CONFIG_FILES([
   Makefile
-  data/Makefile
   data/cangjie.xml.in
   data/quick.xml.in
-  src/Makefile
   po/Makefile.in
 ])
 
