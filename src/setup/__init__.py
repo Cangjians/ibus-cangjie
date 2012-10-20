@@ -38,24 +38,7 @@ class Setup(object):
         self.__builder.set_translation_domain(gettext_package)
         self.__builder.add_from_file(ui_file)
 
-        combo = self.__builder.get_object("punctuation_chars")
-
-        store = Gtk.ListStore(int, str)
-        for k, v in punctuation_options.items():
-            store.append((k, v))
-        combo.set_model(store)
-        cell = Gtk.CellRendererText()
-        combo.pack_start(cell, True)
-        combo.add_attribute(cell, "text", 1)
-
-        v = self.__config.read("punctuation_chars")
-        if v is None:
-            v = GLib.Variant("i", 0)
-            self.__config.write("punctuation_chars", v)
-        combo.set_active(v.unpack())
-        combo.connect("changed", self.on_widget_changed, name, 'i')
-
-        self.punctuation_chars = combo
+        self.__prepare_combo("punctuation_chars", punctuation_options, 0)
 
         for setting_name, setting_default in (("use_new_version", False),
                                               ("include_simplified", False),
@@ -85,6 +68,31 @@ class Setup(object):
         button.connect("toggled", self.on_widget_changed, name, 'b')
 
         setattr(self, name, button)
+
+    def __prepare_combo(self, name, options, default_value):
+        """Prepare a Gtk.ComboBox
+
+        Set the combobox named `name` to the current engine config value, or
+        to the provided `default_value` as a fallback.
+        """
+        combo = self.__builder.get_object(name)
+
+        store = Gtk.ListStore(int, str)
+        for k, v in options.items():
+            store.append((k, v))
+        combo.set_model(store)
+        cell = Gtk.CellRendererText()
+        combo.pack_start(cell, True)
+        combo.add_attribute(cell, "text", 1)
+
+        v = self.__config.read(name)
+        if v is None:
+            v = GLib.Variant("i", default_value)
+            self.__config.write(name, v)
+        combo.set_active(v.unpack())
+        combo.connect("changed", self.on_widget_changed, name, 'i')
+
+        setattr(self, name, combo)
 
     def run(self):
         res = self.__window.run()
