@@ -83,6 +83,8 @@ CLEANFILES = \
 	data/ibus-setup-cangjie.desktop.in \
 	data/ibus-setup-quick.desktop \
 	data/ibus-setup-quick.desktop.in \
+	scripts/ibus-engine-cangjie \
+	scripts/ibus-setup-cangjie \
 	src/*.pyc \
 	src/config.py \
 	src/setup/*.pyc \
@@ -95,8 +97,6 @@ EXTRA_DIST = \
 	data/quick.xml.in.in \
 	data/ibus-setup-cangjie.desktop.in.in \
 	data/ibus-setup-quick.desktop.in.in \
-	scripts/ibus-engine-cangjie \
-	scripts/ibus-setup-cangjie \
 	src/config.py.in \
 	$(NULL)
 
