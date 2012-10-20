@@ -53,7 +53,7 @@ class Setup(object):
             v = GLib.Variant("i", 0)
             self.__config.write("punctuation_chars", v)
         combo.set_active(v.unpack())
-        combo.connect("changed", self.on_combo_changed, "punctuation_chars")
+        combo.connect("changed", self.on_widget_changed, name, 'i')
 
         self.punctuation_chars = combo
 
@@ -69,7 +69,7 @@ class Setup(object):
                 v = GLib.Variant('b', setting_default)
                 self.__config.write(setting_name, v)
             button.set_active(v)
-            button.connect("toggled", self.on_button_toggled, setting_name)
+            button.connect("toggled", self.on_widget_changed, name, 'b')
 
             setattr(self, setting_name, button)
 
@@ -97,10 +97,5 @@ class Setup(object):
         if widget.get_active() != value:
             widget.set_active(value)
 
-    def on_button_toggled(self, button, setting_name):
-        self.__config.write(setting_name, GLib.Variant('b', button.get_active()))
-
-    def on_combo_changed(self, combo, setting_name):
-        tree_iter = combo.get_active_iter()
-        model = combo.get_model()
-        self.__config.write(setting_name, GLib.Variant('i', model[tree_iter][0]))
+    def on_widget_changed(self, widget, setting_name, variant_type):
+        self.__config.write(setting_name, GLib.Variant(variant_type, widget.get_active()))
