@@ -53,7 +53,6 @@ class Setup(object):
             v = GLib.Variant("i", 0)
             self.__config.write("punctuation_chars", v)
         combo.set_active(v.unpack())
-
         combo.connect("changed", self.on_combo_changed, "punctuation_chars")
 
         self.punctuation_chars = combo
@@ -69,9 +68,7 @@ class Setup(object):
             if v is None:
                 v = GLib.Variant('b', setting_default)
                 self.__config.write(setting_name, v)
-
             button.set_active(v)
-
             button.connect("toggled", self.on_button_toggled, setting_name)
 
             setattr(self, setting_name, button)
