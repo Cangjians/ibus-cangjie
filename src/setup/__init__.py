@@ -57,26 +57,34 @@ class Setup(object):
 
         self.punctuation_chars = combo
 
-        buttons = (("use_new_version", False), ("include_simplified", False),
-                   ("adapt_to_input", False), ("auto_next_chars", False),
-                   )
-
-        for setting_name, setting_default in buttons:
-            button = self.__builder.get_object(setting_name)
-
-            v = self.__config.read(setting_name)
-            if v is None:
-                v = GLib.Variant('b', setting_default)
-                self.__config.write(setting_name, v)
-            button.set_active(v)
-            button.connect("toggled", self.on_widget_changed, name, 'b')
-
-            setattr(self, setting_name, button)
+        for setting_name, setting_default in (("use_new_version", False),
+                                              ("include_simplified", False),
+                                              ("adapt_to_input", False),
+                                              ("auto_next_chars", False),
+                                              ):
+            self.__prepare_button(setting_name, setting_default)
 
         # setup dialog
         self.__window = self.__builder.get_object("setup_dialog")
         self.__window.set_title("%s settings" % engine.capitalize())
         self.__window.show()
+
+    def __prepare_button(self, name, default_value):
+        """Prepare a Gtk.CheckButton
+
+        Set the button named `name` (in)active based on the current engine
+        config value, or on the provided `default_value` as a fallback.
+        """
+        button = self.__builder.get_object(name)
+
+        v = self.__config.read(name)
+        if v is None:
+            v = GLib.Variant('b', setting_default)
+            self.__config.write(name, v)
+        button.set_active(v.unpack())
+        button.connect("toggled", self.on_widget_changed, name, 'b')
+
+        setattr(self, name, button)
 
     def run(self):
         res = self.__window.run()
