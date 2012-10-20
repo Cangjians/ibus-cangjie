@@ -56,6 +56,8 @@ class Setup(object):
 
         combo.connect("changed", self.on_combo_changed, "punctuation_chars")
 
+        self.punctuation_chars = combo
+
         buttons = (("use_new_version", False), ("include_simplified", False),
                    ("adapt_to_input", False), ("auto_next_chars", False),
                    )
@@ -71,6 +73,8 @@ class Setup(object):
             button.set_active(v)
 
             button.connect("toggled", self.on_button_toggled, setting_name)
+
+            setattr(self, setting_name, button)
 
         # setup dialog
         self.__window = self.__builder.get_object("setup_dialog")
