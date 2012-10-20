@@ -100,13 +100,6 @@ EXTRA_DIST = \
 	src/config.py.in \
 	$(NULL)
 
-noinst_DIST = \
-	$(NULL)
-
-DISTCLEANFILES = \
-	src/config.py \
-	$(NULL)
-
 # Custom targets
 superclean:
 	rm -fr ABOUT-NLS aclocal.m4 autom4te.cache config.* configure \
