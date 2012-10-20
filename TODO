@@ -1,4 +1,3 @@
-- Make the engine/setup work with both Python 2 and Python 3
 - Wrap Wan Leung's libcangjie when it's ready
 - Actually implement the engine functionality:
   - 9 candidates per page
