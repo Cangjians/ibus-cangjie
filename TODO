@@ -7,6 +7,7 @@
   - pgdwn **and space** to switch to next page
   - cycle through pages
 - Replace the SC option by a « all CJK » option
+- Setup the necessary stuff for i18n
 - Get an icon for the setup UI
 - Modify the GNOME Control Center whitelist so it uses `cangjie` and `quick`
   instead of the current `cangjie3`, `cangjie5`,... from ibus-tables
