@@ -1,0 +1,14 @@
+- Make the engine/setup work with both Python 2 and Python 3
+- Wrap Wan Leung's libcangjie when it's ready
+- Actually implement the engine functionality:
+  - 9 candidates per page
+  - no navigation with arrow keys (it's slow compared to numbers, so nobody
+    uses it, and some keyboards don't even have them without the `fn` key)
+  - pgup to switch to previous page of candidates
+  - pgdwn **and space** to switch to next page
+  - cycle through pages
+- Replace the SC option by a « all CJK » option
+- Get an icon for the setup UI
+- Modify the GNOME Control Center whitelist so it uses `cangjie` and `quick`
+  instead of the current `cangjie3`, `cangjie5`,... from ibus-tables
+- Drop the obsolete DBs from ibus-table-chinese
