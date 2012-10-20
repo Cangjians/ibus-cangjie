@@ -28,7 +28,7 @@ class Config(object):
         if read_only not in (True, False):
             raise ValueError("Argument 'read_only' must be a boolean")
 
-        self.config_section = "engine/%s" % engine.capitalize()
+        self.config_section = "engine/%s" % engine
 
         self.__ibus_config = bus.get_config()
         self.__ibus_config.connect("value-changed", on_value_changed_cb, None)
