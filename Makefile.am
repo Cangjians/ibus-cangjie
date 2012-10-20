@@ -93,8 +93,6 @@ CLEANFILES = \
 EXTRA_DIST = \
 	autogen.sh \
 	data/setup.ui \
-	data/cangjie.xml.in.in \
-	data/quick.xml.in.in \
 	data/ibus-setup-cangjie.desktop.in.in \
 	data/ibus-setup-quick.desktop.in.in \
 	src/config.py.in \
