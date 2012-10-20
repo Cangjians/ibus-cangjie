@@ -82,7 +82,7 @@ class Setup(object):
         self.__window.destroy()
 
     def on_value_changed(self, config, section, name, value, data):
-        if section == self.__config_section:
+        if section == self.__config.config_section:
             print("[%s] Option %s was set to %s" % (section, name, value))
             print("     Data: %s" % data)
 
