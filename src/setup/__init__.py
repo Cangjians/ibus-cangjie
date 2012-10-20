@@ -83,9 +83,19 @@ class Setup(object):
         self.__window.destroy()
 
     def on_value_changed(self, config, section, name, value, data):
-        if section == self.__config.config_section:
-            print("[%s] Option %s was set to %s" % (section, name, value))
-            print("     Data: %s" % data)
+        """Callback when the value of a widget is changed.
+
+        We need to react, in case the value was changed from somewhere else,
+        for example from another setup UI.
+        """
+        if section != self.__config.config_section:
+            return
+
+        value = value.unpack()
+        widget = getattr(self, name)
+
+        if widget.get_active() != value:
+            widget.set_active(value)
 
     def on_button_toggled(self, button, setting_name):
         self.__config.write(setting_name, GLib.Variant('b', button.get_active()))
