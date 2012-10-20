@@ -18,13 +18,20 @@ Installing
 ==========
 
 This is pretty much a standard Autotools project. You can install it with the
-usual sequence:
+usual sequence::
+
     $ ./configure
     $ make
     # make install
 
 Of course, if you got the sources from Git, you will need to run the
 ``autogen.sh`` script first.
+
+The engine and its setup UI should work with Python 2 or 3. The default is
+Python 2, and you can build with Python 3 instead by passing the appropraite
+option to the ``configure`` script::
+
+    $ configure --enable-python3
 
 Legal
 =====
