@@ -41,7 +41,7 @@ class Setup(object):
         self.__prepare_combo("punctuation_chars", punctuation_options, 0)
 
         for setting_name, setting_default in (("use_new_version", False),
-                                              ("include_simplified", False),
+                                              ("include_all_cjk", False),
                                               ("adapt_to_input", False),
                                               ("auto_next_chars", False),
                                               ):

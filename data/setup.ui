@@ -92,8 +92,8 @@
           </packing>
         </child>
         <child>
-          <object class="GtkCheckButton" id="include_simplified">
-            <property name="label" translatable="yes">Allow Simplified Chinese suggestions</property>
+          <object class="GtkCheckButton" id="include_cjk">
+            <property name="label" translatable="yes">Also suggest Simplified Chinese and Japanese characters</property>
             <property name="use_action_appearance">False</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>

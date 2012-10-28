@@ -6,7 +6,6 @@
   - pgup to switch to previous page of candidates
   - pgdwn **and space** to switch to next page
   - cycle through pages
-- Replace the SC option by a « all CJK » option
 - Setup the necessary stuff for i18n
 - Get an icon for the setup UI
 - Modify the GNOME Control Center whitelist so it uses `cangjie` and `quick`
