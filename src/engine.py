@@ -26,6 +26,11 @@ class Engine(IBus.Engine):
     def __init__(self):
         super(Engine, self).__init__()
 
+        self.lookuptable = IBus.LookupTable()
+        self.lookuptable.set_page_size(9)
+        self.lookuptable.set_round(True)
+        self.lookuptable.set_orientation(IBus.Orientation.VERTICAL)
+
     def do_process_key_event(self, keyval, keycode, state):
         # TODO: Implement that stuff
         pass

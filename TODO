@@ -1,12 +1,10 @@
 - Wrap Wan Leung's libcangjie when it's ready
 - Actually implement the engine functionality:
   - get candidates
-  - 9 candidates per page
   - no navigation with arrow keys (it's slow compared to numbers, so nobody
     uses it, and some keyboards don't even have them without the `fn` key)
   - pgup to switch to previous page of candidates
   - pgdwn **and space** to switch to next page
-  - cycle through pages
 - Setup the necessary stuff for i18n
 - Get an icon for the setup UI
 - Modify the GNOME Control Center whitelist so it uses `cangjie` and `quick`
