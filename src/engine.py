@@ -32,8 +32,11 @@ class Engine(IBus.Engine):
         self.lookuptable.set_orientation(IBus.Orientation.VERTICAL)
 
     def do_process_key_event(self, keyval, keycode, state):
-        # TODO: Implement that stuff
-        pass
+        # Ignore key release events
+        if (state & IBus.ModifierType.RELEASE_MASK):
+            return False
+
+        return False
 
 
 class EngineCangjie(Engine):
