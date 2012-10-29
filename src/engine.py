@@ -23,6 +23,7 @@ from gi.repository import IBus
 
 
 class Engine(IBus.Engine):
+    """The base class for Cangjie and Quick engines."""
     def __init__(self):
         super(Engine, self).__init__()
 
@@ -32,6 +33,9 @@ class Engine(IBus.Engine):
         self.lookuptable.set_orientation(IBus.Orientation.VERTICAL)
 
     def do_process_key_event(self, keyval, keycode, state):
+        """Handle `process-key-event` events.
+
+        This event is fired when the user presses a key."""
         # Ignore key release events
         if (state & IBus.ModifierType.RELEASE_MASK):
             return False
@@ -40,7 +44,10 @@ class Engine(IBus.Engine):
 
 
 class EngineCangjie(Engine):
+    """The Cangjie engine."""
     __gtype_name__ = "EngineCangjie"
 
+
 class EngineQuick(Engine):
+    """The Quick engine."""
     __gtype_name__ = "EngineQuick"
