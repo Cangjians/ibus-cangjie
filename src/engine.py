@@ -72,10 +72,18 @@ class Engine(IBus.Engine):
         This doesn't cancel the current input, only removes the last
         user-inputted character from the pre-edit text, and updates the list
         of candidates accordingly.
+
+        However, if there isn't any pre-edit, then we shouldn't handle the
+        backspace key at all, so that it can fulfill its original function:
+        deleting characters backwards.
         """
-        self.preedit = self.preedit[:-1]
-        self.update()
-        return True
+        if self.preedit:
+            self.preedit = self.preedit[:-1]
+            self.update()
+            return True
+
+        else:
+            return False
 
     def do_process_inputchar(self, keyval):
         """Handle user input of valid Cangjie input characters."""
