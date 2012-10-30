@@ -66,10 +66,6 @@ class Engine(IBus.Engine):
         if (state & IBus.ModifierType.RELEASE_MASK):
             return False
 
-        # Ignore arrow keys
-        if keyval in (IBus.Up, IBus.Down, IBus.Left, IBus.Right):
-            return False
-
         if is_inputchar(keyval, state):
             return self.do_process_inputchar(keyval)
 
