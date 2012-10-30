@@ -92,7 +92,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkCheckButton" id="include_cjk">
+          <object class="GtkCheckButton" id="include_all_cjk">
             <property name="label" translatable="yes">Also suggest Simplified Chinese and Japanese characters</property>
             <property name="use_action_appearance">False</property>
             <property name="visible">True</property>
