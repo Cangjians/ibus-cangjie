@@ -191,7 +191,6 @@ class Engine(IBus.Engine):
                 self.lookuptable.append_candidate(IBus.Text.new_from_string(c))
 
         text = IBus.Text.new_from_string(self.preedit)
-        self.update_auxiliary_text(text, preedit_len>0)
         attrs = IBus.AttrList()
         attrs.append(IBus.attr_underline_new(IBus.AttrUnderline.SINGLE, 0,
                                              preedit_len))
