@@ -64,20 +64,41 @@ class Engine(IBus.Engine):
         self.lookuptable.set_orientation(IBus.Orientation.VERTICAL)
 
     def do_cancel_input(self):
-        """Cancel the current input."""
+        """Cancel the current input.
+
+        However, if there isn't any pre-edit, then we shouldn't try to do
+        anything at all, so that the key can fulfill its original function.
+        """
+        if not self.preedit:
+            return False
+
         self.preedit = u""
         self.update()
         return True
 
     def do_page_down(self):
-        """Present the next page of candidates."""
+        """Present the next page of candidates.
+
+        However, if there isn't any pre-edit, then we shouldn't try to do
+        anything at all, so that the key can fulfill its original function.
+        """
+        if not self.preedit:
+            return False
+
         self.lookuptable.page_down()
         self.update_lookup_table(self.lookuptable,
                                  self.lookuptable.get_number_of_candidates()>0)
         return True
 
     def do_page_up(self):
-        """Present the previous page of candidates."""
+        """Present the previous page of candidates.
+
+        However, if there isn't any pre-edit, then we shouldn't try to do
+        anything at all, so that the key can fulfill its original function.
+        """
+        if not self.preedit:
+            return False
+
         self.lookuptable.page_up()
         self.update_lookup_table(self.lookuptable,
                                  self.lookuptable.get_number_of_candidates()>0)
@@ -94,13 +115,12 @@ class Engine(IBus.Engine):
         backspace key at all, so that it can fulfill its original function:
         deleting characters backwards.
         """
-        if self.preedit:
-            self.preedit = self.preedit[:-1]
-            self.update()
-            return True
-
-        else:
+        if not self.preedit:
             return False
+
+        self.preedit = self.preedit[:-1]
+        self.update()
+        return True
 
     def do_process_inputchar(self, keyval):
         """Handle user input of valid Cangjie input characters."""
