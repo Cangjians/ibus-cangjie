@@ -42,6 +42,14 @@ def is_inputchar(keyval, state=0):
             (state & (IBus.ModifierType.CONTROL_MASK |
                       IBus.ModifierType.MOD1_MASK)) == 0)
 
+def get_inputnumber(keyval):
+    """Is the `keyval` param a numeric input, to select a candidate."""
+    if keyval in range(getattr(IBus, "1"), getattr(IBus, "9")+1):
+         return IBus.keyval_to_unicode(keyval)
+
+    else:
+         return False
+
 
 class Engine(IBus.Engine):
     """The base class for Cangjie and Quick engines."""
@@ -100,6 +108,19 @@ class Engine(IBus.Engine):
         self.update()
         return True
 
+    def do_select_candidate(self, index):
+        """Commit the selected candidate.
+
+        Parameter `index` is the number entered by the user corresponding to
+        the character she wishes to select on the current page.
+
+        Note: user-visible index starts at 1, but start at 0 in the lookup
+        table.
+        """
+        selected = self.lookuptable.get_candidate(index-1)
+        self.commit_string(selected)
+        return True
+
     def do_process_key_event(self, keyval, keycode, state):
         """Handle `process-key-event` events.
 
@@ -122,6 +143,10 @@ class Engine(IBus.Engine):
 
         if is_inputchar(keyval, state):
             return self.do_process_inputchar(keyval)
+
+        select_candidate = get_inputnumber(keyval)
+        if select_candidate:
+            return self.do_select_candidate(int(select_candidate))
 
         # All other keys are not handled here. Cancel the input, and let the
         # key do what the application wants it to do
@@ -154,6 +179,12 @@ class Engine(IBus.Engine):
 
         self.update_lookup_table(self.lookuptable,
                                  self.lookuptable.get_number_of_candidates()>0)
+
+    def commit_string(self, text):
+        """Commit the `text` and prepare for future input."""
+        self.commit_text(text)
+        self.preedit = u""
+        self.update()
 
 
 class EngineCangjie(Engine):
