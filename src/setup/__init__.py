@@ -61,7 +61,7 @@ class Setup(object):
 
         v = self.__config.read(name)
         if v is None:
-            v = GLib.Variant('b', setting_default)
+            v = GLib.Variant('b', default_value)
             self.__config.write(name, v)
         button.set_active(v.unpack())
         button.connect("toggled", self.on_widget_changed, name, 'b')
