@@ -66,6 +66,9 @@ class Engine(IBus.Engine):
         if (state & IBus.ModifierType.RELEASE_MASK):
             return False
 
+        if keyval == IBus.Escape:
+            return self.do_cancel_input()
+
         if is_inputchar(keyval, state):
             return self.do_process_inputchar(keyval)
 
