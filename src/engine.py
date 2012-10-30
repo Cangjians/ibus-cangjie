@@ -22,6 +22,15 @@ __all__ = ["EngineCangjie", "EngineQuick"]
 from gi.repository import IBus
 
 
+def get_candidates(input_text):
+    """Get the candidates corresponding to `input_char`.
+
+    This is just a dummy function for now, we really need `libcangjie` to do
+    that for real.
+    """
+    import string
+    return string.letters
+
 def is_inputchar(keyval, state=0):
     """Is the `keyval` param an acceptable input character for Cangjie.
 
@@ -132,9 +141,7 @@ class Engine(IBus.Engine):
 
         self.lookuptable.clear()
         if preedit_len > 0:
-            # Add some dummy candidates
-            import string
-            for c in string.letters:
+            for c in get_candidates(self.preedit):
                 self.lookuptable.append_candidate(IBus.Text.new_from_string(c))
 
         text = IBus.Text.new_from_string(self.preedit)
