@@ -117,7 +117,8 @@ class Engine(IBus.Engine):
         Note: user-visible index starts at 1, but start at 0 in the lookup
         table.
         """
-        selected = self.lookuptable.get_candidate(index-1)
+        page_index = self.lookuptable.get_cursor_pos()
+        selected = self.lookuptable.get_candidate(page_index+index-1)
         self.commit_string(selected)
         return True
 
