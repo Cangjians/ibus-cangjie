@@ -52,6 +52,17 @@ class Engine(IBus.Engine):
         self.update()
         return True
 
+    def do_backspace(self):
+        """Go back from one input character.
+
+        This doesn't cancel the current input, only removes the last
+        user-inputted character from the pre-edit text, and updates the list
+        of candidates accordingly.
+        """
+        self.preedit = self.preedit[:-1]
+        self.update()
+        return True
+
     def do_process_inputchar(self, keyval):
         """Handle user input of valid Cangjie input characters."""
         self.preedit += IBus.keyval_to_unicode(keyval)
@@ -68,6 +79,9 @@ class Engine(IBus.Engine):
 
         if keyval == IBus.Escape:
             return self.do_cancel_input()
+
+        if keyval == IBus.BackSpace:
+            return self.do_backspace()
 
         if is_inputchar(keyval, state):
             return self.do_process_inputchar(keyval)
