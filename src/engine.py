@@ -52,6 +52,20 @@ class Engine(IBus.Engine):
         self.update()
         return True
 
+    def do_page_down(self):
+        """Present the next page of candidates."""
+        self.lookuptable.page_down()
+        self.update_lookup_table(self.lookuptable,
+                                 self.lookuptable.get_number_of_candidates()>0)
+        return True
+
+    def do_page_up(self):
+        """Present the previous page of candidates."""
+        self.lookuptable.page_up()
+        self.update_lookup_table(self.lookuptable,
+                                 self.lookuptable.get_number_of_candidates()>0)
+        return True
+
     def do_backspace(self):
         """Go back from one input character.
 
@@ -79,6 +93,12 @@ class Engine(IBus.Engine):
 
         if keyval == IBus.Escape:
             return self.do_cancel_input()
+
+        if keyval in (IBus.Page_Down, IBus.space):
+            return self.do_page_down()
+
+        if keyval == IBus.Page_Up:
+            return self.do_page_up()
 
         if keyval == IBus.BackSpace:
             return self.do_backspace()

@@ -1,8 +1,6 @@
 - Wrap Wan Leung's libcangjie when it's ready
 - Actually implement the engine functionality:
   - get candidates
-  - pgup to switch to previous page of candidates
-  - pgdwn **and space** to switch to next page
 - Setup the necessary stuff for i18n
 - Get an icon for the setup UI
 - Modify the GNOME Control Center whitelist so it uses `cangjie` and `quick`
