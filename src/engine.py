@@ -146,7 +146,10 @@ class Engine(IBus.Engine):
 
         text = IBus.Text.new_from_string(self.preedit)
         self.update_auxiliary_text(text, preedit_len>0)
-        # TODO: Underline the preedit text
+        attrs = IBus.AttrList()
+        attrs.append(IBus.attr_underline_new(IBus.AttrUnderline.SINGLE, 0,
+                                             preedit_len))
+        text.set_attributes(attrs)
         self.update_preedit_text(text, preedit_len, preedit_len>0)
 
         self.update_lookup_table(self.lookuptable,
