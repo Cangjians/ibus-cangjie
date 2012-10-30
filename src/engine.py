@@ -46,6 +46,12 @@ class Engine(IBus.Engine):
         self.lookuptable.set_round(True)
         self.lookuptable.set_orientation(IBus.Orientation.VERTICAL)
 
+    def do_cancel_input(self):
+        """Cancel the current input."""
+        self.preedit = u""
+        self.update()
+        return True
+
     def do_process_inputchar(self, keyval):
         """Handle user input of valid Cangjie input characters."""
         self.preedit += IBus.keyval_to_unicode(keyval)
@@ -67,6 +73,9 @@ class Engine(IBus.Engine):
         if is_inputchar(keyval, state):
             return self.do_process_inputchar(keyval)
 
+        # All other keys are not handled here. Cancel the input, and let the
+        # key do what the application wants it to do
+        self.do_cancel_input()
         return False
 
     def update(self):
