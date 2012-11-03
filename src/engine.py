@@ -74,6 +74,7 @@ class Engine(IBus.Engine):
 
         self.preedit = u""
         self.update()
+        self.update_lookup_table()
         return True
 
     def do_page_down(self):
@@ -86,8 +87,7 @@ class Engine(IBus.Engine):
             return False
 
         self.lookuptable.page_down()
-        self.update_lookup_table(self.lookuptable,
-                                 self.lookuptable.get_number_of_candidates()>0)
+        self.update_lookup_table()
         return True
 
     def do_page_up(self):
@@ -100,8 +100,7 @@ class Engine(IBus.Engine):
             return False
 
         self.lookuptable.page_up()
-        self.update_lookup_table(self.lookuptable,
-                                 self.lookuptable.get_number_of_candidates()>0)
+        self.update_lookup_table()
         return True
 
     def do_backspace(self):
@@ -120,12 +119,14 @@ class Engine(IBus.Engine):
 
         self.preedit = self.preedit[:-1]
         self.update()
+        self.update_lookup_table()
         return True
 
     def do_process_inputchar(self, keyval):
         """Handle user input of valid Cangjie input characters."""
         self.preedit += IBus.keyval_to_unicode(keyval)
         self.update()
+        self.update_lookup_table()
         return True
 
     def do_select_candidate(self, index):
@@ -197,14 +198,19 @@ class Engine(IBus.Engine):
         text.set_attributes(attrs)
         self.update_preedit_text(text, preedit_len, preedit_len>0)
 
-        self.update_lookup_table(self.lookuptable,
-                                 self.lookuptable.get_number_of_candidates()>0)
+    def update_lookup_table(self):
+        """Update the lookup table."""
+        num_candidates = self.lookuptable.get_number_of_candidates()
+
+        super(Engine, self).update_lookup_table(self.lookuptable,
+                                                num_candidates>0)
 
     def commit_string(self, text):
         """Commit the `text` and prepare for future input."""
         self.commit_text(text)
         self.preedit = u""
         self.update()
+        self.update_lookup_table()
 
 
 class EngineCangjie(Engine):
