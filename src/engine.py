@@ -119,6 +119,7 @@ class Engine(IBus.Engine):
 
         self.preedit = self.preedit[:-1]
         self.update()
+        self.get_candidates()
         self.update_lookup_table()
         return True
 
@@ -126,6 +127,7 @@ class Engine(IBus.Engine):
         """Handle user input of valid Cangjie input characters."""
         self.preedit += IBus.keyval_to_unicode(keyval)
         self.update()
+        self.get_candidates()
         self.update_lookup_table()
         return True
 
@@ -186,11 +188,6 @@ class Engine(IBus.Engine):
         """
         preedit_len = len(self.preedit)
 
-        self.lookuptable.clear()
-        if preedit_len > 0:
-            for c in get_candidates(self.preedit):
-                self.lookuptable.append_candidate(IBus.Text.new_from_string(c))
-
         text = IBus.Text.new_from_string(self.preedit)
         attrs = IBus.AttrList()
         attrs.append(IBus.attr_underline_new(IBus.AttrUnderline.SINGLE, 0,
@@ -198,10 +195,18 @@ class Engine(IBus.Engine):
         text.set_attributes(attrs)
         self.update_preedit_text(text, preedit_len, preedit_len>0)
 
+    def get_candidates(self):
+        """Get the candidates based on the user input."""
+        self.lookuptable.clear()
+
+        # Add some dummy candidates for now...
+        if self.preedit:
+            for c in get_candidates(self.preedit):
+                self.lookuptable.append_candidate(IBus.Text.new_from_string(c))
+
     def update_lookup_table(self):
         """Update the lookup table."""
         num_candidates = self.lookuptable.get_number_of_candidates()
-
         super(Engine, self).update_lookup_table(self.lookuptable,
                                                 num_candidates>0)
 
