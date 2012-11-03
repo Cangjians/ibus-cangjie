@@ -73,7 +73,7 @@ class Engine(IBus.Engine):
             return False
 
         self.preedit = u""
-        self.update()
+        self.update_preedit_text()
         self.update_lookup_table()
         return True
 
@@ -118,7 +118,7 @@ class Engine(IBus.Engine):
             return False
 
         self.preedit = self.preedit[:-1]
-        self.update()
+        self.update_preedit_text()
         self.get_candidates()
         self.update_lookup_table()
         return True
@@ -126,7 +126,7 @@ class Engine(IBus.Engine):
     def do_process_inputchar(self, keyval):
         """Handle user input of valid Cangjie input characters."""
         self.preedit += IBus.keyval_to_unicode(keyval)
-        self.update()
+        self.update_preedit_text()
         self.get_candidates()
         self.update_lookup_table()
         return True
@@ -177,15 +177,8 @@ class Engine(IBus.Engine):
         self.do_cancel_input()
         return False
 
-    def update(self):
-        """Update the user-visible elements.
-
-        This sets the pre-edit and auxiliary texts, and populate the list of
-        candidates.
-
-        This is where the engine actually implements its core function:
-        associating user input to CJK characters.
-        """
+    def update_preedit_text(self):
+        """Update the preedit text."""
         preedit_len = len(self.preedit)
 
         text = IBus.Text.new_from_string(self.preedit)
@@ -193,7 +186,8 @@ class Engine(IBus.Engine):
         attrs.append(IBus.attr_underline_new(IBus.AttrUnderline.SINGLE, 0,
                                              preedit_len))
         text.set_attributes(attrs)
-        self.update_preedit_text(text, preedit_len, preedit_len>0)
+        super(Engine, self).update_preedit_text(text, preedit_len,
+                                                preedit_len>0)
 
     def get_candidates(self):
         """Get the candidates based on the user input."""
@@ -214,7 +208,7 @@ class Engine(IBus.Engine):
         """Commit the `text` and prepare for future input."""
         self.commit_text(text)
         self.preedit = u""
-        self.update()
+        self.update_preedit_text()
         self.update_lookup_table()
 
 
