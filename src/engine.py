@@ -72,8 +72,7 @@ class Engine(IBus.Engine):
         if not self.preedit:
             return False
 
-        self.preedit = u""
-        self.update_preedit_text()
+        self.update_preedit_text(u"")
         self.update_lookup_table()
         return True
 
@@ -117,16 +116,14 @@ class Engine(IBus.Engine):
         if not self.preedit:
             return False
 
-        self.preedit = self.preedit[:-1]
-        self.update_preedit_text()
+        self.update_preedit_text(self.preedit[:-1])
         self.get_candidates()
         self.update_lookup_table()
         return True
 
     def do_process_inputchar(self, keyval):
         """Handle user input of valid Cangjie input characters."""
-        self.preedit += IBus.keyval_to_unicode(keyval)
-        self.update_preedit_text()
+        self.update_preedit_text(self.preedit+IBus.keyval_to_unicode(keyval))
         self.get_candidates()
         self.update_lookup_table()
         return True
@@ -177,8 +174,9 @@ class Engine(IBus.Engine):
         self.do_cancel_input()
         return False
 
-    def update_preedit_text(self):
+    def update_preedit_text(self, new_text):
         """Update the preedit text."""
+        self.preedit = new_text
         preedit_len = len(self.preedit)
 
         text = IBus.Text.new_from_string(self.preedit)
@@ -210,8 +208,7 @@ class Engine(IBus.Engine):
     def commit_string(self, text):
         """Commit the `text` and prepare for future input."""
         self.commit_text(text)
-        self.preedit = u""
-        self.update_preedit_text()
+        self.update_preedit_text(u"")
         self.update_lookup_table()
 
 
