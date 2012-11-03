@@ -200,6 +200,9 @@ class Engine(IBus.Engine):
 
     def update_lookup_table(self):
         """Update the lookup table."""
+        if not self.preedit:
+            self.lookuptable.clear()
+
         num_candidates = self.lookuptable.get_number_of_candidates()
         super(Engine, self).update_lookup_table(self.lookuptable,
                                                 num_candidates>0)
