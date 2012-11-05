@@ -139,7 +139,7 @@ class Engine(IBus.Engine):
         """
         page_index = self.lookuptable.get_cursor_pos()
         selected = self.lookuptable.get_candidate(page_index+index-1)
-        self.commit_string(selected)
+        self.commit_text(selected)
         return True
 
     def do_process_key_event(self, keyval, keycode, state):
@@ -205,9 +205,9 @@ class Engine(IBus.Engine):
         super(Engine, self).update_lookup_table(self.lookuptable,
                                                 num_candidates>0)
 
-    def commit_string(self, text):
+    def commit_text(self, text):
         """Commit the `text` and prepare for future input."""
-        self.commit_text(text)
+        super(Engine, self).commit_text(text)
         self.update_preedit_text(u"")
         self.update_lookup_table()
 
