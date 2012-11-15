@@ -1,0 +1,47 @@
+<?xml version="1.0"?><!--*- mode: nxml; indent-tabs-mode: nil -*-->
+<!DOCTYPE moduleset SYSTEM "moduleset.dtd">
+<?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
+<!-- vim:set ts=2 expandtab: -->
+<moduleset>
+
+<!-- git repos -->
+  <repository type="git" name="github.com/bochecha" default="no"
+      href="git://github.com/bochecha/"/>
+  <repository type="git" name="github.com/wanleung" default="no"
+      href="git://github.com/wanleung/"/>
+  <repository type="git" name="github.com/ibus" default="no"
+      href="git://github.com/ibus/"/>
+
+<!-- tarball repos -->
+  <repository type="tarball" name="ibus"
+      href="https://ibus.googlecode.com/files/"/>
+
+<!-- ibus-cangjie and its dependencies -->
+
+  <autotools id="ibus-cangjie">
+    <branch repo="github.com/bochecha" />
+    <dependencies>
+      <dep package="ibus" />
+      <dep package="pycangjie" />
+    </dependencies>
+  </autotools>
+
+  <autotools id="pycangjie">
+    <branch repo="github.com/bochecha" />
+    <dependencies>
+      <dep package="libcangjie" />
+    </dependencies>
+  </autotools>
+
+  <autotools id="libcangjie">
+    <branch repo="github.com/wanleung" />
+    <dependencies />
+  </autotools>
+
+  <autotools id="ibus"
+             autogenargs="--disable-gconf --enable-dconf --enable-introspection --disable-python-library"
+             makeargs="CFLAGS=-Wno-error">
+    <branch module="ibus-1.4.99.20121109.tar.gz" version="1.4.99.20121109" repo="ibus" />
+  </autotools>
+
+</moduleset>

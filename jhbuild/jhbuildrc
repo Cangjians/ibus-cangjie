@@ -1,0 +1,24 @@
+# -*- mode: python -*-
+# -*- coding: utf-8 -*-
+
+# What module set should be used.
+moduleset = 'https://raw.github.com/bochecha/ibus-cangjie/master/jhbuild/ibus-cangjie.modules'
+
+# If you have a developer Git account, uncomment these lines
+#repos['github.com/bochecha'] = 'git@github.com:bochecha/'
+#repos['github.com/wanleung'] = 'git@github.com:wanleung/'
+#repos['github.com/ibus'] = 'git@github.com:ibus/'
+
+# ----------------------------------------------------------------------------
+# Note: if you have forked the repositories, you might want to modify the
+# `moduleset` file, and add your own `repos` above.
+# ----------------------------------------------------------------------------
+
+# A list of the modules to build. (their dependencies are automatically added)
+modules = ['ibus-cangjie']
+
+# What directory should the source be checked out to?
+checkoutroot = '~/Workspace/ibus-cangjie/sources'
+
+# The prefix to configure/install modules to (must have write access)
+prefix = '~/Workspace/ibus-cangjie/install'
