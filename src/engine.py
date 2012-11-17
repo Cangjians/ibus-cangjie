@@ -66,7 +66,11 @@ class Engine(IBus.Engine):
         self.init_cangjie()
 
     def init_cangjie(self):
-        self.cangjie = cangjie.CangJie(cangjie.VERSION_3, 1)
+        new_version = self.config.read("use_new_version")
+        version = getattr(cangjie,
+                          "VERSION_%d" % (5 if new_version else 3))
+
+        self.cangjie = cangjie.CangJie(version, 1)
 
     def on_value_changed(self, config, section, name, value, data):
         if section != self.config.config_section:
