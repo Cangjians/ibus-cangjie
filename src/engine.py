@@ -23,14 +23,8 @@ import math
 
 from gi.repository import IBus
 
-def get_candidates(input_text):
-    """Get the candidates corresponding to `input_char`.
+import cangjie
 
-    This is just a dummy function for now, we really need `libcangjie` to do
-    that for real.
-    """
-    import string
-    return string.letters
 
 def is_inputchar(keyval, state=0):
     """Is the `keyval` param an acceptable input character for Cangjie.
@@ -63,6 +57,8 @@ class Engine(IBus.Engine):
         self.lookuptable.set_page_size(9)
         self.lookuptable.set_round(True)
         self.lookuptable.set_orientation(IBus.Orientation.VERTICAL)
+
+        self.cangjie = cangjie.CangJie(cangjie.VERSION_3, 1)
 
     def do_cancel_input(self):
         """Cancel the current input.
@@ -199,7 +195,7 @@ class Engine(IBus.Engine):
 
         # Add some dummy candidates for now...
         if self.preedit:
-            for c in get_candidates(self.preedit):
+            for c in self.cangjie.getCharacters(self.preedit):
                 self.lookuptable.append_candidate(IBus.Text.new_from_string(c))
 
     def update_auxiliary_text(self):
