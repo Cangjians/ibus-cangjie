@@ -1,4 +1,3 @@
-- Wrap Wan Leung's libcangjie when it's ready
 - Actually implement the engine functionality:
   - get candidates
 - Setup the necessary stuff for i18n
