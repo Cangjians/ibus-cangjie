@@ -19,10 +19,9 @@
 __all__ = ["EngineCangjie", "EngineQuick"]
 
 
-from gi.repository import IBus
-
 import math
 
+from gi.repository import IBus
 
 def get_candidates(input_text):
     """Get the candidates corresponding to `input_char`.
