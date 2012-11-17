@@ -3,8 +3,8 @@
 set -e
 set -x
 
-autopoint
-intltoolize --copy --force
+autopoint --force
+intltoolize --force --copy --automake
 aclocal -I m4
 autoheader
 automake --add-missing --copy
