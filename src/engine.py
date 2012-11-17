@@ -33,8 +33,6 @@ def is_inputchar(keyval, state=0):
 
     Only lower case letters from a to z are possible input characters.
     """
-    # Note: MOD1_MASK used to be called ALT_MASK in the static bindings
-    # Should that be reported to IBus devs?
     return ((keyval in range(IBus.a, IBus.z + 1)) and
             (state & (IBus.ModifierType.CONTROL_MASK |
                       IBus.ModifierType.MOD1_MASK)) == 0)
