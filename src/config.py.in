@@ -16,12 +16,33 @@
 # along with ibus-cangjie.  If not, see <http://www.gnu.org/licenses/>.
 
 
+from gi.repository import GLib
+
 gettext_package = '@CANGJIE_GETTEXT_PACKAGE@'
 localedir = '@LOCALEDIR@'
 datadir = "@PKGDATADIR@"
 
-punctuation_options = {0: "Chinese (full width)", 1: "English (half width)"}
-
+options = ({"name": "punctuation_chars",
+            "type": "i",
+            "values": ((0, "Chinese (full width)"), (1, "English (half width)")),
+            "default": 0},
+           {"name": "use_new_version",
+            "type": "b",
+            "values": (False, True),
+            "default": False},
+           {"name": "include_all_cjk",
+            "type": "b",
+            "values": (False, True),
+            "default": False},
+           {"name": "adapt_to_input",
+            "type": "b",
+            "values": (False, True),
+            "default": False},
+           {"name": "auto_next_chars",
+            "type": "b",
+            "values": (False, True),
+            "default": False},
+           )
 
 class Config(object):
     def __init__(self, bus, engine, on_value_changed_cb, read_only=True):
@@ -33,7 +54,18 @@ class Config(object):
         self.__ibus_config = bus.get_config()
         self.__ibus_config.connect("value-changed", on_value_changed_cb, None)
 
+        self.__ensure_default_values()
+
         self.__read_only = read_only
+
+    def __ensure_default_values(self):
+        for option in options:
+            name = option["name"]
+            value = self.read(name)
+
+            if value is None:
+                value = GLib.Variant(option["type"], option["default"])
+                self.write(name)
 
     def read(self, name):
         return self.__ibus_config.get_value(self.config_section, name)

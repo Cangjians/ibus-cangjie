@@ -22,7 +22,7 @@ from gi.repository import GLib
 from gi.repository import Gtk
 
 from ibus_cangjie.config import (datadir, gettext_package,
-                                 punctuation_options, Config)
+                                 options, Config)
 
 
 _ = lambda a : gettext.dgettext(gettext_package, a)
@@ -38,58 +38,55 @@ class Setup(object):
         self.__builder.set_translation_domain(gettext_package)
         self.__builder.add_from_file(ui_file)
 
-        self.__prepare_combo("punctuation_chars", punctuation_options, 0)
+        for option in options:
+            if option["name"] == "punctuation_chars":
+                self.__prepare_combo(option)
 
-        for setting_name, setting_default in (("use_new_version", False),
-                                              ("include_all_cjk", False),
-                                              ("adapt_to_input", False),
-                                              ("auto_next_chars", False),
-                                              ):
-            self.__prepare_button(setting_name, setting_default)
+            else:
+                self.__prepare_button(option)
 
         self.__window = self.__builder.get_object("setup_dialog")
         self.__window.set_title("%s settings" % engine.capitalize())
         self.__window.show()
 
-    def __prepare_button(self, name, default_value):
+    def __prepare_button(self, option):
         """Prepare a Gtk.CheckButton
 
-        Set the button named `name` (in)active based on the current engine
-        config value, or on the provided `default_value` as a fallback.
+        Set the button named `option['name']` (in)active based on the current
+        engine config value.
         """
+        name = option["name"]
+
         button = self.__builder.get_object(name)
 
         v = self.__config.read(name)
-        if v is None:
-            v = GLib.Variant('b', default_value)
-            self.__config.write(name, v)
         button.set_active(v.unpack())
-        button.connect("toggled", self.on_widget_changed, name, 'b')
+        button.connect("toggled", self.on_widget_changed, name, option["type"])
 
         setattr(self, name, button)
 
-    def __prepare_combo(self, name, options, default_value):
+    def __prepare_combo(self, option):
         """Prepare a Gtk.ComboBox
 
         Set the combobox named `name` to the current engine config value, or
         to the provided `default_value` as a fallback.
         """
+        name = option["name"]
+        values = option["values"]
+
         combo = self.__builder.get_object(name)
 
-        store = Gtk.ListStore(int, str)
-        for k, v in options.items():
-            store.append((k, v))
+        store = Gtk.ListStore(*[type(v) for v in values[0]])
+        for n, v in values:
+            store.append((n, v))
         combo.set_model(store)
         cell = Gtk.CellRendererText()
         combo.pack_start(cell, True)
         combo.add_attribute(cell, "text", 1)
 
         v = self.__config.read(name)
-        if v is None:
-            v = GLib.Variant("i", default_value)
-            self.__config.write(name, v)
         combo.set_active(v.unpack())
-        combo.connect("changed", self.on_widget_changed, name, 'i')
+        combo.connect("changed", self.on_widget_changed, name, option["type"])
 
         setattr(self, name, combo)
 
