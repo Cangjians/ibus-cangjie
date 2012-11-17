@@ -25,6 +25,8 @@ from gi.repository import IBus
 
 import cangjie
 
+from .config import Config
+
 
 def is_inputchar(keyval, state=0):
     """Is the `keyval` param an acceptable input character for Cangjie.
@@ -51,6 +53,9 @@ class Engine(IBus.Engine):
     def __init__(self):
         super(Engine, self).__init__()
 
+        self.config = Config(IBus.Bus(), self.config_name,
+                             self.on_value_changed)
+
         self.preedit = u""
 
         self.lookuptable = IBus.LookupTable()
@@ -58,7 +63,16 @@ class Engine(IBus.Engine):
         self.lookuptable.set_round(True)
         self.lookuptable.set_orientation(IBus.Orientation.VERTICAL)
 
+        self.init_cangjie()
+
+    def init_cangjie(self):
         self.cangjie = cangjie.CangJie(cangjie.VERSION_3, 1)
+
+    def on_value_changed(self, config, section, name, value, data):
+        if section != self.config.config_section:
+            return
+
+        self.init_cangjie()
 
     def do_cancel_input(self):
         """Cancel the current input.
@@ -241,8 +255,10 @@ class Engine(IBus.Engine):
 class EngineCangjie(Engine):
     """The Cangjie engine."""
     __gtype_name__ = "EngineCangjie"
+    config_name = "cangjie"
 
 
 class EngineQuick(Engine):
     """The Quick engine."""
     __gtype_name__ = "EngineQuick"
+    config_name = "quick"
