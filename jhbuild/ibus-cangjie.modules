@@ -16,6 +16,9 @@
   <repository type="tarball" name="ibus"
       href="https://ibus.googlecode.com/files/"/>
 
+<!-- system repo -->
+  <repository type="system" name="system"/>
+
 <!-- ibus-cangjie and its dependencies -->
 
   <autotools id="ibus-cangjie">
@@ -35,13 +38,21 @@
 
   <autotools id="libcangjie">
     <branch repo="github.com/wanleung" />
-    <dependencies />
+    <dependencies>
+      <dep package="dbc++" />
+    </dependencies>
   </autotools>
 
-  <autotools id="ibus"
-             autogenargs="--disable-gconf --enable-dconf --enable-introspection --disable-python-library"
-             makeargs="CFLAGS=-Wno-error">
-    <branch module="ibus-1.4.99.20121109.tar.gz" version="1.4.99.20121109" repo="ibus" />
-  </autotools>
+  <systemmodule id="ibus">
+    <branch repo="system" version="1.4.99" />
+    <pkg-config>ibus-1.0.pc</pkg-config>
+  </systemmodule>
+
+  <systemmodule id="dbc++">
+    <branch repo="system" version="5.0" />
+    <systemdependencies>
+      <dep type="c_include" name="db_cxx.h"/>
+    </systemdependencies>
+  </systemmodule>
 
 </moduleset>
