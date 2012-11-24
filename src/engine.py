@@ -68,7 +68,11 @@ class Engine(IBus.Engine):
         version = getattr(cangjie.versions,
                           "CANGJIE%d" % (5 if new_version else 3))
 
-        self.cangjie = cangjie.CangJie(version, 1)
+        all_cjk = self.config.read("include_all_cjk")
+        lang = getattr(cangjie.languages,
+                       "ALL_CJK" if all_cjk else "TRADITIONAL")
+
+        self.cangjie = cangjie.CangJie(version, lang)
 
     def on_value_changed(self, config, section, name, value, data):
         if section != self.config.config_section:
