@@ -65,8 +65,8 @@ class Engine(IBus.Engine):
 
     def init_cangjie(self):
         new_version = self.config.read("use_new_version")
-        version = getattr(cangjie,
-                          "VERSION_%d" % (5 if new_version else 3))
+        version = getattr(cangjie.versions,
+                          "CANGJIE%d" % (5 if new_version else 3))
 
         self.cangjie = cangjie.CangJie(version, 1)
 
