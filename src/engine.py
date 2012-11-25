@@ -178,7 +178,7 @@ class Engine(IBus.Engine):
             return self.do_backspace()
 
         if is_inputchar(keyval, state):
-            return self.do_process_inputchar(keyval)
+            return self.do_inputchar(keyval)
 
         select_candidate = get_inputnumber(keyval)
         if select_candidate:
@@ -229,7 +229,7 @@ class EngineCangjie(Engine):
     __gtype_name__ = "EngineCangjie"
     config_name = "cangjie"
 
-    def do_process_inputchar(self, keyval):
+    def do_inputchar(self, keyval):
         """Handle user input of valid Cangjie input characters."""
         self.update_preedit_text(self.preedit+IBus.keyval_to_unicode(keyval))
         self.update_auxiliary_text()
