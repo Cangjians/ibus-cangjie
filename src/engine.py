@@ -194,10 +194,7 @@ class Engine(IBus.Engine):
         if select_candidate:
             return self.do_select_candidate(int(select_candidate))
 
-        # All other keys are not handled here. Cancel the input, and let the
-        # key do what the application wants it to do
-        self.do_cancel_input()
-        return False
+        return self.do_other_key(keyval)
 
     def update_preedit_text(self, new_text):
         """Update the preedit text."""
