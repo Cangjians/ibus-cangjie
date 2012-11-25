@@ -220,6 +220,20 @@ class EngineCangjie(Engine):
     __gtype_name__ = "EngineCangjie"
     config_name = "cangjie"
 
+    def do_process_inputchar(self, keyval):
+        """Handle user input of valid Cangjie input characters."""
+        self.update_preedit_text(self.preedit+IBus.keyval_to_unicode(keyval))
+        self.update_auxiliary_text()
+        return True
+
+    def update_auxiliary_text(self):
+        """Update the auxiliary text.
+
+        Somewhat counter-intuitively, this should contain the pre-edit text for
+        Cangjie.
+        """
+        text = IBus.Text.new_from_string(self.preedit)
+        super(EngineCangjie, self).update_auxiliary_text(text, len(self.preedit)>0)
 
 class EngineQuick(Engine):
     """The Quick engine."""
