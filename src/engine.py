@@ -19,8 +19,6 @@
 __all__ = ["EngineCangjie", "EngineQuick"]
 
 
-import math
-
 from gi.repository import IBus
 import pycanberra
 
