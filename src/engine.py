@@ -207,29 +207,6 @@ class Engine(IBus.Engine):
             for c in self.cangjie.getCharacters(self.preedit):
                 self.lookuptable.append_candidate(IBus.Text.new_from_string(c))
 
-    def update_auxiliary_text(self):
-        """Update the auxiliary text.
-
-        We use it to display the current page of candidates, and the total
-        number of pages.
-        """
-        num_candidates = self.lookuptable.get_number_of_candidates()
-
-        if num_candidates:
-            page_size = self.lookuptable.get_page_size()
-            current_page = (self.lookuptable.get_cursor_pos() / page_size) + 1
-            total_pages = int(math.ceil(num_candidates / float(page_size)))
-            text = "%s / %s" % (current_page, total_pages)
-            visible = True
-
-        else:
-            text = ""
-            visible = False
-
-        text = IBus.Text.new_from_string(text)
-
-        super(Engine, self).update_auxiliary_text(text, num_candidates>0)
-
     def update_lookup_table(self):
         """Update the lookup table."""
         if not self.preedit:
