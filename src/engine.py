@@ -226,11 +226,17 @@ class EngineCangjie(Engine):
     """The Cangjie engine."""
     __gtype_name__ = "EngineCangjie"
     config_name = "cangjie"
+    input_max_len = 5
 
     def do_inputchar(self, keyval):
         """Handle user input of valid Cangjie input characters."""
-        self.update_preedit_text(self.preedit+IBus.keyval_to_unicode(keyval))
-        self.update_auxiliary_text()
+        if len(self.preedit) < self.input_max_len:
+            self.update_preedit_text(self.preedit+IBus.keyval_to_unicode(keyval))
+            self.update_auxiliary_text()
+
+        else:
+            self.play_error_bell()
+
         return True
 
     def do_space(self):
