@@ -175,7 +175,10 @@ class Engine(IBus.Engine):
         if keyval == IBus.Escape:
             return self.do_cancel_input()
 
-        if keyval in (IBus.Page_Down, IBus.space):
+        if keyval == IBus.space:
+            return self.do_space()
+
+        if keyval == IBus.Page_Down:
             return self.do_page_down()
 
         if keyval == IBus.Page_Up:
