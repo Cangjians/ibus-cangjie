@@ -22,6 +22,7 @@ __all__ = ["EngineCangjie", "EngineQuick"]
 import math
 
 from gi.repository import IBus
+import pycanberra
 
 import cangjie
 
@@ -213,6 +214,14 @@ class Engine(IBus.Engine):
         self.update_preedit_text(u"")
         self.update_lookup_table()
         self.update_auxiliary_text()
+
+    def play_error_bell(self):
+        """Play an error sound, to notify the user of invalid input."""
+        if not hasattr(self, "canberra"):
+            self.canberra = pycanberra.Canberra()
+
+        self.canberra.play(1, pycanberra.CA_PROP_EVENT_ID, "dialog-error",
+                           pycanberra.CA_PROP_MEDIA_ROLE, "error", None)
 
 
 class EngineCangjie(Engine):
