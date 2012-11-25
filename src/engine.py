@@ -99,7 +99,7 @@ class Engine(IBus.Engine):
         However, if there isn't any pre-edit, then we shouldn't try to do
         anything at all, so that the key can fulfill its original function.
         """
-        if not self.preedit:
+        if not self.lookuptable.get_number_of_candidates():
             return False
 
         self.lookuptable.page_down()
@@ -113,7 +113,7 @@ class Engine(IBus.Engine):
         However, if there isn't any pre-edit, then we shouldn't try to do
         anything at all, so that the key can fulfill its original function.
         """
-        if not self.preedit:
+        if not self.lookuptable.get_number_of_candidates():
             return False
 
         self.lookuptable.page_up()
