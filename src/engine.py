@@ -139,14 +139,6 @@ class Engine(IBus.Engine):
         self.update_auxiliary_text()
         return True
 
-    def do_process_inputchar(self, keyval):
-        """Handle user input of valid Cangjie input characters."""
-        self.update_preedit_text(self.preedit+IBus.keyval_to_unicode(keyval))
-        self.get_candidates()
-        self.update_lookup_table()
-        self.update_auxiliary_text()
-        return True
-
     def do_select_candidate(self, index):
         """Commit the selected candidate.
 
