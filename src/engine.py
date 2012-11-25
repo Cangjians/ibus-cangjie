@@ -36,13 +36,9 @@ def is_inputchar(keyval, state=0):
             (state & (IBus.ModifierType.CONTROL_MASK |
                       IBus.ModifierType.MOD1_MASK)) == 0)
 
-def get_inputnumber(keyval):
-    """Is the `keyval` param a numeric input, to select a candidate."""
-    if keyval in range(getattr(IBus, "1"), getattr(IBus, "9")+1):
-         return IBus.keyval_to_unicode(keyval)
-
-    else:
-         return False
+def is_inputnumber(keyval):
+    """Is the `keyval` param a numeric input, e.g to select a candidate."""
+    return keyval in range(getattr(IBus, "0"), getattr(IBus, "9")+1)
 
 
 class Engine(IBus.Engine):
@@ -178,9 +174,8 @@ class Engine(IBus.Engine):
         if is_inputchar(keyval, state):
             return self.do_inputchar(keyval)
 
-        select_candidate = get_inputnumber(keyval)
-        if select_candidate:
-            return self.do_select_candidate(int(select_candidate))
+        if is_inputnumber(keyval):
+            return self.do_number(keyval)
 
         return self.do_other_key(keyval)
 
@@ -238,6 +233,13 @@ class EngineCangjie(Engine):
             self.play_error_bell()
 
         return True
+
+    def do_number(self, keyval):
+        """Handle numeric input."""
+        if not self.lookuptable.get_number_of_candidates():
+            return False
+
+        return self.do_select_candidate(int(IBus.keyval_to_unicode(keyval)))
 
     def do_space(self):
         """Handle the space key.
