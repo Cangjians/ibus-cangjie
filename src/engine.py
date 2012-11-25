@@ -126,8 +126,7 @@ class Engine(IBus.Engine):
         """Go back from one input character.
 
         This doesn't cancel the current input, only removes the last
-        user-inputted character from the pre-edit text, and updates the list
-        of candidates accordingly.
+        user-inputted character from the pre-edit text.
 
         However, if there isn't any pre-edit, then we shouldn't handle the
         backspace key at all, so that it can fulfill its original function:
@@ -137,8 +136,6 @@ class Engine(IBus.Engine):
             return False
 
         self.update_preedit_text(self.preedit[:-1])
-        self.get_candidates()
-        self.update_lookup_table()
         self.update_auxiliary_text()
         return True
 
