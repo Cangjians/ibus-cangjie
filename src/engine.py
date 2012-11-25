@@ -188,15 +188,6 @@ class Engine(IBus.Engine):
     def update_preedit_text(self, new_text):
         """Update the preedit text."""
         self.preedit = new_text
-        preedit_len = len(self.preedit)
-
-        text = IBus.Text.new_from_string(self.preedit)
-        attrs = IBus.AttrList()
-        attrs.append(IBus.attr_underline_new(IBus.AttrUnderline.SINGLE, 0,
-                                             preedit_len))
-        text.set_attributes(attrs)
-        super(Engine, self).update_preedit_text(text, preedit_len,
-                                                preedit_len>0)
 
     def get_candidates(self):
         """Get the candidates based on the user input."""
