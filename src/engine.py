@@ -256,6 +256,13 @@ class EngineCangjie(Engine):
 
         return True
 
+    def do_other_key(self, keyval):
+        """Handle all otherwise unhandled key presses.
+
+        For Cangjie, that means "do nothing".
+        """
+        return False
+
     def update_auxiliary_text(self):
         """Update the auxiliary text.
 
