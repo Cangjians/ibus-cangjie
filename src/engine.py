@@ -235,6 +235,29 @@ class EngineCangjie(Engine):
         self.update_auxiliary_text()
         return True
 
+    def do_space(self):
+        """Handle the space key.
+
+        For Cangjie, that's the key which will do everything.
+        """
+        if not self.preedit:
+            return False
+
+        self.get_candidates()
+        num_candidates = self.lookuptable.get_number_of_candidates()
+
+        if num_candidates == 0:
+            self.play_error_bell()
+
+        elif num_candidates == 1:
+            self.do_select_candidate(1)
+
+        else:
+            # More than one candidate, display them
+            self.update_lookup_table()
+
+        return True
+
     def update_auxiliary_text(self):
         """Update the auxiliary text.
 
