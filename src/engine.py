@@ -196,7 +196,8 @@ class Engine(IBus.Engine):
         # Add some dummy candidates for now...
         if self.preedit:
             for c in self.cangjie.getCharacters(self.preedit):
-                self.lookuptable.append_candidate(IBus.Text.new_from_string(c))
+                self.lookuptable.append_candidate(
+                        IBus.Text.new_from_string(c.decode("utf-8")))
 
     def update_lookup_table(self):
         """Update the lookup table."""
