@@ -238,6 +238,19 @@ class EngineCangjie(Engine):
 
         return True
 
+    def do_backspace(self):
+        """Go back from one input character.
+
+        For Cangjie, we need to empty the candidates list in addition.
+        """
+        handled_by_parent = super(EngineCangjie, self).do_backspace()
+        if not handled_by_parent:
+            return False
+
+        self.lookuptable.clear()
+        self.update_lookup_table()
+        return True
+
     def do_number(self, keyval):
         """Handle numeric input."""
         if not self.lookuptable.get_number_of_candidates():
