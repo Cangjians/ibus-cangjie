@@ -20,7 +20,13 @@ __all__ = ["EngineCangjie", "EngineQuick"]
 
 
 from gi.repository import IBus
-import pycanberra
+
+try:
+    import pycanberra
+except ImportError:
+    # Fall back on the bundled version, until upstream ports to Python 3:
+    # https://github.com/psykoyiko/pycanberra/pull/2
+    from . import pycanberra
 
 import cangjie
 

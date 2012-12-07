@@ -41,3 +41,19 @@ License (LGPL) version 3 or any later version.
 
 We won't ask you to sign a copyright assignment or any other long and tedious
 legal document, so just send us your patches!
+
+pycanberra
+==========
+
+ibus-cangjie requires pycanberra to play event sounds.
+
+However, pycanberra hasn't been ported to Python 3 yet:
+    https://github.com/psykoyiko/pycanberra/pull/2
+
+To avoid being blocked, we are currently bundling it in ibus-cangjie.
+
+It is a temporary solution, though, which should be resolved as soon as
+possible.
+
+pycanberra is under the LGPL license, you can get it from there:
+    https://github.com/psykoyiko/pycanberra/blob/master/COPYING

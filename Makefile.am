@@ -51,6 +51,7 @@ desktopdir = $(datadir)/applications
 ibus_cangjie_PYTHON = \
 	src/__init__.py \
 	src/engine.py \
+        src/pycanberra.py \
 	$(NULL)
 ibus_cangjiedir = $(pythondir)/ibus_cangjie
 nodist_ibus_cangjie_PYTHON = src/config.py
