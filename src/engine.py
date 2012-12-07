@@ -33,15 +33,6 @@ import cangjie
 from .config import Config
 
 
-def is_inputchar(keyval, state=0):
-    """Is the `keyval` param an acceptable input character for Cangjie.
-
-    Only lower case letters from a to z are possible input characters.
-    """
-    return ((keyval in range(IBus.a, IBus.z + 1)) and
-            (state & (IBus.ModifierType.CONTROL_MASK |
-                      IBus.ModifierType.MOD1_MASK)) == 0)
-
 def is_inputnumber(keyval):
     """Is the `keyval` param a numeric input, e.g to select a candidate."""
     return keyval in range(getattr(IBus, "0"), getattr(IBus, "9")+1)
@@ -162,6 +153,11 @@ class Engine(IBus.Engine):
         if (state & IBus.ModifierType.RELEASE_MASK):
             return False
 
+        if state & (IBus.ModifierType.CONTROL_MASK |
+                    IBus.ModifierType.MOD1_MASK):
+            # Ignore Alt+<key> and Ctrl+<key>
+            return False
+
         if keyval == IBus.Escape:
             return self.do_cancel_input()
 
@@ -177,11 +173,12 @@ class Engine(IBus.Engine):
         if keyval == IBus.BackSpace:
             return self.do_backspace()
 
-        if is_inputchar(keyval, state):
-            return self.do_inputchar(keyval)
-
         if is_inputnumber(keyval):
             return self.do_number(keyval)
+
+        c = IBus.keyval_to_unicode(keyval)
+        if c and self.cangjie.isCangJieInputKey(c):
+            return self.do_inputchar(c)
 
         return self.do_other_key(keyval)
 
@@ -230,10 +227,10 @@ class EngineCangjie(Engine):
     config_name = "cangjie"
     input_max_len = 5
 
-    def do_inputchar(self, keyval):
+    def do_inputchar(self, inputchar):
         """Handle user input of valid Cangjie input characters."""
         if len(self.preedit) < self.input_max_len:
-            self.update_preedit_text(self.preedit+IBus.keyval_to_unicode(keyval))
+            self.update_preedit_text(self.preedit+inputchar)
             self.update_auxiliary_text()
 
         else:
