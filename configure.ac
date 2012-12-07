@@ -26,17 +26,7 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE",
 # check deps
 PKG_CHECK_MODULES(IBUS, [ibus-1.0 >= 1.3.0])
 
-AC_ARG_ENABLE(python3,
-              AS_HELP_STRING([--enable-python3=@<:@no/yes@:>@],
-                             [build the engine for Python 3]), ,
-                             enable_python3=no)
-
-# Try to use Python 3 if available
-if test "x$enable_python3" == "xyes"; then
-   AM_PATH_PYTHON([3.3])
-else
-   AM_PATH_PYTHON([2.5])
-fi
+AM_PATH_PYTHON([3.3])
 
 # OUTPUT files
 AC_CONFIG_FILES([
