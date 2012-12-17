@@ -60,7 +60,7 @@ class Config(object):
 
             if value is None:
                 value = GLib.Variant(option["type"], option["default"])
-                self.write(name)
+                self.write(name, value)
 
     def read(self, name):
         return self.__ibus_config.get_value(self.config_section, name)
