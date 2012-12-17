@@ -30,8 +30,7 @@ _ = lambda a : gettext.dgettext(gettext_package, a)
 
 class Setup(object):
     def __init__ (self, bus, engine):
-        self.__config = Config(bus, engine, self.on_value_changed,
-                               read_only=False)
+        self.__config = Config(bus, engine, self.on_value_changed)
 
         ui_file = GLib.build_filenamev([datadir, "setup.ui"])
         self.__builder = Gtk.Builder()
