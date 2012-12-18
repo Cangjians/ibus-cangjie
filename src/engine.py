@@ -26,7 +26,7 @@ try:
 except ImportError:
     # Fall back on the bundled version, until upstream ports to Python 3:
     # https://github.com/psykoyiko/pycanberra/pull/2
-    from . import pycanberra
+    import ibus_cangjie.pycanberra as pycanberra
 
 import cangjie
 
