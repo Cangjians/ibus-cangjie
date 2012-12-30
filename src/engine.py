@@ -47,6 +47,7 @@ class Engine(IBus.Engine):
                              self.on_value_changed)
 
         self.current_input = u""
+        self.current_radicals = u""
 
         self.lookuptable = IBus.LookupTable()
         self.lookuptable.set_page_size(9)
@@ -182,6 +183,7 @@ class Engine(IBus.Engine):
     def clear_current_input(self):
         """Clear the current input."""
         self.current_input = u""
+        self.current_radicals = u""
 
         self.update_lookup_table()
         self.update_auxiliary_text()
@@ -190,8 +192,11 @@ class Engine(IBus.Engine):
         """Update the current input."""
         if append is not None:
             self.current_input += append
+            # TODO: What happens when a key (e.g 'a') has more than one radical?
+            self.current_radicals += list(self.cangjie.getCharacters(append))[0]
         elif drop is not None:
             self.current_input = self.current_input[:-drop]
+            self.current_radicals = self.current_radicals[:-drop]
         else:
             raise ValueError("You must specify either 'append' or 'drop'")
 
@@ -301,8 +306,8 @@ class EngineCangjie(Engine):
 
         With Cangjie, this should contain the radicals for the current input.
         """
-        text = IBus.Text.new_from_string(self.current_input)
-        super(EngineCangjie, self).update_auxiliary_text(text, len(self.current_input)>0)
+        text = IBus.Text.new_from_string(self.current_radicals)
+        super(EngineCangjie, self).update_auxiliary_text(text, len(self.current_radicals)>0)
 
 class EngineQuick(Engine):
     """The Quick engine."""
