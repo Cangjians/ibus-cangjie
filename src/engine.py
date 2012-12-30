@@ -46,7 +46,7 @@ class Engine(IBus.Engine):
         self.config = Config(IBus.Bus(), self.config_name,
                              self.on_value_changed)
 
-        self.preedit = u""
+        self.current_input = u""
 
         self.lookuptable = IBus.LookupTable()
         self.lookuptable.set_page_size(9)
@@ -75,13 +75,13 @@ class Engine(IBus.Engine):
     def do_cancel_input(self):
         """Cancel the current input.
 
-        However, if there isn't any pre-edit, then we shouldn't try to do
+        However, if there isn't any current input, then we shouldn't try to do
         anything at all, so that the key can fulfill its original function.
         """
-        if not self.preedit:
+        if not self.current_input:
             return False
 
-        self.update_preedit_text(u"")
+        self.update_current_input(u"")
         self.update_lookup_table()
         self.update_auxiliary_text()
         return True
@@ -89,7 +89,7 @@ class Engine(IBus.Engine):
     def do_page_down(self):
         """Present the next page of candidates.
 
-        However, if there isn't any pre-edit, then we shouldn't try to do
+        However, if there isn't any current input, then we shouldn't try to do
         anything at all, so that the key can fulfill its original function.
         """
         if not self.lookuptable.get_number_of_candidates():
@@ -103,7 +103,7 @@ class Engine(IBus.Engine):
     def do_page_up(self):
         """Present the previous page of candidates.
 
-        However, if there isn't any pre-edit, then we shouldn't try to do
+        However, if there isn't any current input, then we shouldn't try to do
         anything at all, so that the key can fulfill its original function.
         """
         if not self.lookuptable.get_number_of_candidates():
@@ -118,16 +118,16 @@ class Engine(IBus.Engine):
         """Go back from one input character.
 
         This doesn't cancel the current input, only removes the last
-        user-inputted character from the pre-edit text.
+        user-inputted character from the current input.
 
         However, if there isn't any pre-edit, then we shouldn't handle the
         backspace key at all, so that it can fulfill its original function:
         deleting characters backwards.
         """
-        if not self.preedit:
+        if not self.current_input:
             return False
 
-        self.update_preedit_text(self.preedit[:-1])
+        self.update_current_input(self.current_input[:-1])
         self.update_auxiliary_text()
         return True
 
@@ -182,23 +182,23 @@ class Engine(IBus.Engine):
 
         return self.do_other_key(keyval)
 
-    def update_preedit_text(self, new_text):
-        """Update the preedit text."""
-        self.preedit = new_text
+    def update_current_input(self, new_text):
+        """Update the current input."""
+        self.current_input = new_text
 
     def get_candidates(self):
         """Get the candidates based on the user input."""
         self.lookuptable.clear()
 
         # Add some dummy candidates for now...
-        if self.preedit:
-            for c in self.cangjie.getCharacters(self.preedit):
+        if self.current_input:
+            for c in self.cangjie.getCharacters(self.current_input):
                 self.lookuptable.append_candidate(
                         IBus.Text.new_from_string(c.decode("utf-8")))
 
     def update_lookup_table(self):
         """Update the lookup table."""
-        if not self.preedit:
+        if not self.current_input:
             self.lookuptable.clear()
 
         num_candidates = self.lookuptable.get_number_of_candidates()
@@ -208,7 +208,7 @@ class Engine(IBus.Engine):
     def commit_text(self, text):
         """Commit the `text` and prepare for future input."""
         super(Engine, self).commit_text(text)
-        self.update_preedit_text(u"")
+        self.update_current_input(u"")
         self.update_lookup_table()
         self.update_auxiliary_text()
 
@@ -229,8 +229,8 @@ class EngineCangjie(Engine):
 
     def do_inputchar(self, inputchar):
         """Handle user input of valid Cangjie input characters."""
-        if len(self.preedit) < self.input_max_len:
-            self.update_preedit_text(self.preedit+inputchar)
+        if len(self.current_input) < self.input_max_len:
+            self.update_current_input(self.current_input+inputchar)
             self.update_auxiliary_text()
 
         else:
@@ -263,7 +263,7 @@ class EngineCangjie(Engine):
 
         For Cangjie, that's the key which will do everything.
         """
-        if not self.preedit:
+        if not self.current_input:
             return False
 
         self.get_candidates()
@@ -291,11 +291,10 @@ class EngineCangjie(Engine):
     def update_auxiliary_text(self):
         """Update the auxiliary text.
 
-        Somewhat counter-intuitively, this should contain the pre-edit text for
-        Cangjie.
+        With Cangjie, this should contain the radicals for the current input.
         """
-        text = IBus.Text.new_from_string(self.preedit)
-        super(EngineCangjie, self).update_auxiliary_text(text, len(self.preedit)>0)
+        text = IBus.Text.new_from_string(self.current_input)
+        super(EngineCangjie, self).update_auxiliary_text(text, len(self.current_input)>0)
 
 class EngineQuick(Engine):
     """The Quick engine."""
