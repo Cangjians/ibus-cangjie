@@ -208,8 +208,7 @@ class Engine(IBus.Engine):
 
         if self.current_input:
             for c in self.cangjie.getCharacters(self.current_input):
-                self.lookuptable.append_candidate(
-                        IBus.Text.new_from_string(c.decode("utf-8")))
+                self.lookuptable.append_candidate(IBus.Text.new_from_string(c))
 
     def update_lookup_table(self):
         """Update the lookup table."""
