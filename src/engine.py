@@ -206,7 +206,6 @@ class Engine(IBus.Engine):
         """Get the candidates based on the user input."""
         self.lookuptable.clear()
 
-        # Add some dummy candidates for now...
         if self.current_input:
             for c in self.cangjie.getCharacters(self.current_input):
                 self.lookuptable.append_candidate(
