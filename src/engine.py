@@ -125,8 +125,7 @@ class Engine(IBus.Engine):
         if not self.current_input:
             return False
 
-        self.update_current_input(self.current_input[:-1])
-        self.update_auxiliary_text()
+        self.update_current_input(drop=1)
         return True
 
     def do_select_candidate(self, index):
@@ -187,9 +186,16 @@ class Engine(IBus.Engine):
         self.update_lookup_table()
         self.update_auxiliary_text()
 
-    def update_current_input(self, new_text):
+    def update_current_input(self, append=None, drop=None):
         """Update the current input."""
-        self.current_input = new_text
+        if append is not None:
+            self.current_input += append
+        elif drop is not None:
+            self.current_input = self.current_input[:-drop]
+        else:
+            raise ValueError("You must specify either 'append' or 'drop'")
+
+        self.update_auxiliary_text()
 
     def get_candidates(self):
         """Get the candidates based on the user input."""
@@ -233,8 +239,7 @@ class EngineCangjie(Engine):
     def do_inputchar(self, inputchar):
         """Handle user input of valid Cangjie input characters."""
         if len(self.current_input) < self.input_max_len:
-            self.update_current_input(self.current_input+inputchar)
-            self.update_auxiliary_text()
+            self.update_current_input(append=inputchar)
 
         else:
             self.play_error_bell()
