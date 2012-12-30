@@ -81,9 +81,7 @@ class Engine(IBus.Engine):
         if not self.current_input:
             return False
 
-        self.update_current_input(u"")
-        self.update_lookup_table()
-        self.update_auxiliary_text()
+        self.clear_current_input()
         return True
 
     def do_page_down(self):
@@ -182,6 +180,13 @@ class Engine(IBus.Engine):
 
         return self.do_other_key(keyval)
 
+    def clear_current_input(self):
+        """Clear the current input."""
+        self.current_input = u""
+
+        self.update_lookup_table()
+        self.update_auxiliary_text()
+
     def update_current_input(self, new_text):
         """Update the current input."""
         self.current_input = new_text
@@ -208,9 +213,7 @@ class Engine(IBus.Engine):
     def commit_text(self, text):
         """Commit the `text` and prepare for future input."""
         super(Engine, self).commit_text(text)
-        self.update_current_input(u"")
-        self.update_lookup_table()
-        self.update_auxiliary_text()
+        self.clear_current_input()
 
     def play_error_bell(self):
         """Play an error sound, to notify the user of invalid input."""
