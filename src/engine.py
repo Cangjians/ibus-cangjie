@@ -117,7 +117,8 @@ class Engine(IBus.Engine):
         """Go back from one input character.
 
         This doesn't cancel the current input, only removes the last
-        user-inputted character from the current input.
+        user-inputted character from the current input, and clear the list of
+        candidates.
 
         However, if there isn't any pre-edit, then we shouldn't handle the
         backspace key at all, so that it can fulfill its original function:
@@ -127,7 +128,24 @@ class Engine(IBus.Engine):
             return False
 
         self.update_current_input(drop=1)
+
+        self.lookuptable.clear()
+        self.update_lookup_table()
         return True
+
+    def do_number(self, keyval):
+        """Handle numeric input."""
+        if not self.lookuptable.get_number_of_candidates():
+            return False
+
+        return self.do_select_candidate(int(IBus.keyval_to_unicode(keyval)))
+
+    def do_other_key(self, keyval):
+        """Handle all otherwise unhandled key presses.
+
+        For Cangjie and Quick, that means "do nothing".
+        """
+        return False
 
     def do_select_candidate(self, index):
         """Commit the selected candidate.
@@ -210,6 +228,22 @@ class Engine(IBus.Engine):
             for c in self.cangjie.getCharacters(self.current_input):
                 self.lookuptable.append_candidate(IBus.Text.new_from_string(c))
 
+    def update_preedit_text(self):
+        """Update the preedit text.
+
+        This is never used with Cangjie and Quick, so let's nullify it
+        completely, in case something else in the IBus machinery calls it.
+        """
+        pass
+
+    def update_auxiliary_text(self):
+        """Update the auxiliary text.
+
+        This should contain the radicals for the current input.
+        """
+        text = IBus.Text.new_from_string(self.current_radicals)
+        super(Engine, self).update_auxiliary_text(text, len(self.current_radicals)>0)
+
     def update_lookup_table(self):
         """Update the lookup table."""
         if not self.current_input:
@@ -249,26 +283,6 @@ class EngineCangjie(Engine):
 
         return True
 
-    def do_backspace(self):
-        """Go back from one input character.
-
-        For Cangjie, we need to empty the candidates list in addition.
-        """
-        handled_by_parent = super(EngineCangjie, self).do_backspace()
-        if not handled_by_parent:
-            return False
-
-        self.lookuptable.clear()
-        self.update_lookup_table()
-        return True
-
-    def do_number(self, keyval):
-        """Handle numeric input."""
-        if not self.lookuptable.get_number_of_candidates():
-            return False
-
-        return self.do_select_candidate(int(IBus.keyval_to_unicode(keyval)))
-
     def do_space(self):
         """Handle the space key.
 
@@ -292,20 +306,6 @@ class EngineCangjie(Engine):
 
         return True
 
-    def do_other_key(self, keyval):
-        """Handle all otherwise unhandled key presses.
-
-        For Cangjie, that means "do nothing".
-        """
-        return False
-
-    def update_auxiliary_text(self):
-        """Update the auxiliary text.
-
-        With Cangjie, this should contain the radicals for the current input.
-        """
-        text = IBus.Text.new_from_string(self.current_radicals)
-        super(EngineCangjie, self).update_auxiliary_text(text, len(self.current_radicals)>0)
 
 class EngineQuick(Engine):
     """The Quick engine."""
