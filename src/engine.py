@@ -229,10 +229,22 @@ class Engine(IBus.Engine):
     def get_candidates(self):
         """Get the candidates based on the user input."""
         self.lookuptable.clear()
+        num_candidates = 0
 
         if self.current_input:
             for c in self.cangjie.getCharacters(self.current_input):
                 self.lookuptable.append_candidate(IBus.Text.new_from_string(c))
+                num_candidates += 1
+
+        if num_candidates == 0:
+            self.play_error_bell()
+
+        elif num_candidates == 1:
+            self.do_select_candidate(1)
+
+        else:
+            # More than one candidate, display them
+            self.update_lookup_table()
 
     def update_preedit_text(self):
         """Update the preedit text.
@@ -298,17 +310,6 @@ class EngineCangjie(Engine):
             return False
 
         self.get_candidates()
-        num_candidates = self.lookuptable.get_number_of_candidates()
-
-        if num_candidates == 0:
-            self.play_error_bell()
-
-        elif num_candidates == 1:
-            self.do_select_candidate(1)
-
-        else:
-            # More than one candidate, display them
-            self.update_lookup_table()
 
         return True
 
