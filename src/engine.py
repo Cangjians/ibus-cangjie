@@ -227,13 +227,20 @@ class Engine(IBus.Engine):
 
         self.update_auxiliary_text()
 
-    def get_candidates(self):
-        """Get the candidates based on the user input."""
+    def get_candidates(self, code=None):
+        """Get the candidates based on the user input.
+
+        If the optional `code` parameter is not specified, then use the
+        current input instead.
+        """
         self.lookuptable.clear()
         num_candidates = 0
 
-        if self.current_input:
-            for c in self.cangjie.getCharacters(self.current_input):
+        if not code:
+            code = self.current_input
+
+        if code:
+            for c in self.cangjie.getCharacters(code):
                 self.lookuptable.append_candidate(IBus.Text.new_from_string(c))
                 num_candidates += 1
 
