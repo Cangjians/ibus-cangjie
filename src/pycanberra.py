@@ -6,7 +6,16 @@
 from ctypes import *
 import time
 
-import six
+# This is inspired by the six module: http://pypi.python.org/pypi/six
+import sys
+if sys.version_info.major == 3:
+    string_types = str,
+    def b(s):
+        return s.encode("latin-1")
+else:
+    string_types = basestring,
+    def b(s):
+        return s
 
 
 # /**
@@ -559,8 +568,7 @@ class Canberra(object):
          raise CanberraException(res, "Failed to destroy context")
 
    def change_props(self, *args):
-      args = tuple(six.b(arg)
-                   if isinstance(arg, six.string_types) else arg
+      args = tuple(b(arg) if isinstance(arg, string_types) else arg
                    for arg in args)
       res = GetApi().ca_context_change_props(self._handle, *args)
       if res != CA_SUCCESS:
@@ -579,16 +587,14 @@ class Canberra(object):
       pass
 
    def play(self, playId, *args):
-      args = tuple(six.b(arg)
-                   if isinstance(arg, six.string_types) else arg
+      args = tuple(b(arg) if isinstance(arg, string_types) else arg
                    for arg in args)
       res = GetApi().ca_context_play(self._handle, playId, *args)
       if res != CA_SUCCESS:
          raise CanberraException(res, "Failed to play!")
 
    def cache(self, *args):
-      args = tuple(six.b(arg)
-                   if isinstance(arg, six.string_types) else arg
+      args = tuple(b(arg) if isinstance(arg, string_types) else arg
                    for arg in args)
       res = GetApi().ca_context_cache(self._handle, *args)
       if res != CA_SUCCESS:
@@ -608,7 +614,8 @@ class Canberra(object):
 
    def easy_play_sync(self, eventName):
       """ play an event sound synchronously """
-      eventName = six.b(eventName)
+      if isinstance(eventName, string_types):
+          eventName = b(eventName)
       self.play(1,
                 CA_PROP_EVENT_ID, eventName,
                 None)
