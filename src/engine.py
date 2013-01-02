@@ -326,3 +326,26 @@ class EngineQuick(Engine):
     """The Quick engine."""
     __gtype_name__ = "EngineQuick"
     config_name = "quick"
+    input_max_len = 2
+
+    def do_inputchar(self, inputchar):
+        """Handle user input of valid Cangjie input characters."""
+        if len(self.current_input) < self.input_max_len:
+            self.update_current_input(append=inputchar)
+
+        else:
+            self.do_select_candidate(1)
+
+        # Now that we appended/committed, let's check the new length
+        if len(self.current_input) == self.input_max_len:
+            current_input = "*".join(self.current_input)
+            self.get_candidates(current_input)
+
+        return True
+
+    def do_space(self):
+        """Handle the space key.
+
+        For Quick, this is either a page-down on the candidates table.
+        """
+        return self.do_page_down()
