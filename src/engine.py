@@ -193,7 +193,8 @@ class Engine(IBus.Engine):
             return self.do_number(keyval)
 
         c = IBus.keyval_to_unicode(keyval)
-        if c and self.cangjie.isCangJieInputKey(c):
+        # TODO: should wildcard support be optional?
+        if c and self.cangjie.isCangJieInputKey(c) or c == "*":
             return self.do_inputchar(c)
 
         return self.do_other_key(keyval)
