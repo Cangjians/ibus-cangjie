@@ -18,6 +18,18 @@
 # along with ibus-cangjie.  If not, see <http://www.gnu.org/licenses/>.
 
 import argparse
+parser = argparse.ArgumentParser(description="Cangjie input method setup")
+parser.add_argument("engine", help="Input method engine to set up",
+                    choices=("cangjie", "quick"))
+args = parser.parse_args()
+
+from gi.repository import GLib
+
+# This has to be set before importing Gtk, or else the WM_CLASS property for
+# the window will be wrong
+GLib.set_prgname('ibus-setup-%s' % args.engine)
+
+
 import locale
 
 from gi.repository import Gtk
@@ -25,11 +37,6 @@ from gi.repository import IBus
 
 from ibus_cangjie.config import gettext_package, localedir
 from ibus_cangjie.setup import Setup
-
-parser = argparse.ArgumentParser(description="Cangjie input method setup")
-parser.add_argument("engine", help="Input method engine to set up",
-                    choices=("cangjie", "quick"))
-args = parser.parse_args()
 
 locale.bindtextdomain(gettext_package, localedir)
 locale.bind_textdomain_codeset(gettext_package, "UTF-8")
