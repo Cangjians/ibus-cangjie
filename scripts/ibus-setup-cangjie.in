@@ -19,7 +19,6 @@
 
 import argparse
 import locale
-import sys
 
 from gi.repository import Gtk
 from gi.repository import IBus
@@ -46,6 +45,8 @@ except:
                                buttons = Gtk.ButtonsType.CLOSE,
                                message_format = "\n".join(message))
     dialog.run()
+
+    import sys
     sys.exit(1)
 
 Setup(bus, args.engine).run()
