@@ -82,6 +82,21 @@ Here's some stuff we could already gather.
     Instead, we should commit the first candidate, and start a new input with
     that new key.
 
+    3. Properly implement the display of radicals in the input box
+    --------------------------------------------------------------
+
+    Now that libcangjie added `CangJie::translateInputKeyToCangJie`, we should
+    just use that instead of our hacked-up stuff.
+
+    4. Implement full-/half-width support
+    -------------------------------------
+
+    Wan Leung recently added `CangJie::getFullWidthChar` to libcangjie, so we
+    should use it.
+
+    This needs to respect the user settings.
+
+
 Stuff to investigate for future improvements
 ============================================
 
