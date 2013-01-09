@@ -115,3 +115,12 @@ This could be done only when no candidates are returned for example, to avoid
 giving the user many candidates when he actually typed the right one.
 
 Etc...
+
+Allow suggesting the next possible characters
+---------------------------------------------
+
+We could eventually decide to suggest not just the current character based on
+the user inputted code, but also the next one, even before she types.
+
+That seems like it would require knowledge of Chinese grammar, or dictionaries
+of very common sentances, or...?
