@@ -1,7 +1,117 @@
-- Actually implement the engine functionality:
-  - get candidates
-- Setup the necessary stuff for i18n
-- Get an icon for the setup UI
-- Modify the GNOME Control Center whitelist so it uses `cangjie` and `quick`
-  instead of the current `cangjie3`, `cangjie5`,... from ibus-tables
-- Drop the obsolete DBs from ibus-table-chinese
+Critical for 1.0
+================
+
+Properly document the dependencies in the README
+------------------------------------------------
+
+Right now, unless you ask me, you'll have a hard time figuring out what's
+needed to install.
+
+Properly check for all dependencies at build-time
+-------------------------------------------------
+
+This is similar to the previous one, but on the tooling side, rather than
+purely as documentation.
+
+Figure out what's the deal with IBus in /usr/local
+--------------------------------------------------
+
+I haven't been able to get IBus to find engines in /usr/local, but I might
+just have overlooked the fact that I had to restart IBus after installing
+ibus-cangjie...
+
+Try again, ask the IBus devs.
+
+If it works, great. If it doesn't, make sure that at least the XML component
+file gets always installed in /usr.
+
+Add a note about building on multilib distros
+---------------------------------------------
+
+Not everybody trying to build software from source seems to know about passing
+the --libdir=/usr/lib64 (or similar) oarameter to the configure script,
+depending on their distro.
+
+The least we can do is add a note about it in the README, or similar
+documentation.
+
+Setup the necessary stuff for i18n
+----------------------------------
+
+We're a project aiming at helping people to input Chinese. The least we can do
+is show all strings in Chinese. ;)
+
+Get an icon for the setup UI
+----------------------------
+
+I'd like to work with the GNOME designers on this one, so that we get a icon
+that is beautiful and integrates well with GNOME.
+
+Get listed in the GNOME Control Center
+--------------------------------------
+
+Modify their whitelist so it uses `cangjie` and `quick` instead of the current
+`cangjie3`, `cangjie5`,... from ibus-tables
+
+Get some feedback on the UX
+---------------------------
+
+We really need to nail the basic features down with a top-notch UX.
+
+Right now, the implementation is based on the discussions I had, but I know of
+many things which might be wrong or missing.
+
+Here's some stuff we could already gather.
+
+    1. [cangjie] Pressing space twice on multiple candidates
+    --------------------------------------------------------
+
+    When pressing space, the user sometimes gets multiple candidates.
+
+    When that happens, if the user presses space again, we should commit the
+    first candidate.
+
+    2. [cangjie] Input after space on multiple candidates
+    -----------------------------------------------------
+
+    When pressing space, the user sometimes gets multiple candidates.
+
+    When that happens, if the user then goes on pressing an input key, we
+    shouldn't consider that as the continuation of the previous input.
+
+    Instead, we should commit the first candidate, and start a new input with
+    that new key.
+
+Stuff to investigate for future improvements
+============================================
+
+Traditional to Simplified Chinese
+---------------------------------
+
+At least 2 persons told me that when they want to input Simplified Chinese,
+they will usually instead write Traditional Chinese and use some kind of
+automatic conversion:
+
+- one person said that Microsoft Word allowed her to do that
+- one person said that the Yahoo! KeyKey input method does that too
+
+This is potentially an interesting feature to look into.
+
+Make Cangjie a bit more tolerant to input mistakes
+--------------------------------------------------
+
+Cangjie is very unforgiving. If you make a mistake in one of the input
+characters, you will only discover it when you hit space, and you have to
+start all over again.
+
+It could be possible to be a bit more tolerant and permissive, for example
+allowing other results than what the user typed, under certain conditions.
+
+One idea is to return candidates which have input codes that are "close" to
+what the user typed. Another factor to add could be the surrounding
+characters, or the meaning of the sentence, etc...
+
+This could be done only when no candidates are returned for example, to avoid
+giving the user many candidates when he actually typed the right one.
+
+Etc...
