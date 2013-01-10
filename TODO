@@ -1,12 +1,6 @@
 Critical for 1.0
 ================
 
-Properly document the dependencies in the README
-------------------------------------------------
-
-Right now, unless you ask me, you'll have a hard time figuring out what's
-needed to install.
-
 Properly check for all dependencies at build-time
 -------------------------------------------------
 

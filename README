@@ -27,6 +27,29 @@ usual sequence::
 Of course, if you got the sources from Git, you will need to run the
 ``autogen.sh`` script first.
 
+Dependencies
+============
+
+To use this engine, you will need the following:
+
+  - Python >= 3.3
+      -> http://python.org
+
+  - ibus >= 1.5.0
+      Note that the GObject-Introspection bindings must be enabled
+      -> https://code.google.com/p/ibus/
+
+  - libcangjie
+      -> https://github.com/wanleung/libcangjie
+
+  - pycangjie
+      -> https://github.com/bochecha/pycangjie
+
+  - pycanberra
+      Not needed currently as we bundle it. More details at the end of this
+      document.
+      -> https://github.com/psykoyiko/pycanberra
+
 Legal
 =====
 
