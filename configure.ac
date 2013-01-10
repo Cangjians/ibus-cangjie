@@ -24,8 +24,6 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE",
                    [The prefix for our gettext translation domains.])
 
 # check deps
-PKG_CHECK_MODULES(IBUS, [ibus-1.0 >= 1.3.0])
-
 AM_PATH_PYTHON([3.3])
 
 # OUTPUT files
