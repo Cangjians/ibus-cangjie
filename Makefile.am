@@ -31,7 +31,7 @@ desktopdir = $(datadir)/applications
 %.xml: %.xml.in
 	$(AM_V_GEN) \
 	( \
-		libexecdir=${libexecdir}; \
+		pkglibexecdir=${pkglibexecdir}; \
 		s=`cat $<`; \
 		eval "echo \"$${s}\""; \
 	) > $@
@@ -63,9 +63,10 @@ bin_SCRIPTS = \
 	scripts/ibus-setup-cangjie \
 	$(NULL)
 
-libexec_SCRIPTS = \
+pkglibexec_SCRIPTS = \
 	scripts/ibus-engine-cangjie \
 	$(NULL)
+libexecdir = $(prefix)/lib
 
 src/config.py: src/config.py.in Makefile
 	$(MKDIR_P) src

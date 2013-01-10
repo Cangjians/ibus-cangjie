@@ -21,7 +21,7 @@ along with ibus-cangjie.  If not, see <http://www.gnu.org/licenses/>.
 <component>
   <name>org.freedesktop.IBus.Quick</name>
   <description>Quick Component</description>
-  <exec>${libexecdir}/ibus-engine-cangjie --ibus quick</exec>
+  <exec>${pkglibexecdir}/ibus-engine-cangjie --ibus quick</exec>
   <version>@VERSION@</version>
   <author>The IBus Cangjie authors</author>
   <license>LGPLv3+</license>
