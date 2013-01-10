@@ -2,7 +2,7 @@
 Encoding=UTF-8
 _Name=Cangjie settings
 _Comment=Set preferences for the Cangjie input method
-Exec=${libexecdir}/ibus-setup-cangjie cangjie
+Exec=${bindir}/ibus-setup-cangjie cangjie
 Icon=ibus-setup-cangjie
 Terminal=false
 Type=Application

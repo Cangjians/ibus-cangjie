@@ -39,7 +39,7 @@ desktopdir = $(datadir)/applications
 %.desktop.in: %.desktop.in.in
 	$(AM_V_GEN) \
 	( \
-		libexecdir=${libexecdir}; \
+		bindir=${bindir}; \
 		s=`cat $<`; \
 		eval "echo \"$${s}\""; \
 	) > $@
@@ -59,9 +59,12 @@ ibus_cangjie_setup_PYTHON = \
 	$(NULL)
 ibus_cangjie_setupdir = $(ibus_cangjiedir)/setup
 
+bin_SCRIPTS = \
+	scripts/ibus-setup-cangjie \
+	$(NULL)
+
 libexec_SCRIPTS = \
 	scripts/ibus-engine-cangjie \
-	scripts/ibus-setup-cangjie \
 	$(NULL)
 
 src/config.py: src/config.py.in Makefile
