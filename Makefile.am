@@ -32,7 +32,6 @@ desktopdir = $(datadir)/applications
 	$(AM_V_GEN) \
 	( \
 		libexecdir=${libexecdir}; \
-		pkgdatadir=${pkgdatadir}; \
 		s=`cat $<`; \
 		eval "echo \"$${s}\""; \
 	) > $@
@@ -41,7 +40,6 @@ desktopdir = $(datadir)/applications
 	$(AM_V_GEN) \
 	( \
 		libexecdir=${libexecdir}; \
-		pkgdatadir=${pkgdatadir}; \
 		s=`cat $<`; \
 		eval "echo \"$${s}\""; \
 	) > $@
