@@ -211,12 +211,7 @@ class Engine(IBus.Engine):
         """Update the current input."""
         if append is not None:
             self.current_input += append
-            try:
-                # TODO: What happens when a key (e.g 'a') has more than one radical?
-                self.current_radicals += list(self.cangjie.getCharacters(append))[0]
-            except IndexError:
-                # Some input characters have no associated radicals
-                self.current_radicals += append
+            self.current_radicals += self.cangjie.translateInputKeyToCangJie(append)
 
         elif drop is not None:
             self.current_input = self.current_input[:-drop]
