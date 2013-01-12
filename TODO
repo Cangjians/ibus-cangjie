@@ -1,12 +1,6 @@
 Critical for 1.0
 ================
 
-Properly check for all dependencies at build-time
--------------------------------------------------
-
-This is similar to the previous one, but on the tooling side, rather than
-purely as documentation.
-
 Figure out what's the deal with IBus in /usr/local
 --------------------------------------------------
 
