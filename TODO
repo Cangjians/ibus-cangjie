@@ -13,16 +13,6 @@ Try again, ask the IBus devs.
 If it works, great. If it doesn't, make sure that at least the XML component
 file gets always installed in /usr.
 
-Add a note about building on multilib distros
----------------------------------------------
-
-Not everybody trying to build software from source seems to know about passing
-the --libdir=/usr/lib64 (or similar) oarameter to the configure script,
-depending on their distro.
-
-The least we can do is add a note about it in the README, or similar
-documentation.
-
 Setup the necessary stuff for i18n
 ----------------------------------
 
