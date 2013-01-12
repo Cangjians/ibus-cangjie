@@ -138,14 +138,24 @@ class Engine(IBus.Engine):
         if self.lookuptable.get_number_of_candidates():
             return self.do_select_candidate(int(IBus.keyval_to_unicode(keyval)))
 
-        return False
+        return self.do_fullwidth_char(IBus.keyval_to_unicode(keyval))
 
     def do_other_key(self, keyval):
-        """Handle all otherwise unhandled key presses.
+        """Handle all otherwise unhandled key presses."""
+        return self.do_fullwidth_char(IBus.keyval_to_unicode(keyval))
 
-        For Cangjie and Quick, that means "do nothing".
-        """
-        return False
+    def do_fullwidth_char(self, inputchar):
+        """Commit the full-width version of an input character."""
+        if self.config.read("halfwidth_chars"):
+            return False
+
+        try:
+            t = self.cangjie.getFullWidthChar(inputchar)
+        except TypeError:
+            t = inputchar
+
+        self.commit_text(IBus.Text.new_from_string(t))
+        return True
 
     def do_select_candidate(self, index):
         """Commit the selected candidate.
@@ -310,7 +320,7 @@ class EngineCangjie(Engine):
         For Cangjie, that's the key which will do everything.
         """
         if not self.current_input:
-            return False
+            return self.do_fullwidth_char(" ")
 
         if self.lookuptable.get_number_of_candidates():
             self.do_select_candidate(1)
@@ -350,4 +360,4 @@ class EngineQuick(Engine):
         if self.do_page_down():
             return True
 
-        return False
+        return self.do_fullwidth_char(" ")
