@@ -39,9 +39,6 @@ To use this engine, you will need the following:
       Note that the GObject-Introspection bindings must be enabled
       -> https://code.google.com/p/ibus/
 
-  - libcangjie
-      -> https://github.com/wanleung/libcangjie
-
   - pycangjie
       -> https://github.com/bochecha/pycangjie
 
