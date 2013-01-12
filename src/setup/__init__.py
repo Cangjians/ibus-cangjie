@@ -38,11 +38,7 @@ class Setup(object):
         self.__builder.add_from_file(ui_file)
 
         for option in options:
-            if option["name"] == "punctuation_chars":
-                self.__prepare_combo(option)
-
-            else:
-                self.__prepare_button(option)
+            self.__prepare_button(option)
 
         self.__window = self.__builder.get_object("setup_dialog")
         self.__window.set_title("%s settings" % engine.capitalize())

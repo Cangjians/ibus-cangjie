@@ -22,10 +22,10 @@ gettext_package = '@CANGJIE_GETTEXT_PACKAGE@'
 localedir = '@LOCALEDIR@'
 datadir = "@PKGDATADIR@"
 
-options = ({"name": "punctuation_chars",
-            "type": "i",
-            "values": ((0, "Chinese (full width)"), (1, "English (half width)")),
-            "default": 0},
+options = ({"name": "halfwidth_chars",
+            "type": "b",
+            "values": (False, True),
+            "default": False},
            {"name": "use_new_version",
             "type": "b",
             "values": (False, True),

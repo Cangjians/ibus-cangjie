@@ -41,34 +41,13 @@
           </packing>
         </child>
         <child>
-          <object class="GtkHBox" id="box2">
+          <object class="GtkCheckButton" id="halfwidth_chars">
+            <property name="label" translatable="yes">Use half-width characters</property>
+            <property name="use_action_appearance">False</property>
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="spacing">15</property>
-            <child>
-              <object class="GtkLabel" id="punctuation_label">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="xalign">0</property>
-                <property name="label" translatable="yes">Punctuation characters</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBox" id="punctuation_chars">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="draw_indicator">True</property>
           </object>
           <packing>
             <property name="expand">True</property>
