@@ -312,7 +312,11 @@ class EngineCangjie(Engine):
         if not self.current_input:
             return False
 
-        self.get_candidates()
+        if self.lookuptable.get_number_of_candidates():
+            self.do_select_candidate(1)
+
+        else:
+            self.get_candidates()
 
         return True
 
