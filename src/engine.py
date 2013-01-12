@@ -135,10 +135,10 @@ class Engine(IBus.Engine):
 
     def do_number(self, keyval):
         """Handle numeric input."""
-        if not self.lookuptable.get_number_of_candidates():
-            return False
+        if self.lookuptable.get_number_of_candidates():
+            return self.do_select_candidate(int(IBus.keyval_to_unicode(keyval)))
 
-        return self.do_select_candidate(int(IBus.keyval_to_unicode(keyval)))
+        return False
 
     def do_other_key(self, keyval):
         """Handle all otherwise unhandled key presses.
@@ -347,4 +347,7 @@ class EngineQuick(Engine):
 
         For Quick, this is either a page-down on the candidates table.
         """
-        return self.do_page_down()
+        if self.do_page_down():
+            return True
+
+        return False
