@@ -151,7 +151,7 @@ class Engine(IBus.Engine):
 
         try:
             t = self.cangjie.getFullWidthChar(inputchar)
-        except TypeError:
+        except Exception as e:
             t = inputchar
 
         self.commit_text(IBus.Text.new_from_string(t))
