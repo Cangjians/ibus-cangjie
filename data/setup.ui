@@ -71,8 +71,8 @@
           </packing>
         </child>
         <child>
-          <object class="GtkCheckButton" id="include_all_cjk">
-            <property name="label" translatable="yes">Also suggest Simplified Chinese and Japanese characters</property>
+          <object class="GtkCheckButton" id="include_all_zh">
+            <property name="label" translatable="yes">Also suggest Simplified Chinese characters</property>
             <property name="use_action_appearance">False</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
