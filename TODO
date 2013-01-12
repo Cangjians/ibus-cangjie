@@ -13,12 +13,6 @@ Try again, ask the IBus devs.
 If it works, great. If it doesn't, make sure that at least the XML component
 file gets always installed in /usr.
 
-Setup the necessary stuff for i18n
-----------------------------------
-
-We're a project aiming at helping people to input Chinese. The least we can do
-is show all strings in Chinese. ;)
-
 Get an icon for the setup UI
 ----------------------------
 
