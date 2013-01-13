@@ -23,8 +23,15 @@ AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE",
                    [The prefix for our gettext translation domains.])
 
-# check deps
+# check for Python
 AM_PATH_PYTHON([3.3])
+
+# check for IBus
+PKG_CHECK_EXISTS(IBUS, [ibus-1.0 >= 1.4.99])
+AC_MSG_CHECKING(for ibus component dir)
+IBUS_COMPONENT_DIR="`$PKG_CONFIG --variable=pkgdatadir ibus-1.0`/component"
+AC_MSG_RESULT($IBUS_COMPONENT_DIR)
+AC_SUBST(IBUS_COMPONENT_DIR)
 
 # OUTPUT files
 AC_CONFIG_FILES([

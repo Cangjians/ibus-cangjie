@@ -15,7 +15,7 @@ component_DATA = \
 	data/cangjie.xml \
 	data/quick.xml \
 	$(NULL)
-componentdir = $(datadir)/ibus/component
+componentdir = $(IBUS_COMPONENT_DIR)
 
 desktop_in_files = \
 	data/ibus-setup-cangjie.desktop.in \
