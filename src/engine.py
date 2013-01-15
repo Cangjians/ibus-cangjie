@@ -46,8 +46,8 @@ class Engine(IBus.Engine):
         self.config = Config(IBus.Bus(), self.config_name,
                              self.on_value_changed)
 
-        self.current_input = u""
-        self.current_radicals = u""
+        self.current_input = ""
+        self.current_radicals = ""
 
         self.lookuptable = IBus.LookupTable()
         self.lookuptable.set_page_size(9)
@@ -211,8 +211,8 @@ class Engine(IBus.Engine):
 
     def clear_current_input(self):
         """Clear the current input."""
-        self.current_input = u""
-        self.current_radicals = u""
+        self.current_input = ""
+        self.current_radicals = ""
 
         self.update_lookup_table()
         self.update_auxiliary_text()
