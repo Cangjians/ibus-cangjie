@@ -34,14 +34,6 @@ options = ({"name": "halfwidth_chars",
             "type": "b",
             "values": (False, True),
             "default": False},
-           {"name": "adapt_to_input",
-            "type": "b",
-            "values": (False, True),
-            "default": False},
-           {"name": "auto_next_chars",
-            "type": "b",
-            "values": (False, True),
-            "default": False},
            )
 
 class Config(object):
