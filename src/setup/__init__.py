@@ -18,6 +18,7 @@
 
 import gettext
 
+from gi.repository import Gdk
 from gi.repository import GLib
 from gi.repository import Gtk
 
@@ -42,6 +43,7 @@ class Setup(object):
 
         self.__window = self.__builder.get_object("setup_dialog")
         self.__window.set_title("%s settings" % engine.capitalize())
+        self.__window.set_type_hint(Gdk.WindowTypeHint.DIALOG)
         self.__window.show()
 
     def __prepare_button(self, option):
