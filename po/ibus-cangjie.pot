@@ -1,0 +1,45 @@
+# XX translation for ibus-cangjie
+# Copyright (C) 2012-2013 - The IBus Cangjie authors
+# This file is distributed under the same license as the ibus-cangjie package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-01-16 23:06+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../data/ibus-setup-cangjie.desktop.in.in.h:1
+msgid "Cangjie settings"
+msgstr ""
+
+#: ../data/ibus-setup-cangjie.desktop.in.in.h:2
+msgid "Set preferences for the Cangjie input method"
+msgstr ""
+
+#: ../data/ibus-setup-quick.desktop.in.in.h:1
+msgid "Quick settings"
+msgstr ""
+
+#: ../data/ibus-setup-quick.desktop.in.in.h:2
+msgid "Set preferences for the Quick input method"
+msgstr ""
+
+#: ../data/setup.ui.h:1
+msgid "Use half-width characters"
+msgstr ""
+
+#: ../data/setup.ui.h:2
+msgid "Use the newer version"
+msgstr ""
+
+#: ../data/setup.ui.h:3
+msgid "Also suggest Simplified Chinese characters"
+msgstr ""
