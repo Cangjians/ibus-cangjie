@@ -29,6 +29,7 @@ data/*.desktop.in
 data/*.xml
 data/*.xml.in
 *.swp
+*~
 .intltool-merge-cache
 src/config.py
 scripts/ibus-engine-cangjie
