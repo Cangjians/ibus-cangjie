@@ -36,3 +36,5 @@ scripts/ibus-engine-cangjie
 scripts/ibus-setup-cangjie
 *.pyc
 *.pyo
+po/POTFILES
+po/*.gmo
