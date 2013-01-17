@@ -142,7 +142,11 @@ class Engine(IBus.Engine):
 
     def do_other_key(self, keyval):
         """Handle all otherwise unhandled key presses."""
-        return self.do_fullwidth_char(IBus.keyval_to_unicode(keyval))
+        c = IBus.keyval_to_unicode(keyval)
+        if c:
+            return self.do_fullwidth_char(IBus.keyval_to_unicode(keyval))
+
+        return False
 
     def do_fullwidth_char(self, inputchar):
         """Commit the full-width version of an input character."""
@@ -152,7 +156,7 @@ class Engine(IBus.Engine):
         try:
             t = self.cangjie.getFullWidthChar(inputchar)
         except Exception as e:
-            t = inputchar
+            return False
 
         self.commit_text(IBus.Text.new_from_string(t))
         return True
