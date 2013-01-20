@@ -367,4 +367,8 @@ class EngineQuick(Engine):
         if self.do_page_down():
             return True
 
+        if len(self.current_input) == 1:
+            self.get_candidates()
+            return True
+
         return self.do_fullwidth_char(" ")
