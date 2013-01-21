@@ -44,3 +44,15 @@ AC_CONFIG_FILES([
 ])
 
 AC_OUTPUT
+
+dnl ==========================================================================
+echo "
+
+    $PACKAGE $VERSION
+    ==================
+
+    python version: ${PYTHON_VERSION}
+    prefix:         ${prefix}
+
+    Now type 'make' to build $PACKAGE
+"
