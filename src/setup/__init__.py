@@ -42,7 +42,7 @@ class Setup(object):
             self.__prepare_button(option)
 
         self.__window = self.__builder.get_object("setup_dialog")
-        self.__window.set_title("%s settings" % engine.capitalize())
+        self.__window.set_title("%s Preferences" % engine.capitalize())
         self.__window.set_type_hint(Gdk.WindowTypeHint.DIALOG)
         self.__window.show()
 
