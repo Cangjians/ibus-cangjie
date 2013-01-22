@@ -57,13 +57,12 @@ class Engine(IBus.Engine):
         self.init_cangjie()
 
     def init_cangjie(self):
-        new_version = self.config.read("use_new_version")
-        version = getattr(cangjie.versions,
-                          "CANGJIE%d" % (5 if new_version else 3))
+        version = self.config.read("version").unpack()
+        version = getattr(cangjie.versions, "CANGJIE%d"%version)
 
-        all_zh = self.config.read("include_all_zh")
+        include_sc = self.config.read("include_sc")
         lang = getattr(cangjie.languages,
-                       "COMMON" if all_zh else "TRADITIONAL")
+                       "COMMON" if include_sc else "TRADITIONAL")
 
         self.cangjie = cangjie.CangJie(version, lang)
 

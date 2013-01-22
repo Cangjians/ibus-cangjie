@@ -39,51 +39,55 @@ class Setup(object):
         self.__builder.add_from_file(ui_file)
 
         for option in options:
-            self.__prepare_button(option)
+            prepare_func = getattr(self, "prepare_%s" % option["widget"])
+            prepare_func(option)
 
         self.__window = self.__builder.get_object("setup_dialog")
         self.__window.set_title("%s Preferences" % engine.capitalize())
         self.__window.set_type_hint(Gdk.WindowTypeHint.DIALOG)
         self.__window.show()
 
-    def __prepare_button(self, option):
-        """Prepare a Gtk.CheckButton
+    def prepare_switch(self, option):
+        """Prepare a Gtk.Switch
 
-        Set the button named `option['name']` (in)active based on the current
+        Set the switch named `option["name"]` (in)active based on the current
         engine config value.
         """
         name = option["name"]
 
-        button = self.__builder.get_object(name)
+        switch = self.__builder.get_object(name)
 
         v = self.__config.read(name)
-        button.set_active(v.unpack())
-        button.connect("toggled", self.on_widget_changed, name, option["type"])
+        switch.set_active(v.unpack())
+        switch.connect("notify::active", self.on_switch_toggled,
+                       name, option["type"])
 
-        setattr(self, name, button)
+        setattr(self, name, switch)
 
-    def __prepare_combo(self, option):
+    def prepare_combo(self, option):
         """Prepare a Gtk.ComboBox
 
-        Set the combobox named `name` to the current engine config value, or
-        to the provided `default_value` as a fallback.
+        Set the combobox named `option['name']` to the current engine config
+        value.
         """
         name = option["name"]
         values = option["values"]
+        labels = option["labels"]
+        current_value = self.__config.read(name).unpack()
 
         combo = self.__builder.get_object(name)
 
-        store = Gtk.ListStore(*[type(v) for v in values[0]])
-        for n, v in values:
+        store = Gtk.ListStore(type(values[0]), type(labels[0]))
+        for i, n in enumerate(values):
+            v = labels[i]
             store.append((n, v))
         combo.set_model(store)
         cell = Gtk.CellRendererText()
         combo.pack_start(cell, True)
         combo.add_attribute(cell, "text", 1)
 
-        v = self.__config.read(name)
-        combo.set_active(v.unpack())
-        combo.connect("changed", self.on_widget_changed, name, option["type"])
+        combo.set_active(values.index(current_value))
+        combo.connect("changed", self.on_combo_changed, name, option)
 
         setattr(self, name, combo)
 
@@ -107,8 +111,22 @@ class Setup(object):
 
         value = value.unpack()
 
-        if widget.get_active() != value:
-            widget.set_active(value)
+        if isinstance(widget, Gtk.ComboBox):
+            for option in options:
+                if option["name"] != name:
+                    continue
 
-    def on_widget_changed(self, widget, setting_name, variant_type):
+                values = option["values"]
+                if values[widget.get_active()] != value:
+                    widget.set_active(values.index(value))
+
+        else:
+            if widget.get_active() != value:
+                widget.set_active(value)
+
+    def on_switch_toggled(self, widget, active, setting_name, variant_type):
         self.__config.write(setting_name, GLib.Variant(variant_type, widget.get_active()))
+
+    def on_combo_changed(self, widget, setting_name, option):
+        value = option["values"][widget.get_active()]
+        self.__config.write(setting_name, GLib.Variant(option["type"], value))

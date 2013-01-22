@@ -22,11 +22,15 @@ gettext_package = '@CANGJIE_GETTEXT_PACKAGE@'
 localedir = '@LOCALEDIR@'
 datadir = "@PKGDATADIR@"
 
-options = ({"name": "use_new_version",
+options = ({"name": "version",
+            "type": "i",
+            "widget": "combo",
+            "values": (3, 5),
+            "labels": ("Standard (Version3)", "Updated (Version 5)"),
+            "default": 3},
+           {"name": "include_sc",
             "type": "b",
-            "default": False},
-           {"name": "include_all_zh",
-            "type": "b",
+            "widget": "switch",
             "default": False},
             )
 properties = ({"name": "halfwidth_chars",
