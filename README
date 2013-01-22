@@ -32,7 +32,7 @@ Dependencies
 
 To use this engine, you will need the following:
 
-  - Python >= 3.3
+  - Python >= 3.2
       -> http://python.org
 
   - ibus >= 1.5.0
