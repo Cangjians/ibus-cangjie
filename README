@@ -47,6 +47,9 @@ To use this engine, you will need the following:
       document.
       -> https://github.com/psykoyiko/pycanberra
 
+  - the Python 3 GObject bindings
+      -> https://live.gnome.org/PyGObject
+
 Legal
 =====
 
