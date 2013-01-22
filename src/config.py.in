@@ -22,11 +22,7 @@ gettext_package = '@CANGJIE_GETTEXT_PACKAGE@'
 localedir = '@LOCALEDIR@'
 datadir = "@PKGDATADIR@"
 
-options = ({"name": "halfwidth_chars",
-            "type": "b",
-            "values": (False, True),
-            "default": False},
-           {"name": "use_new_version",
+options = ({"name": "use_new_version",
             "type": "b",
             "values": (False, True),
             "default": False},
@@ -34,7 +30,12 @@ options = ({"name": "halfwidth_chars",
             "type": "b",
             "values": (False, True),
             "default": False},
-           )
+            )
+properties = ({"name": "halfwidth_chars",
+               "type": "b",
+               "values": (False, True),
+               "default": False},
+              )
 
 class Config(object):
     def __init__(self, bus, engine, on_value_changed_cb):
@@ -46,7 +47,7 @@ class Config(object):
         self.__ensure_default_values()
 
     def __ensure_default_values(self):
-        for option in options:
+        for option in options+properties:
             name = option["name"]
             value = self.read(name)
 

@@ -100,8 +100,12 @@ class Setup(object):
         if section != self.__config.config_section:
             return
 
+        try:
+            widget = getattr(self, name)
+        except AttributeError:
+            return
+
         value = value.unpack()
-        widget = getattr(self, name)
 
         if widget.get_active() != value:
             widget.set_active(value)

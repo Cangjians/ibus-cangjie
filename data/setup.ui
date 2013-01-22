@@ -41,21 +41,6 @@
           </packing>
         </child>
         <child>
-          <object class="GtkCheckButton" id="halfwidth_chars">
-            <property name="label" translatable="yes">Use half-width characters</property>
-            <property name="use_action_appearance">False</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">False</property>
-            <property name="draw_indicator">True</property>
-          </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-        <child>
           <object class="GtkCheckButton" id="use_new_version">
             <property name="label" translatable="yes">Use the newer version</property>
             <property name="use_action_appearance">False</property>
