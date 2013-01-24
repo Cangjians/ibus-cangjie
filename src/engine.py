@@ -362,13 +362,21 @@ class EngineQuick(Engine):
     def do_space(self):
         """Handle the space key.
 
-        For Quick, this is either a page-down on the candidates table.
+        For Quick, this is normally a page-down on the candidates table. When there are
+        only one input key or less than one page of candidate table, it automatically 
+        selects a candidate.
         """
-        if self.do_page_down():
-            return True
+        if not self.current_input:
+            return self.do_fullwidth_char(" ")
 
         if len(self.current_input) == 1:
             self.get_candidates()
             return True
 
-        return self.do_fullwidth_char(" ")
+        if self.lookuptable.get_number_of_candidates() <= 9:
+            self.do_select_candidate(1)
+            return True
+
+        else:
+            self.do_page_down()
+            return True
