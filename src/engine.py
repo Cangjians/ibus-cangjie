@@ -363,7 +363,7 @@ class EngineQuick(Engine):
         """Handle the space key.
 
         For Quick, this is normally a page-down on the candidates table. When there are
-        only one input key or less than one page of candidate table, it automatically 
+        only one input key or less than one page of candidate table, it automatically
         selects a candidate.
         """
         if not self.current_input:
