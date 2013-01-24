@@ -24,16 +24,13 @@ datadir = "@PKGDATADIR@"
 
 options = ({"name": "use_new_version",
             "type": "b",
-            "values": (False, True),
             "default": False},
            {"name": "include_all_zh",
             "type": "b",
-            "values": (False, True),
             "default": False},
             )
 properties = ({"name": "halfwidth_chars",
                "type": "b",
-               "values": (False, True),
                "default": False},
               )
 
