@@ -43,11 +43,15 @@
         <child>
           <object class="GtkGrid" id="grid">
             <property name="visible">True</property>
+            <property name="column_spacing">10</property>
+            <property name="row_spacing">10</property>
+            <property name="border-width">5</property>
             <child>
               <object class="GtkLabel" id="version_label">
-                <property name="label" translatable="yes">Version</property>
+                <property name="label" translatable="yes">Input Method Version</property>
                 <property name="can_focus">False</property>
                 <property name="visible">True</property>
+                <property name="xalign">1</property>
               </object>
               <packing>
                 <property name="left-attach">0</property>
@@ -59,6 +63,7 @@
                 <property name="can_focus">True</property>
                 <property name="visible">True</property>
                 <property name="receives_default">True</property>
+                <property name="margin-left">3</property>
               </object>
               <packing>
                 <property name="left-attach">1</property>
@@ -70,6 +75,7 @@
                 <property name="label" translatable="yes">Simplified Chinese</property>
                 <property name="can_focus">False</property>
                 <property name="visible">True</property>
+                <property name="xalign">1</property>
               </object>
               <packing>
                 <property name="left-attach">0</property>
@@ -82,6 +88,8 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
+                <property name="hexpand">False</property>
+                <property name="halign">start</property>
               </object>
               <packing>
                 <property name="left-attach">1</property>
