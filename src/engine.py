@@ -19,6 +19,7 @@
 __all__ = ["EngineCangjie", "EngineQuick"]
 
 
+from gi.repository import GLib
 from gi.repository import IBus
 
 try:
@@ -30,7 +31,7 @@ except ImportError:
 
 import cangjie
 
-from .config import Config
+from .config import Config, properties
 
 
 def is_inputnumber(keyval):
@@ -54,7 +55,36 @@ class Engine(IBus.Engine):
         self.lookuptable.set_round(True)
         self.lookuptable.set_orientation(IBus.Orientation.VERTICAL)
 
+        self.init_properties()
         self.init_cangjie()
+
+    def init_properties(self):
+        self.prop_list = IBus.PropList()
+
+        for p in properties:
+            key = p["name"]
+
+            stored_value = self.config.read(key)
+            state = IBus.PropState.CHECKED if stored_value else IBus.PropState.UNCHECKED
+
+            prop = IBus.Property(key=key,
+                                 prop_type=IBus.PropType.TOGGLE,
+                                 label=IBus.Text.new_from_string(p["label"]),
+                                 symbol=IBus.Text.new_from_string(""),
+                                 icon='',
+                                 sensitive=True,
+                                 visible=True,
+                                 state=state,
+                                 sub_props=None)
+
+            self.prop_list.append(prop)
+
+    def do_property_activate(self, prop_name, state):
+        active = state == IBus.PropState.CHECKED
+        self.config.write(prop_name, GLib.Variant("b", active))
+
+    def do_focus_in(self):
+        self.register_properties(self.prop_list)
 
     def init_cangjie(self):
         version = self.config.read("version").unpack()

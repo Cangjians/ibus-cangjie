@@ -34,6 +34,7 @@ options = ({"name": "version",
             "default": False},
             )
 properties = ({"name": "halfwidth_chars",
+               "label": "Half-Width Characters",
                "type": "b",
                "default": False},
               )
