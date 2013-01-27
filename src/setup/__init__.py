@@ -44,8 +44,31 @@ class Setup(object):
 
         self.__window = self.__builder.get_object("setup_dialog")
         self.__window.set_title("%s Preferences" % engine.capitalize())
-        self.__window.set_type_hint(Gdk.WindowTypeHint.DIALOG)
+
+        try:
+            # Pretend to be a GNOME Control Center dialog if appropriate
+            self.gnome_cc_xid = int(GLib.getenv('GNOME_CONTROL_CENTER_XID'))
+            self.__window.set_wmclass('gnome-control-center',
+                                      'Gnome-control-center')
+            self.__window.set_modal(True)
+            self.__window.connect('notify::window', self.set_transient)
+            self.__window.set_type_hint(Gdk.WindowTypeHint.DIALOG)
+
+        except:
+            # No problem here, we're just a normal dialog
+            pass
+
         self.__window.show()
+
+    def set_transient(self, obj, pspec):
+        from gi.repository import GdkX11
+        window = self.__window.get_window()
+        if window != None:
+            parent = GdkX11.X11Window.foreign_new_for_display(
+                         Gdk.Display.get_default(), self.gnome_cc_xid)
+
+        if parent != None:
+            window.set_transient_for(parent)
 
     def prepare_switch(self, option):
         """Prepare a Gtk.Switch
