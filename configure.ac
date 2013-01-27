@@ -27,7 +27,7 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE",
 AM_PATH_PYTHON([3.2.3])
 
 # check for IBus
-PKG_CHECK_MODULES(IBUS, [ibus-1.0 >= 1.4.99])
+PKG_CHECK_MODULES(IBUS, [ibus-1.0 >= 1.4.1])
 AC_MSG_CHECKING(for ibus component dir)
 IBUS_COMPONENT_DIR="`$PKG_CONFIG --variable=pkgdatadir ibus-1.0`/component"
 AC_MSG_RESULT($IBUS_COMPONENT_DIR)
