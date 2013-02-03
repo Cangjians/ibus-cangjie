@@ -347,10 +347,6 @@ class Engine(IBus.Engine):
         super(Engine, self).update_lookup_table(self.lookuptable,
                                                 num_candidates>0)
 
-    def commit_text(self, text):
-        """Commit the `text` and prepare for future input."""
-        super(Engine, self).commit_text(text)
-
     def play_error_bell(self):
         """Play an error sound, to notify the user of invalid input."""
         if not hasattr(self, "canberra"):
