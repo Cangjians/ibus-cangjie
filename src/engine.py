@@ -358,12 +358,15 @@ class EngineCangjie(Engine):
         if not self.current_input:
             return self.do_fullwidth_char(" ")
 
-        if self.lookuptable.get_number_of_candidates():
-            self.do_select_candidate(1)
-
-        else:
+        if not self.lookuptable.get_number_of_candidates():
             self.get_candidates()
+            return True
 
+        if self.lookuptable.get_number_of_candidates() <= 9:
+            self.do_select_candidate(1)
+            return True
+
+        self.do_page_down()
         return True
 
 
