@@ -409,6 +409,5 @@ class EngineQuick(Engine):
             self.do_select_candidate(1)
             return True
 
-        else:
-            self.do_page_down()
-            return True
+        self.do_page_down()
+        return True
