@@ -162,6 +162,32 @@ class Engine(IBus.Engine):
         self.update_lookup_table()
         return True
 
+    def do_space(self):
+        """Handle the space key.
+
+        This is our "power key". It implements most of the behaviour behind
+        Cangjie and Quick.
+
+        It can be used to fetch the candidates if there are none, scroll to
+        the next page of candidates if appropriate or just commit the first
+        candidate when we have only one page.
+
+        Of course, it can also be used to input a "space" character.
+        """
+        if not self.current_input:
+            return self.do_fullwidth_char(" ")
+
+        if not self.lookuptable.get_number_of_candidates():
+            self.get_candidates()
+            return True
+
+        if self.lookuptable.get_number_of_candidates() <= 9:
+            self.do_select_candidate(1)
+            return True
+
+        self.do_page_down()
+        return True
+
     def do_number(self, keyval):
         """Handle numeric input."""
         if self.lookuptable.get_number_of_candidates():
@@ -350,25 +376,6 @@ class EngineCangjie(Engine):
 
         return True
 
-    def do_space(self):
-        """Handle the space key.
-
-        For Cangjie, that's the key which will do everything.
-        """
-        if not self.current_input:
-            return self.do_fullwidth_char(" ")
-
-        if not self.lookuptable.get_number_of_candidates():
-            self.get_candidates()
-            return True
-
-        if self.lookuptable.get_number_of_candidates() <= 9:
-            self.do_select_candidate(1)
-            return True
-
-        self.do_page_down()
-        return True
-
 
 class EngineQuick(Engine):
     """The Quick engine."""
@@ -389,25 +396,4 @@ class EngineQuick(Engine):
             current_input = "*".join(self.current_input)
             self.get_candidates(current_input)
 
-        return True
-
-    def do_space(self):
-        """Handle the space key.
-
-        For Quick, this is normally a page-down on the candidates table. When there are
-        only one input key or less than one page of candidate table, it automatically
-        selects a candidate.
-        """
-        if not self.current_input:
-            return self.do_fullwidth_char(" ")
-
-        if not self.lookuptable.get_number_of_candidates():
-            self.get_candidates()
-            return True
-
-        if self.lookuptable.get_number_of_candidates() <= 9:
-            self.do_select_candidate(1)
-            return True
-
-        self.do_page_down()
         return True
