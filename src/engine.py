@@ -401,7 +401,7 @@ class EngineQuick(Engine):
         if not self.current_input:
             return self.do_fullwidth_char(" ")
 
-        if len(self.current_input) == 1:
+        if not self.lookuptable.get_number_of_candidates():
             self.get_candidates()
             return True
 
