@@ -262,8 +262,11 @@ class Engine(IBus.Engine):
             return self.do_number(keyval)
 
         c = IBus.keyval_to_unicode(keyval)
-        # TODO: should wildcard support be optional?
-        if c and self.cangjie.isCangJieInputKey(c) or c == "*":
+
+        if c and c == "*":
+            return self.do_star()
+
+        if c and self.cangjie.isCangJieInputKey(c):
             return self.do_inputchar(c)
 
         return self.do_other_key(keyval)
@@ -376,6 +379,13 @@ class EngineCangjie(Engine):
 
         return True
 
+    def do_star(self):
+        """Handle the star key (*)
+
+        For Cangjie, this can be a wildcard key.
+        """
+        return self.do_inputchar("*")
+
 
 class EngineQuick(Engine):
     """The Quick engine."""
@@ -397,3 +407,10 @@ class EngineQuick(Engine):
             self.get_candidates(current_input)
 
         return True
+
+    def do_star(self):
+        """Handle the star key (*)
+
+        For Quick, this should just be considered as any other key.
+        """
+        return self.do_other_key(IBus.asterisk)
