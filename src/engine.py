@@ -228,6 +228,7 @@ class Engine(IBus.Engine):
         page_index = self.lookuptable.get_cursor_pos()
         selected = self.lookuptable.get_candidate(page_index+index-1)
         self.commit_text(selected)
+        self.clear_current_input()
         return True
 
     def do_process_key_event(self, keyval, keycode, state):
@@ -349,7 +350,6 @@ class Engine(IBus.Engine):
     def commit_text(self, text):
         """Commit the `text` and prepare for future input."""
         super(Engine, self).commit_text(text)
-        self.clear_current_input()
 
     def play_error_bell(self):
         """Play an error sound, to notify the user of invalid input."""
