@@ -385,11 +385,11 @@ class EngineQuick(Engine):
 
     def do_inputchar(self, inputchar):
         """Handle user input of valid Cangjie input characters."""
+        if self.lookuptable.get_number_of_candidates():
+            self.do_select_candidate(1)
+
         if len(self.current_input) < self.input_max_len:
             self.update_current_input(append=inputchar)
-
-        else:
-            self.do_select_candidate(1)
 
         # Now that we appended/committed, let's check the new length
         if len(self.current_input) == self.input_max_len:
