@@ -115,6 +115,7 @@ EXTRA_DIST = \
 	scripts/ibus-setup-cangjie.in \
 	tests/run_tests.in \
 	tests/__init__.py \
+	$(wildcard $(srcdir)/tests/test_*.py) \
 	$(NULL)
 
 # Custom targets
