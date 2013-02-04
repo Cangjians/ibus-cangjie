@@ -1,0 +1,15 @@
+#!@PYTHON_BIN@
+
+
+import sys
+import unittest
+
+
+# -- Load and run our unit tests ---------------------------------------------
+loader = unittest.TestLoader()
+suite = loader.discover("@SRCDIR@/tests")
+runner = unittest.TextTestRunner(verbosity=2)
+result = runner.run(suite)
+
+if result.failures or result.errors:
+    sys.exit(1)

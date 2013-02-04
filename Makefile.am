@@ -80,6 +80,15 @@ ibus_cangjie_setup_PYTHON = \
 ibus_cangjie_setupdir = $(ibus_cangjiedir)/setup
 
 
+# -- Testing -------------------------
+TESTS = tests/run_tests
+
+tests/run_tests: tests/run_tests.in
+	$(MKDIR_P) tests
+	sed -e 's&@PYTHON_BIN@&$(PYTHON)&g' \
+	    -e 's&@SRCDIR@&$(srcdir)&g' $< > $@
+	chmod +x $@
+
 # -- Common --------------------------
 CLEANFILES = \
 	data/cangjie.xml \
@@ -94,6 +103,7 @@ CLEANFILES = \
 	scripts/ibus-setup-cangjie \
 	src/*.pyc \
 	src/setup/*.pyc \
+	tests/run_tests \
 	$(NULL)
 
 EXTRA_DIST = \
@@ -103,6 +113,8 @@ EXTRA_DIST = \
 	data/ibus-setup-quick.desktop.in.in \
 	scripts/ibus-engine-cangjie.in \
 	scripts/ibus-setup-cangjie.in \
+	tests/run_tests.in \
+	tests/__init__.py \
 	$(NULL)
 
 # Custom targets
