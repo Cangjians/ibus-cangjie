@@ -5,6 +5,102 @@ import sys
 import unittest
 
 
+# -- Define some mock classes for the tests ----------------------------------
+class MockIBusConfig:
+    def __init__(self):
+        self._mock_configs = {}
+
+    def connect(self, *args):
+        pass
+
+    def get_value(self, section, name):
+        try:
+            return self._mock_configs[section][name]
+        except KeyError:
+            return None
+
+    def set_value(self, section, name, value):
+        if not section in self._mock_configs:
+            self._mock_configs[section] = {}
+
+        self._mock_configs[section][name] = value
+
+
+class MockEngine:
+    def __init__(self):
+        self._mock_auxiliary_text = ""
+        self._mock_committed_text = ""
+
+    def update_auxiliary_text(self, text, visible):
+        self._mock_auxiliary_text = text.text
+
+    def commit_text(self, text):
+        self._mock_committed_text += text.text
+
+    def update_lookup_table(self, table, visible):
+        # We don't need anything here for the unit tests
+        pass
+
+
+class MockBus:
+    def get_config(self):
+        return MockIBusConfig()
+
+
+class MockLookupTable:
+    def __init__(self):
+        self.clear()
+
+    def clear(self):
+        self._mock_candidates = []
+        self._mock_cursor_pos = 0
+
+    def set_page_size(self, size):
+        self._mock_page_size = size
+
+    def set_round(self, round):
+        self._mock_round = round
+
+    def set_orientation(self, orientation):
+        self._mock_orientation = orientation
+
+    def get_number_of_candidates(self):
+        return len(self._mock_candidates)
+
+    def append_candidate(self, candidate):
+        self._mock_candidates.append(candidate)
+
+    def get_cursor_pos(self):
+        return self._mock_cursor_pos
+
+    def get_candidate(self, index):
+        return self._mock_candidates[index]
+
+    def get_number_of_candidates(self):
+        return len(self._mock_candidates)
+
+
+class MockPropList:
+    def append(self, property):
+        # We don't need anything here for the unit tests
+        pass
+
+
+class MockProperty:
+    def __init__(self, *args, **kwargs):
+        # We don't need anything here for the unit tests
+        pass
+
+
+# -- Monkey patch the environment with the mock classes ----------------------
+from gi.repository import IBus
+sys.modules["gi.repository.IBus"].Bus = MockBus
+sys.modules["gi.repository.IBus"].Engine = MockEngine
+sys.modules["gi.repository.IBus"].LookupTable = MockLookupTable
+sys.modules["gi.repository.IBus"].Property = MockProperty
+sys.modules["gi.repository.IBus"].PropList = MockPropList
+
+
 # -- Load and run our unit tests ---------------------------------------------
 loader = unittest.TestLoader()
 suite = loader.discover("@SRCDIR@/tests")
