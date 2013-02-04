@@ -5,6 +5,12 @@ import sys
 import unittest
 
 
+# -- Make sure we test the development tree ----------------------------------
+sys.path.insert(0, "@SRCDIR@")
+import src
+sys.modules["ibus_cangjie"] = src
+
+
 # -- Define some mock classes for the tests ----------------------------------
 class MockIBusConfig:
     def __init__(self):
