@@ -20,6 +20,7 @@ scripts/ibus-%-cangjie: scripts/ibus-%-cangjie.in Makefile
 	sed -e 's&@PYTHON_PATH@&$(PYTHON)&g' \
 	    -e 's&@CANGJIE_GETTEXT_PACKAGE@&$(GETTEXT_PACKAGE)&g' \
 	    -e 's&@LOCALEDIR@&$(localedir)&g' \
+	    -e 's&@COMPONENTDIR@&$(COMPONENT_DIR)&g' \
 	    -e 's&@PKGDATADIR@&$(pkgdatadir)&g' $< > $@
 
 

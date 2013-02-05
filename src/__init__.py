@@ -29,9 +29,8 @@ from .engine import *
 
 
 class IMApp(object):
-    def __init__(self, exec_by_ibus, engine_name, datadir):
-        component_path = GLib.build_filenamev([datadir, "..", "ibus",
-                                               "component",
+    def __init__(self, exec_by_ibus, engine_name, componentdir):
+        component_path = GLib.build_filenamev([componentdir,
                                                "%s.xml" % engine_name])
         self.__component = IBus.Component.new_from_file(component_path)
 

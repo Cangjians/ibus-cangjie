@@ -27,7 +27,7 @@ from gi.repository import IBus
 from ibus_cangjie import IMApp
 
 
-datadir = "@PKGDATADIR@"
+componentdir = "@COMPONENTDIR@"
 
 try:
     locale.setlocale(locale.LC_ALL, "")
@@ -48,4 +48,4 @@ if args.daemonize:
         sys.exit()
 
 IBus.init()
-IMApp(args.ibus, args.engine, datadir).run()
+IMApp(args.ibus, args.engine, componentdir).run()
