@@ -378,9 +378,12 @@ class EngineCangjie(Engine):
     def do_star(self):
         """Handle the star key (*)
 
-        For Cangjie, this can be a wildcard key.
+        For Cangjie, this can in some cases be a wildcard key.
         """
-        return self.do_inputchar("*")
+        if self.current_input:
+            return self.do_inputchar("*")
+
+        return self.do_other_key(IBus.asterisk)
 
 
 class EngineQuick(Engine):
