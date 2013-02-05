@@ -1,4 +1,4 @@
-#!@PYTHON@
+#!@PYTHON_PATH@
 #
 # Copyright (c) 2012 - The IBus Cangjie authors
 #
@@ -35,8 +35,11 @@ import locale
 from gi.repository import Gtk
 from gi.repository import IBus
 
-from ibus_cangjie.config import gettext_package, localedir
 from ibus_cangjie.setup import Setup
+
+gettext_package = "@CANGJIE_GETTEXT_PACKAGE@"
+localedir = "@LOCALEDIR@"
+datadir = "@PKGDATADIR@"
 
 locale.bindtextdomain(gettext_package, localedir)
 locale.bind_textdomain_codeset(gettext_package, "UTF-8")
@@ -56,4 +59,4 @@ except:
     import sys
     sys.exit(1)
 
-Setup(bus, args.engine).run()
+Setup(bus, args.engine, datadir, gettext_package).run()

@@ -5,6 +5,24 @@ ACLOCAL_AMFLAGS  = -I m4 ${ACLOCAL_FLAGS}
 SUBDIRS = po
 
 
+# -- scripts/ ------------------------
+bin_SCRIPTS = \
+	scripts/ibus-setup-cangjie \
+	$(NULL)
+
+pkglibexec_SCRIPTS = \
+	scripts/ibus-engine-cangjie \
+	$(NULL)
+libexecdir = $(prefix)/lib
+
+scripts/ibus-%-cangjie: scripts/ibus-%-cangjie.in Makefile
+	$(MKDIR_P) scripts
+	sed -e 's&@PYTHON_PATH@&$(PYTHON)&g' \
+	    -e 's&@CANGJIE_GETTEXT_PACKAGE@&$(GETTEXT_PACKAGE)&g' \
+	    -e 's&@LOCALEDIR@&$(localedir)&g' \
+	    -e 's&@PKGDATADIR@&$(pkgdatadir)&g' $< > $@
+
+
 # -- data/ ---------------------------
 ibus_cangjie_data_DATA = \
 	data/setup.ui \
@@ -48,6 +66,7 @@ desktopdir = $(datadir)/applications
 # -- src/ ----------------------------
 ibus_cangjie_PYTHON = \
 	src/__init__.py \
+	src/config.py \
 	src/engine.py \
         src/pycanberra.py \
 	$(NULL)
@@ -59,22 +78,6 @@ ibus_cangjie_setup_PYTHON = \
 	$(NULL)
 ibus_cangjie_setupdir = $(ibus_cangjiedir)/setup
 
-bin_SCRIPTS = \
-	scripts/ibus-setup-cangjie \
-	$(NULL)
-
-pkglibexec_SCRIPTS = \
-	scripts/ibus-engine-cangjie \
-	$(NULL)
-libexecdir = $(prefix)/lib
-
-src/config.py: src/config.py.in Makefile
-	$(MKDIR_P) src
-	sed -e 's&@CANGJIE_GETTEXT_PACKAGE@&$(GETTEXT_PACKAGE)&g' \
-	    -e 's&@LOCALEDIR@&$(localedir)&g' \
-	    -e 's&@PKGDATADIR@&$(pkgdatadir)&g' $< > $@
-
-BUILT_SOURCES = src/config.py
 
 # -- Common --------------------------
 CLEANFILES = \
@@ -89,7 +92,6 @@ CLEANFILES = \
 	scripts/ibus-engine-cangjie \
 	scripts/ibus-setup-cangjie \
 	src/*.pyc \
-	src/config.py \
 	src/setup/*.pyc \
 	$(NULL)
 
@@ -98,7 +100,8 @@ EXTRA_DIST = \
 	data/setup.ui \
 	data/ibus-setup-cangjie.desktop.in.in \
 	data/ibus-setup-quick.desktop.in.in \
-	src/config.py.in \
+	scripts/ibus-engine-cangjie.in \
+	scripts/ibus-setup-cangjie.in \
 	$(NULL)
 
 # Custom targets

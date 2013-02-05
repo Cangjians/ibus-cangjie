@@ -25,12 +25,11 @@ from gi.repository import GLib
 from gi.repository import GObject
 from gi.repository import IBus
 
-from .config import datadir
 from .engine import *
 
 
 class IMApp(object):
-    def __init__(self, exec_by_ibus, engine_name):
+    def __init__(self, exec_by_ibus, engine_name, datadir):
         component_path = GLib.build_filenamev([datadir, "..", "ibus",
                                                "component",
                                                "%s.xml" % engine_name])

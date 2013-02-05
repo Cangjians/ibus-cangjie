@@ -1,4 +1,4 @@
-#!@PYTHON@
+#!@PYTHON_PATH@
 #
 # Copyright (c) 2012 - The IBus Cangjie authors
 #
@@ -26,6 +26,9 @@ from gi.repository import IBus
 
 from ibus_cangjie import IMApp
 
+
+datadir = "@PKGDATADIR@"
+
 try:
     locale.setlocale(locale.LC_ALL, "")
 except:
@@ -45,4 +48,4 @@ if args.daemonize:
         sys.exit()
 
 IBus.init()
-IMApp(args.ibus, args.engine).run()
+IMApp(args.ibus, args.engine, datadir).run()

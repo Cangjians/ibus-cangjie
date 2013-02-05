@@ -22,15 +22,14 @@ from gi.repository import Gdk
 from gi.repository import GLib
 from gi.repository import Gtk
 
-from ibus_cangjie.config import (datadir, gettext_package,
-                                 options, Config)
+from ibus_cangjie.config import options, Config
 
 
 _ = lambda a : gettext.dgettext(gettext_package, a)
 
 
 class Setup(object):
-    def __init__ (self, bus, engine):
+    def __init__ (self, bus, engine, datadir, gettext_package):
         self.__config = Config(bus, engine, self.on_value_changed)
 
         ui_file = GLib.build_filenamev([datadir, "setup.ui"])

@@ -42,8 +42,6 @@ AC_CONFIG_FILES([
   data/cangjie.xml.in
   data/quick.xml.in
   po/Makefile.in
-  scripts/ibus-engine-cangjie
-  scripts/ibus-setup-cangjie
 ])
 
 AC_OUTPUT

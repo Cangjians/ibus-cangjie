@@ -18,9 +18,6 @@
 
 from gi.repository import GLib
 
-gettext_package = '@CANGJIE_GETTEXT_PACKAGE@'
-localedir = '@LOCALEDIR@'
-datadir = "@PKGDATADIR@"
 
 options = ({"name": "version",
             "type": "i",
