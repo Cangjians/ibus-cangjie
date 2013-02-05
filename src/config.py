@@ -22,8 +22,6 @@ from gi.repository import GLib
 options = ({"name": "version",
             "type": "i",
             "widget": "combo",
-            "values": (3, 5),
-            "labels": ("Standard (Version3)", "Updated (Version 5)"),
             "default": 3},
            {"name": "include_sc",
             "type": "b",

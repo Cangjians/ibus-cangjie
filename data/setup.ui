@@ -2,6 +2,24 @@
 <interface>
   <requires lib="gtk+" version="2.24"/>
   <!-- interface-naming-policy project-wide -->
+  <object class="GtkListStore" id="version_store">
+    <columns>
+      <!-- column-name value -->
+      <column type="gint"/>
+      <!-- column-name label -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0">3</col>
+        <col id="1" translatable="yes">Standard (Version 3)</col>
+      </row>
+      <row>
+        <col id="0">5</col>
+        <col id="1" translatable="yes">Updated (Version 5)</col>
+      </row>
+    </data>
+  </object>
   <object class="GtkDialog" id="setup_dialog">
     <property name="can_focus">False</property>
     <property name="border_width">10</property>
@@ -64,6 +82,13 @@
                 <property name="visible">True</property>
                 <property name="receives_default">True</property>
                 <property name="margin-left">3</property>
+                <property name="model">version_store</property>
+                <child>
+                  <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                  <attributes>
+                    <attribute name="text">1</attribute>
+                  </attributes>
+                </child>
               </object>
               <packing>
                 <property name="left-attach">1</property>

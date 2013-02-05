@@ -16,16 +16,11 @@
 # along with ibus-cangjie.  If not, see <http://www.gnu.org/licenses/>.
 
 
-import gettext
-
 from gi.repository import Gdk
 from gi.repository import GLib
 from gi.repository import Gtk
 
 from ibus_cangjie.config import options, Config
-
-
-_ = lambda a : gettext.dgettext(gettext_package, a)
 
 
 class Setup(object):
@@ -93,25 +88,23 @@ class Setup(object):
         value.
         """
         name = option["name"]
-        values = option["values"]
-        labels = option["labels"]
         current_value = self.__config.read(name).unpack()
 
         combo = self.__builder.get_object(name)
 
-        store = Gtk.ListStore(type(values[0]), type(labels[0]))
-        for i, n in enumerate(values):
-            v = labels[i]
-            store.append((n, v))
-        combo.set_model(store)
-        cell = Gtk.CellRendererText()
-        combo.pack_start(cell, True)
-        combo.add_attribute(cell, "text", 1)
+        store = combo.get_model()
+        active_index = self.__get_active_index(store, current_value)
+        combo.set_active(active_index)
 
-        combo.set_active(values.index(current_value))
         combo.connect("changed", self.on_combo_changed, name, option)
 
         setattr(self, name, combo)
+
+    def __get_active_index(self, store, value):
+        for i, n in enumerate(store):
+            v = store.get_value(store.get_iter(i), 0)
+            if v == value:
+                return i
 
     def run(self):
         res = self.__window.run()
@@ -134,13 +127,11 @@ class Setup(object):
         value = value.unpack()
 
         if isinstance(widget, Gtk.ComboBox):
-            for option in options:
-                if option["name"] != name:
-                    continue
-
-                values = option["values"]
-                if values[widget.get_active()] != value:
-                    widget.set_active(values.index(value))
+            store = widget.get_model()
+            v = store.get_value(store.get_iter(widget.get_active()), 0)
+            if v != value:
+                widget.set_active(self.__get_active_index(widget.get_model(),
+                                                          value))
 
         else:
             if widget.get_active() != value:
@@ -150,5 +141,6 @@ class Setup(object):
         self.__config.write(setting_name, GLib.Variant(variant_type, widget.get_active()))
 
     def on_combo_changed(self, widget, setting_name, option):
-        value = option["values"][widget.get_active()]
+        store = widget.get_model()
+        value = store.get_value(store.get_iter(widget.get_active()), 0)
         self.__config.write(setting_name, GLib.Variant(option["type"], value))
