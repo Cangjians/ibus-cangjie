@@ -98,6 +98,15 @@ class MockProperty:
         pass
 
 
+class MockCanberra:
+    def __init__(self):
+        self._mock_played_events = []
+
+    def play(self, playId, *args):
+        if "dialog-error" in args:
+            self._mock_played_events.append("dialog-error")
+
+
 # -- Monkey patch the environment with the mock classes ----------------------
 from gi.repository import IBus
 sys.modules["gi.repository.IBus"].Bus = MockBus
@@ -105,6 +114,14 @@ sys.modules["gi.repository.IBus"].Engine = MockEngine
 sys.modules["gi.repository.IBus"].LookupTable = MockLookupTable
 sys.modules["gi.repository.IBus"].Property = MockProperty
 sys.modules["gi.repository.IBus"].PropList = MockPropList
+
+try:
+    import pycanberra
+    sys.modules["pycanberra"].Canberra = MockCanberra
+except ImportError:
+    # Fall back on the bundled version, until upstream ports to Python 3:
+    # https://github.com/psykoyiko/pycanberra/pull/2
+    sys.modules["src.pycanberra"].Canberra = MockCanberra
 
 
 # -- Load and run our unit tests ---------------------------------------------
