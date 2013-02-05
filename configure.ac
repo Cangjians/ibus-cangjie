@@ -18,6 +18,8 @@ IT_PROG_INTLTOOL([0.35.0])
 AM_GNU_GETTEXT([external])
 AM_GNU_GETTEXT_VERSION(0.17)
 
+# Note: If you change GETTEXT_PACKAGE below, you will also need to change it
+#       in src/config.py, or find a way to de-hardcode it there.
 GETTEXT_PACKAGE=ibus-cangjie
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE",

@@ -16,6 +16,10 @@
 # along with ibus-cangjie.  If not, see <http://www.gnu.org/licenses/>.
 
 
+import gettext
+# FIXME: Find a way to de-hardcode the gettext package
+_ = lambda x: gettext.dgettext("ibus-cangjie", x)
+
 from gi.repository import GLib
 
 
@@ -29,7 +33,7 @@ options = ({"name": "version",
             "default": False},
             )
 properties = ({"name": "halfwidth_chars",
-               "label": "Half-Width Characters",
+               "label": _("Half-Width Characters"),
                "type": "b",
                "default": False},
               )
