@@ -109,3 +109,63 @@ class CangjieTestCase(unittest.TestCase):
         self.assertEqual(len(self.engine._mock_auxiliary_text), 3)
         self.assertEqual(len(self.engine._mock_committed_text), 0)
         self.assertTrue(self.engine.lookuptable.get_number_of_candidates() > 1)
+
+    def test_backspace(self):
+        self.engine.do_process_key_event(IBus.a, 0, 0)
+        self.engine.do_process_key_event(IBus.BackSpace, 0, 0)
+
+        self.assertEqual(len(self.engine._mock_auxiliary_text), 0)
+        self.assertEqual(len(self.engine._mock_committed_text), 0)
+        self.assertEqual(self.engine.lookuptable.get_number_of_candidates(), 0)
+
+    def test_backspace_on_multiple_keys(self):
+        self.engine.do_process_key_event(IBus.a, 0, 0)
+        self.engine.do_process_key_event(IBus.a, 0, 0)
+        self.engine.do_process_key_event(IBus.BackSpace, 0, 0)
+
+        self.assertEqual(len(self.engine._mock_auxiliary_text), 1)
+        self.assertEqual(len(self.engine._mock_committed_text), 0)
+        self.assertEqual(self.engine.lookuptable.get_number_of_candidates(), 0)
+
+    def test_backspace_on_candidates(self):
+        self.engine.do_process_key_event(IBus.a, 0, 0)
+        self.engine.do_process_key_event(IBus.space, 0, 0)
+        self.engine.do_process_key_event(IBus.BackSpace, 0, 0)
+
+        self.assertEqual(len(self.engine._mock_auxiliary_text), 0)
+        self.assertEqual(len(self.engine._mock_committed_text), 0)
+        self.assertEqual(self.engine.lookuptable.get_number_of_candidates(), 0)
+
+    def test_backspace_on_multiple_keys_and_candidates(self):
+        self.engine.do_process_key_event(IBus.d, 0, 0)
+        self.engine.do_process_key_event(IBus.asterisk, 0, 0)
+        self.engine.do_process_key_event(IBus.d, 0, 0)
+        self.engine.do_process_key_event(IBus.space, 0, 0)
+
+        self.engine.do_process_key_event(IBus.BackSpace, 0, 0)
+
+        self.assertEqual(len(self.engine._mock_auxiliary_text), 2)
+        self.assertEqual(len(self.engine._mock_committed_text), 0)
+        self.assertEqual(self.engine.lookuptable.get_number_of_candidates(), 0)
+
+    def test_escape(self):
+        self.engine.do_process_key_event(IBus.d, 0, 0)
+        self.engine.do_process_key_event(IBus.d, 0, 0)
+
+        self.engine.do_process_key_event(IBus.Escape, 0, 0)
+
+        self.assertEqual(len(self.engine._mock_auxiliary_text), 0)
+        self.assertEqual(len(self.engine._mock_committed_text), 0)
+        self.assertEqual(self.engine.lookuptable.get_number_of_candidates(), 0)
+
+    def test_escape_on_candidates(self):
+        self.engine.do_process_key_event(IBus.d, 0, 0)
+        self.engine.do_process_key_event(IBus.asterisk, 0, 0)
+        self.engine.do_process_key_event(IBus.d, 0, 0)
+        self.engine.do_process_key_event(IBus.space, 0, 0)
+
+        self.engine.do_process_key_event(IBus.Escape, 0, 0)
+
+        self.assertEqual(len(self.engine._mock_auxiliary_text), 0)
+        self.assertEqual(len(self.engine._mock_committed_text), 0)
+        self.assertEqual(self.engine.lookuptable.get_number_of_candidates(), 0)
