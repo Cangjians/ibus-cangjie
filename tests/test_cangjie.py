@@ -59,3 +59,53 @@ class CangjieTestCase(unittest.TestCase):
         self.assertEqual(len(self.engine._mock_committed_text), 1)
         self.assertEqual(self.engine.lookuptable.get_number_of_candidates(), 0)
         self.assertEqual(self.engine._mock_committed_text, expected)
+
+    def test_max_input(self):
+        # Get to max char
+        self.engine.do_process_key_event(IBus.a, 0, 0)
+        self.engine.do_process_key_event(IBus.a, 0, 0)
+        self.engine.do_process_key_event(IBus.a, 0, 0)
+        self.engine.do_process_key_event(IBus.a, 0, 0)
+        self.engine.do_process_key_event(IBus.a, 0, 0)
+
+        # Try adding one more and get the error bell
+        self.engine.do_process_key_event(IBus.a, 0, 0)
+        self.assertEqual(len(self.engine._mock_auxiliary_text), 5)
+        self.assertEqual(len(self.engine._mock_committed_text), 0)
+        self.assertEqual(self.engine.lookuptable.get_number_of_candidates(), 0)
+        self.assertEqual(len(self.engine.canberra._mock_played_events), 1)
+
+        # And once more
+        self.engine.do_process_key_event(IBus.a, 0, 0)
+        self.assertEqual(len(self.engine._mock_auxiliary_text), 5)
+        self.assertEqual(len(self.engine._mock_committed_text), 0)
+        self.assertEqual(self.engine.lookuptable.get_number_of_candidates(), 0)
+        self.assertEqual(len(self.engine.canberra._mock_played_events), 2)
+
+    def test_inexistent_combination(self):
+        self.engine.do_process_key_event(IBus.z, 0, 0)
+        self.engine.do_process_key_event(IBus.z, 0, 0)
+        self.engine.do_process_key_event(IBus.z, 0, 0)
+        self.engine.do_process_key_event(IBus.z, 0, 0)
+        self.engine.do_process_key_event(IBus.z, 0, 0)
+        self.engine.do_process_key_event(IBus.space, 0, 0)
+
+        self.assertEqual(len(self.engine._mock_auxiliary_text), 5)
+        self.assertEqual(len(self.engine._mock_committed_text), 0)
+        self.assertEqual(self.engine.lookuptable.get_number_of_candidates(), 0)
+        self.assertEqual(len(self.engine.canberra._mock_played_events), 1)
+
+    def test_wildcard(self):
+        self.engine.do_process_key_event(IBus.d, 0, 0)
+        self.engine.do_process_key_event(IBus.asterisk, 0, 0)
+        self.engine.do_process_key_event(IBus.d, 0, 0)
+
+        self.assertEqual(len(self.engine._mock_auxiliary_text), 3)
+        self.assertEqual(len(self.engine._mock_committed_text), 0)
+        self.assertEqual(self.engine.lookuptable.get_number_of_candidates(), 0)
+
+        self.engine.do_process_key_event(IBus.space, 0, 0)
+
+        self.assertEqual(len(self.engine._mock_auxiliary_text), 3)
+        self.assertEqual(len(self.engine._mock_committed_text), 0)
+        self.assertTrue(self.engine.lookuptable.get_number_of_candidates() > 1)
