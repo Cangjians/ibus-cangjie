@@ -114,8 +114,3 @@ superclean:
 	rm -fr po/Makefile po/Makefile.in po/Makefile.in.in \
 	       po/Makevars.template po/POTFILES po/Rules-quot po/*.sed \
 	       po/*.header po/*.sin po/stamp-it po/.intltool-merge-cache
-
-update-po:
-	cd po && $(MAKE) $(AM_MAKEFLAGS) update-po
-
-.PHONY: update-po
