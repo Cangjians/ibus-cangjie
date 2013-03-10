@@ -263,6 +263,13 @@ class Engine(IBus.Engine):
         if (state & IBus.ModifierType.RELEASE_MASK):
             return False
 
+        # Work around integer overflow bug on 32 bits systems:
+        #     https://bugzilla.gnome.org/show_bug.cgi?id=693121
+        # The bug is fixed in pygobject 3.7.91, but many distributions will
+        # ship the previous version for some time. (e.g Fedora 18)
+        if (state & 1073741824):
+            return False
+
         if state & (IBus.ModifierType.CONTROL_MASK |
                     IBus.ModifierType.MOD1_MASK):
             # Ignore Alt+<key> and Ctrl+<key>
