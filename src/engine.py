@@ -365,8 +365,13 @@ class Engine(IBus.Engine):
         if not hasattr(self, "canberra"):
             self.canberra = pycanberra.Canberra()
 
-        self.canberra.play(1, pycanberra.CA_PROP_EVENT_ID, "dialog-error",
-                           pycanberra.CA_PROP_MEDIA_ROLE, "error", None)
+        try:
+            self.canberra.play(1, pycanberra.CA_PROP_EVENT_ID, "dialog-error",
+                               pycanberra.CA_PROP_MEDIA_ROLE, "error", None)
+        except:
+            # Playing a sound is a nice indication for the user, but if it
+            # fails, it should never take down the input system
+            pass
 
 
 class EngineCangjie(Engine):
