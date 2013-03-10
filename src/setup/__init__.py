@@ -16,11 +16,19 @@
 # along with ibus-cangjie.  If not, see <http://www.gnu.org/licenses/>.
 
 
+import gettext
+# FIXME: Find a way to de-hardcode the gettext package
+_ = lambda x: gettext.dgettext("ibus-cangjie", x)
+
 from gi.repository import Gdk
 from gi.repository import GLib
 from gi.repository import Gtk
 
 from ibus_cangjie.config import options, Config
+
+
+titles = {"cangjie": _("Cangjie Preferences"),
+          "quick": _("Quick Preferences")}
 
 
 class Setup(object):
@@ -37,7 +45,7 @@ class Setup(object):
             prepare_func(option)
 
         self.__window = self.__builder.get_object("setup_dialog")
-        self.__window.set_title("%s Preferences" % engine.capitalize())
+        self.__window.set_title(titles[engine])
 
         try:
             # Pretend to be a GNOME Control Center dialog if appropriate
