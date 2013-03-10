@@ -310,12 +310,11 @@ class Engine(IBus.Engine):
         if not code:
             code = self.current_input
 
-        if code:
-            for c in sorted(self.cangjie.getCharacters(code),
-                            key=attrgetter("frequency"),
-                            reverse=True):
-                self.lookuptable.append_candidate(IBus.Text.new_from_string(c.chchar))
-                num_candidates += 1
+        for c in sorted(self.cangjie.getCharacters(code),
+                        key=attrgetter("frequency"),
+                        reverse=True):
+            self.lookuptable.append_candidate(IBus.Text.new_from_string(c.chchar))
+            num_candidates += 1
 
         if num_candidates == 0:
             self.play_error_bell()
