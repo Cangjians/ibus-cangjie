@@ -236,7 +236,8 @@ class Engine(IBus.Engine):
     def do_process_key_event(self, keyval, keycode, state):
         """Handle `process-key-event` events.
 
-        This event is fired when the user presses a key."""
+        This event is fired when the user presses a key.
+        """
         # Ignore key release events
         if (state & IBus.ModifierType.RELEASE_MASK):
             return False
