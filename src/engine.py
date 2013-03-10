@@ -105,6 +105,16 @@ class Engine(IBus.Engine):
 
         self.init_cangjie()
 
+    def do_focus_out (self):
+        """Handle focus out event
+
+        This happens, for example, when switching between application windows
+        or input contexts.
+
+        Such events should clear the current input.
+        """
+        self.clear_current_input()
+
     def do_cancel_input(self):
         """Cancel the current input.
 
