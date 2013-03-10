@@ -38,4 +38,8 @@ scripts/ibus-setup-cangjie
 *.pyo
 po/POTFILES
 po/*.gmo
+test-driver
+test-suite.log
 tests/run_tests
+tests/run_tests.log
+tests/run_tests.trs
