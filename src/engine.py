@@ -51,6 +51,7 @@ class Engine(IBus.Engine):
 
         self.current_input = ""
         self.current_radicals = ""
+        self.clear_on_next_input = False
 
         self.lookuptable = IBus.LookupTable()
         self.lookuptable.set_page_size(9)
@@ -280,16 +281,23 @@ class Engine(IBus.Engine):
         self.current_input = ""
         self.current_radicals = ""
 
+        self.clear_on_next_input = False
+
         self.update_lookup_table()
         self.update_auxiliary_text()
 
     def update_current_input(self, append=None, drop=None):
         """Update the current input."""
         if append is not None:
+            if self.clear_on_next_input:
+                self.clear_current_input()
+
             self.current_input += append
             self.current_radicals += self.cangjie.translateInputKeyToCangJie(append)
 
         elif drop is not None:
+            self.clear_on_next_input = False
+
             self.current_input = self.current_input[:-drop]
             self.current_radicals = self.current_radicals[:-drop]
 
@@ -318,6 +326,7 @@ class Engine(IBus.Engine):
 
         if num_candidates == 0:
             self.play_error_bell()
+            self.clear_on_next_input = True
 
         elif num_candidates == 1:
             self.do_select_candidate(1)
