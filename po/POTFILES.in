@@ -2,3 +2,4 @@ data/ibus-setup-cangjie.desktop.in.in
 data/ibus-setup-quick.desktop.in.in
 [type: gettext/glade]data/setup.ui
 src/config.py
+src/setup/__init__.py
