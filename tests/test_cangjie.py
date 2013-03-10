@@ -187,3 +187,17 @@ class CangjieTestCase(unittest.TestCase):
         self.assertEqual(len(self.engine._mock_auxiliary_text), 0)
         self.assertEqual(len(self.engine._mock_committed_text), 0)
         self.assertEqual(self.engine.lookuptable.get_number_of_candidates(), 0)
+
+    def test_autoclear_on_error(self):
+        # First make an error on purpose
+        self.engine.do_process_key_event(IBus.z, 0, 0)
+        self.engine.do_process_key_event(IBus.z, 0, 0)
+        self.engine.do_process_key_event(IBus.space, 0, 0)
+        self.assertEqual(len(self.engine._mock_auxiliary_text), 2)
+        self.assertEqual(len(self.engine.canberra._mock_played_events), 1)
+
+        # Now go on inputting
+        self.engine.do_process_key_event(IBus.z, 0, 0)
+        self.assertEqual(len(self.engine._mock_auxiliary_text), 1)
+        self.assertEqual(len(self.engine._mock_committed_text), 0)
+        self.assertEqual(self.engine.lookuptable.get_number_of_candidates(), 0)
