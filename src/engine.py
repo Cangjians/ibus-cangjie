@@ -70,15 +70,27 @@ class Engine(IBus.Engine):
             stored_value = self.config.read(key)
             state = IBus.PropState.CHECKED if stored_value else IBus.PropState.UNCHECKED
 
-            prop = IBus.Property(key=key,
-                                 prop_type=IBus.PropType.TOGGLE,
-                                 label=IBus.Text.new_from_string(p["label"]),
-                                 symbol=IBus.Text.new_from_string(""),
-                                 icon='',
-                                 sensitive=True,
-                                 visible=True,
-                                 state=state,
-                                 sub_props=None)
+            try:
+                # Try the new constructor from IBus >= 1.5
+                prop = IBus.Property(key=key,
+                                     prop_type=IBus.PropType.TOGGLE,
+                                     label=IBus.Text.new_from_string(p["label"]),
+                                     symbol=IBus.Text.new_from_string(""),
+                                     icon='',
+                                     sensitive=True,
+                                     visible=True,
+                                     state=state,
+                                     sub_props=None)
+
+            except TypeError:
+                # IBus 1.4.x didn't have the GI overrides for the nice
+                # constructor, so let's do it the old, non-pythonic way.
+                #   IBus.Property.new(key, type, label, icon, tooltip,
+                #                     sensitive, visible, state, sub_props)
+                prop = IBus.Property.new(key, IBus.PropType.TOGGLE,
+                                         IBus.Text.new_from_string(p["label"]),
+                                         '', IBus.Text.new_from_string(''),
+                                         True, True, state, None)
 
             self.prop_list.append(prop)
 
