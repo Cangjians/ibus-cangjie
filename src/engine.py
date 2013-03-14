@@ -313,8 +313,11 @@ class Engine(IBus.Engine):
             if self.clear_on_next_input:
                 self.clear_current_input()
 
-            self.current_input += append
-            self.current_radicals += self.cangjie.translateInputKeyToCangJie(append)
+            if len(self.current_input) < self.input_max_len:
+                self.current_input += append
+                self.current_radicals += self.cangjie.translateInputKeyToCangJie(append)
+            else:
+                self.play_error_bell()
 
         elif drop is not None:
             self.clear_on_next_input = False
@@ -406,11 +409,7 @@ class EngineCangjie(Engine):
         if self.lookuptable.get_number_of_candidates():
             self.do_select_candidate(1)
 
-        if len(self.current_input) < self.input_max_len:
-            self.update_current_input(append=inputchar)
-
-        else:
-            self.play_error_bell()
+        self.update_current_input(append=inputchar)
 
         return True
 
