@@ -74,8 +74,7 @@ class Engine(IBus.Engine):
                 # Try the new constructor from IBus >= 1.5
                 prop = IBus.Property(key=key,
                                      prop_type=IBus.PropType.TOGGLE,
-                                     label=IBus.Text.new_from_string(p["label"]),
-                                     symbol=IBus.Text.new_from_string(""),
+                                     label=p["label"],
                                      icon='',
                                      sensitive=True,
                                      visible=True,
