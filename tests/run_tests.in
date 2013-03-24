@@ -1,6 +1,7 @@
 #!@PYTHON_BIN@
 
 
+import os
 import sys
 import unittest
 
@@ -118,10 +119,10 @@ sys.modules["gi.repository.IBus"].PropList = MockPropList
 try:
     import pycanberra
     sys.modules["pycanberra"].Canberra = MockCanberra
+    os.environ["IBUS_CANGJIE_TESTS_HAVE_PYCANBERRA"] = "true"
 except ImportError:
-    # Fall back on the bundled version, until upstream ports to Python 3:
-    # https://github.com/psykoyiko/pycanberra/pull/2
-    sys.modules["src.pycanberra"].Canberra = MockCanberra
+    # Let the tests know that they shouldn't try pycanberra
+    os.environ["IBUS_CANGJIE_TESTS_HAVE_PYCANBERRA"] = "false"
 
 
 # -- Load and run our unit tests ---------------------------------------------

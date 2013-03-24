@@ -27,9 +27,8 @@ from gi.repository import IBus
 try:
     import pycanberra
 except ImportError:
-    # Fall back on the bundled version, until upstream ports to Python 3:
-    # https://github.com/psykoyiko/pycanberra/pull/2
-    from . import pycanberra
+    # Too bad, the user won't get sound feedback on errors
+    pass
 
 import cangjie
 
@@ -386,10 +385,10 @@ class Engine(IBus.Engine):
 
     def play_error_bell(self):
         """Play an error sound, to notify the user of invalid input."""
-        if not hasattr(self, "canberra"):
-            self.canberra = pycanberra.Canberra()
-
         try:
+            if not hasattr(self, "canberra"):
+                self.canberra = pycanberra.Canberra()
+
             self.canberra.play(1, pycanberra.CA_PROP_EVENT_ID, "dialog-error",
                                pycanberra.CA_PROP_MEDIA_ROLE, "error", None)
         except:

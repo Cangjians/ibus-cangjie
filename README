@@ -42,13 +42,20 @@ To use this engine, you will need the following:
   - pycangjie
       -> https://github.com/bochecha/pycangjie
 
-  - pycanberra
-      Not needed currently as we bundle it. More details at the end of this
-      document.
-      -> https://github.com/psykoyiko/pycanberra
-
   - the Python 3 GObject bindings
       -> https://live.gnome.org/PyGObject
+
+  - pycanberra (optional)
+      This is needed to play event sounds, especially to give feedback to the
+      user on incorrect inputs.
+      -> https://github.com/psykoyiko/pycanberra
+
+      Note that we require a Python 3 version of pycanberra, as can be found
+      in this (yet-unmerged) pull request:
+      -> https://github.com/psykoyiko/pycanberra/pull/2
+
+      IBus Cangjie will fail gracefully if pycanberra is not available though,
+      and just won't play any sound.
 
 Legal
 =====
@@ -58,19 +65,3 @@ License (LGPL) version 3 or any later version.
 
 We won't ask you to sign a copyright assignment or any other long and tedious
 legal document, so just send us your patches!
-
-pycanberra
-==========
-
-ibus-cangjie requires pycanberra to play event sounds.
-
-However, pycanberra hasn't been ported to Python 3 yet:
-    https://github.com/psykoyiko/pycanberra/pull/2
-
-To avoid being blocked, we are currently bundling it in ibus-cangjie.
-
-It is a temporary solution, though, which should be resolved as soon as
-possible.
-
-pycanberra is under the LGPL license, you can get it from there:
-    https://github.com/psykoyiko/pycanberra/blob/master/COPYING
