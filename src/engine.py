@@ -1,4 +1,4 @@
-# Copyright (c) 2012 - The IBus Cangjie authors
+# Copyright (c) 2012-2013 - The IBus Cangjie authors
 #
 # This file is part of ibus-cangjie, the IBus Cangjie input method engine.
 #
