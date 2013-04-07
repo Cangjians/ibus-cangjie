@@ -128,14 +128,4 @@ EXTRA_DIST = \
 	$(wildcard $(srcdir)/tests/test_*.py) \
 	$(NULL)
 
-# Custom targets
-superclean:
-	rm -fr ABOUT-NLS aclocal.m4 autom4te.cache config.* configure \
-	       install-sh ltmain.sh m4 Makefile Makefile.in missing   \
-	       py-compile stamp-h1
-	
-	rm -fr po/Makefile po/Makefile.in po/Makefile.in.in \
-	       po/Makevars.template po/POTFILES po/Rules-quot po/*.sed \
-	       po/*.header po/*.sin po/stamp-it po/.intltool-merge-cache
-
 .PHONY: AUTHORS
