@@ -50,6 +50,7 @@ desktopdir = $(datadir)/applications
 %.xml: %.xml.in
 	$(AM_V_GEN) \
 	( \
+		bindir=${bindir}; \
 		pkglibexecdir=${pkglibexecdir}; \
 		s=`cat $<`; \
 		eval "echo \"$${s}\""; \

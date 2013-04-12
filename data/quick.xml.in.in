@@ -38,6 +38,7 @@ along with ibus-cangjie.  If not, see <http://www.gnu.org/licenses/>.
       <symbol>速成</symbol>
       <license>LGPLv3+</license>
       <author>The IBus Cangjie authors</author>
+      <setup>${bindir}/ibus-setup-cangjie quick</setup>
       <rank>0</rank>
     </engine>
   </engines>
