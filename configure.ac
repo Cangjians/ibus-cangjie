@@ -34,9 +34,10 @@ AC_MSG_CHECKING(for ibus component dir)
 IBUS_COMPONENT_DIR="`$PKG_CONFIG --variable=pkgdatadir ibus-1.0`/component"
 AC_MSG_RESULT($IBUS_COMPONENT_DIR)
 
-# FIXME: find a way to use datadir directly
-COMPONENT_DIR="${prefix}/share/ibus/component"
+COMPONENT_DIR="${datadir}/ibus/component"
 AC_SUBST(COMPONENT_DIR)
+
+EXPANDED_COMPONENT_DIR=`eval echo $COMPONENT_DIR`
 
 # OUTPUT files
 AC_CONFIG_FILES([
@@ -56,11 +57,9 @@ echo "
 
     python version: ${PYTHON_VERSION}
     prefix:         ${prefix}
-    component dir:  ${COMPONENT_DIR}"
+    component dir:  ${EXPANDED_COMPONENT_DIR}
 
-AS_IF([test "$COMPONENT_DIR" != "$IBUS_COMPONENT_DIR"],
-      [echo "           WARNING: IBus would find it in $IBUS_COMPONENT_DIR"])
+    Remember: IBus finds its engines only in $IBUS_COMPONENT_DIR by default.
 
-echo "
     Now type 'make' to build $PACKAGE
 "
