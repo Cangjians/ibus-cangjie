@@ -349,7 +349,7 @@ class Engine(IBus.Engine):
             code = self.current_input
 
         for c in sorted(self.cangjie.getCharacters(code),
-                        key=attrgetter("frequency"),
+                        key=attrgetter("classic_frequency"),
                         reverse=True):
             self.lookuptable.append_candidate(IBus.Text.new_from_string(c.chchar))
             num_candidates += 1
