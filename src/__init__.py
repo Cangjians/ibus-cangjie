@@ -16,11 +16,6 @@
 # along with ibus-cangjie.  If not, see <http://www.gnu.org/licenses/>.
 
 
-import argparse
-import locale
-import os
-import sys
-
 from gi.repository import GLib
 from gi.repository import GObject
 from gi.repository import IBus
