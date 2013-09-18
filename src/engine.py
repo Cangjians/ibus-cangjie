@@ -104,7 +104,7 @@ class Engine(IBus.Engine):
         version = getattr(cangjie.versions, "CANGJIE%d"%version)
 
         filters = (cangjie.filters.BIG5 | cangjie.filters.HKSCS
-                                                | cangjie.filters.PUNCTUATION)
+                                        | cangjie.filters.PUNCTUATION)
 
         if self.config.read("include_allzh"):
             filters |= cangjie.filters.CHINESE
