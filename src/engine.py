@@ -105,9 +105,17 @@ class Engine(IBus.Engine):
 
         filters = (cangjie.filters.BIG5 | cangjie.filters.HKSCS
                                                 | cangjie.filters.PUNCTUATION)
-        # TODO: Handle other filters
-        if self.config.read("include_sc"):
+
+        if self.config.read("include_allzh"):
             filters |= cangjie.filters.CHINESE
+        if self.config.read("include_jp"):
+            filters |= cangjie.filters.KANJI
+            filters |= cangjie.filters.HIRAGANA
+            filters |= cangjie.filters.KATAKANA
+        if self.config.read("include_zhuyin"):
+            filters |= cangjie.filters.ZHUYIN
+        if self.config.read("include_symbols"):
+            filters |= cangjie.filters.SYMBOLS
 
         self.cangjie = cangjie.Cangjie(version, filters)
 
