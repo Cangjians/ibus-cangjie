@@ -249,3 +249,29 @@ class CangjieTestCase(unittest.TestCase):
         self.assertEqual(len(self.engine._mock_auxiliary_text), 1)
         self.assertEqual(len(self.engine._mock_committed_text), 0)
         self.assertEqual(self.engine.lookuptable.get_number_of_candidates(), 0)
+
+    def test_symbol(self):
+        self.engine.do_process_key_event(IBus.at, 0, 0)
+
+        self.assertEqual(len(self.engine._mock_auxiliary_text), 0)
+        self.assertEqual(len(self.engine._mock_committed_text), 1)
+        self.assertEqual(self.engine.lookuptable.get_number_of_candidates(), 0)
+
+    def test_multiple_punctuation(self):
+        self.engine.do_process_key_event(IBus.comma, 0, 0)
+
+        self.assertEqual(len(self.engine._mock_auxiliary_text), 1)
+        self.assertEqual(len(self.engine._mock_committed_text), 0)
+        self.assertTrue(self.engine.lookuptable.get_number_of_candidates() > 1)
+
+    def test_char_then_multiple_punctuation(self):
+        self.engine.do_process_key_event(IBus.d, 0, 0)
+        self.engine.do_process_key_event(IBus.comma, 0, 0)
+
+        self.assertEqual(len(self.engine._mock_auxiliary_text), 1)
+        self.assertEqual(len(self.engine._mock_committed_text), 1)
+        self.assertTrue(self.engine.lookuptable.get_number_of_candidates() > 1)
+
+    def test_punctuation_then_punctuation(self):
+        self.engine.do_process_key_event(IBus.comma, 0, 0)
+        self.engine.do_process_key_event(IBus.comma, 0, 0)
