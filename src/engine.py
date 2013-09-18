@@ -103,11 +103,13 @@ class Engine(IBus.Engine):
         version = self.config.read("version").unpack()
         version = getattr(cangjie.versions, "CANGJIE%d"%version)
 
-        include_sc = self.config.read("include_sc")
-        lang = getattr(cangjie.languages,
-                       "COMMON" if include_sc else "TRADITIONAL")
+        filters = (cangjie.filters.BIG5 | cangjie.filters.HKSCS
+                                                | cangjie.filters.PUNCTUATION)
+        # TODO: Handle other filters
+        if self.config.read("include_sc"):
+            filters |= cangjie.filters.CHINESE
 
-        self.cangjie = cangjie.CangJie(version, lang)
+        self.cangjie = cangjie.Cangjie(version, filters)
 
     def on_value_changed(self, config, section, name, value, data):
         if section != self.config.config_section:
@@ -201,7 +203,14 @@ class Engine(IBus.Engine):
             return self.do_fullwidth_char(" ")
 
         if not self.lookuptable.get_number_of_candidates():
-            self.get_candidates()
+            try:
+                self.get_candidates()
+
+            except (cangjie.errors.CangjieNoCharsError,
+                    cangjie.errors.CangjieInvalidInputError):
+                self.play_error_bell()
+                self.clear_on_next_input = True
+
             return True
 
         if self.lookuptable.get_number_of_candidates() <= 9:
@@ -221,22 +230,38 @@ class Engine(IBus.Engine):
     def do_other_key(self, keyval):
         """Handle all otherwise unhandled key presses."""
         c = IBus.keyval_to_unicode(keyval)
-        if c:
-            return self.do_fullwidth_char(IBus.keyval_to_unicode(keyval))
+        if not c or c == '\n' or c == '\r':
+            return False
 
-        return False
+        if not self.lookuptable.get_number_of_candidates() and \
+               self.current_input:
+            # FIXME: This is really ugly
+            if len(self.current_input) == 1 and \
+               not self.cangjie.is_input_key(self.current_input):
+                self.get_candidates(by_shortcode=True)
+
+            else:
+                self.get_candidates()
+
+        if self.lookuptable.get_number_of_candidates():
+            self.do_select_candidate(1)
+
+        return self.do_fullwidth_char(IBus.keyval_to_unicode(keyval))
 
     def do_fullwidth_char(self, inputchar):
         """Commit the full-width version of an input character."""
         if self.config.read("halfwidth_chars"):
             return False
 
+        self.update_current_input(append=inputchar)
+
         try:
-            t = self.cangjie.getFullWidthChar(inputchar)
-        except Exception as e:
+            self.get_candidates(code=inputchar, by_shortcode=True)
+
+        except cangjie.errors.CangjieNoCharsError:
+            self.clear_current_input()
             return False
 
-        self.commit_text(IBus.Text.new_from_string(t))
         return True
 
     def do_select_candidate(self, index):
@@ -298,7 +323,7 @@ class Engine(IBus.Engine):
         if c and c == "*":
             return self.do_star()
 
-        if c and self.cangjie.isCangJieInputKey(c):
+        if c and self.cangjie.is_input_key(c):
             return self.do_inputchar(c)
 
         return self.do_other_key(keyval)
@@ -321,7 +346,14 @@ class Engine(IBus.Engine):
 
             if len(self.current_input) < self.input_max_len:
                 self.current_input += append
-                self.current_radicals += self.cangjie.translateInputKeyToCangJie(append)
+
+                try:
+                    self.current_radicals += self.cangjie.get_radical(append)
+
+                except cangjie.errors.CangjieInvalidInputError:
+                    # That character doesn't have a radical
+                    self.current_radicals += append
+
             else:
                 self.play_error_bell()
 
@@ -336,7 +368,7 @@ class Engine(IBus.Engine):
 
         self.update_auxiliary_text()
 
-    def get_candidates(self, code=None):
+    def get_candidates(self, code=None, by_shortcode=False):
         """Get the candidates based on the user input.
 
         If the optional `code` parameter is not specified, then use the
@@ -348,17 +380,17 @@ class Engine(IBus.Engine):
         if not code:
             code = self.current_input
 
-        for c in sorted(self.cangjie.getCharacters(code),
-                        key=attrgetter("classic_frequency"),
-                        reverse=True):
+        if not by_shortcode:
+            chars = self.cangjie.get_characters(code)
+
+        else:
+            chars = self.cangjie.get_characters_by_shortcode(code)
+
+        for c in sorted(chars, key=attrgetter("frequency"), reverse=True):
             self.lookuptable.append_candidate(IBus.Text.new_from_string(c.chchar))
             num_candidates += 1
 
-        if num_candidates == 0:
-            self.play_error_bell()
-            self.clear_on_next_input = True
-
-        elif num_candidates == 1:
+        if num_candidates == 1:
             self.do_select_candidate(1)
 
         else:
@@ -447,7 +479,12 @@ class EngineQuick(Engine):
         # Now that we appended/committed, let's check the new length
         if len(self.current_input) == self.input_max_len:
             current_input = "*".join(self.current_input)
-            self.get_candidates(current_input)
+            try:
+                self.get_candidates(current_input)
+
+            except cangjie.errors.CangjieNoCharsError:
+                self.play_error_bell()
+                self.clear_on_next_input = True
 
         return True
 
