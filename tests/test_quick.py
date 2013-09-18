@@ -102,15 +102,15 @@ class QuickTestCase(unittest.TestCase):
         self.engine.do_process_key_event(IBus.d, 0, 0)
         self.engine.do_process_key_event(IBus.asterisk, 0, 0)
 
-        self.assertEqual(len(self.engine._mock_auxiliary_text), 1)
-        self.assertEqual(len(self.engine._mock_committed_text), 1)
+        self.assertEqual(len(self.engine._mock_auxiliary_text), 0)
+        self.assertEqual(len(self.engine._mock_committed_text), 2)
         self.assertEqual(self.engine.lookuptable.get_number_of_candidates(), 0)
 
         self.engine.do_process_key_event(IBus.d, 0, 0)
 
-        self.assertEqual(len(self.engine._mock_auxiliary_text), 2)
-        self.assertEqual(len(self.engine._mock_committed_text), 1)
-        self.assertTrue(self.engine.lookuptable.get_number_of_candidates() > 1)
+        self.assertEqual(len(self.engine._mock_auxiliary_text), 1)
+        self.assertEqual(len(self.engine._mock_committed_text), 2)
+        self.assertEqual(self.engine.lookuptable.get_number_of_candidates(), 0)
 
     def test_nowildcard_first(self):
         self.engine.do_process_key_event(IBus.asterisk, 0, 0)
