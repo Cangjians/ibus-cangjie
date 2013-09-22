@@ -5,66 +5,24 @@ Chinese, as they are (by far) the majority of Cangjie and Quick users.
 
 However, it should work for others as well (e.g to input Simplified Chinese).
 
-Note that the actual input logic is handled by libcangjie:
-    https://github.com/wanleung/libcangjie/
+Note that the actual input logic is handled by libcangjie2:
+    https://github.com/Cangjians/libcangjie2/
 
-Getting the source code
-=======================
+Development happens `on github`_, and stable release tarballs will be
+available when we reach that point.
 
-The Git sources are available at the following address:
-    https://github.com/bochecha/ibus-cangjie
+.. _on github: https://github.com/Cangjians/ibus-cangjie
 
-Release tarballs can be found at:
-    http://ibus-cangjie.opensource.hk/downloads/ibus-cangjie/
+Installation instructions can be found in the ``INSTALL.rst`` file.
 
-Installing
+Legalities
 ==========
 
-This is pretty much a standard Autotools project. You can install it with the
-usual sequence::
+IBus Cangjie is written by the folks listed in the ``AUTHORS`` file, who
+decided to offer it under the
+`GNU General Public License, either version 3 or any later version`_.
 
-    $ ./configure
-    $ make
-    # make install
+We won't ask you to sign a copyright assignment or any other kind of silly and
+tedious legal document, so just send us patches and/or pull requests!
 
-Of course, if you got the sources from Git, you will need to run the
-``autogen.sh`` script first.
-
-Dependencies
-============
-
-To use this engine, you will need the following:
-
-  - Python >= 3.2
-      -> http://python.org
-
-  - ibus >= 1.4.1
-      Note that the GObject-Introspection bindings must be enabled
-      -> https://code.google.com/p/ibus/
-
-  - pycangjie
-      -> https://github.com/bochecha/pycangjie
-
-  - the Python 3 GObject bindings
-      -> https://live.gnome.org/PyGObject
-
-  - pycanberra (optional)
-      This is needed to play event sounds, especially to give feedback to the
-      user on incorrect inputs.
-      -> https://github.com/psykoyiko/pycanberra
-
-      Note that we require a Python 3 version of pycanberra, as can be found
-      in this (yet-unmerged) pull request:
-      -> https://github.com/psykoyiko/pycanberra/pull/2
-
-      IBus Cangjie will fail gracefully if pycanberra is not available though,
-      and just won't play any sound.
-
-Legal
-=====
-
-This software is released under the terms of the GNU General Public
-License (GPL) version 3 or any later version.
-
-We won't ask you to sign a copyright assignment or any other long and tedious
-legal document, so just send us your patches!
+.. _GNU General Public License, either version 3 or any later version: http://www.gnu.org/licenses/lgpl.html
