@@ -12,13 +12,6 @@ To build IBus Cangjie, you will need the following:
   will fail gracefully if pycanberra is not available though, and just won't
   play any sound.
 
-.. note::
-
-    If you do want the event sounds, we require a Python 3 version of
-    pycanberra, as can be found in `this (yet-unmerged) pull request`_.
-
-.. _this (yet-unmerged) pull request: https://github.com/psykoyiko/pycanberra/pull/2
-
 Install from a release tarball
 ==============================
 
