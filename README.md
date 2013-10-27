@@ -6,7 +6,7 @@ Chinese, as they are (by far) the majority of Cangjie and Quick users.
 However, it should work for others as well (e.g to input Simplified Chinese).
 
 Note that the actual input logic is handled by
-[libcangjie2](https://github.com/Cangjians/libcangjie2).
+[libcangjie](https://github.com/Cangjians/libcangjie).
 
 Development happens [on github](https://github.com/Cangjians/ibus-cangjie),
 and stable release tarballs will be available when we reach that point.
