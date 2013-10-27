@@ -89,8 +89,6 @@ tests/run_tests: tests/run_tests.in
 	    -e 's&@SRCDIR@&$(srcdir)&g' $< > $@
 	chmod +x $@
 
-check-local:
-	cat tests/run_tests.log
 
 # -- Common --------------------------
 AUTHORS:
