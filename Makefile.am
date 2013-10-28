@@ -25,11 +25,15 @@ scripts/ibus-%-cangjie: scripts/ibus-%-cangjie.in Makefile
 ibus_cangjie_data_DATA = data/setup.ui
 ibus_cangjie_datadir = $(pkgdatadir)
 
-component_DATA = \
-	data/cangjie.xml \
-	data/quick.xml \
-	$(NULL)
+component_in_files = data/cangjie.xml.in data/quick.xml.in
+component_DATA = $(component_in_files:.xml.in=.xml)
 componentdir = $(COMPONENT_DIR)
+%.xml: %.xml.in
+	$(AM_V_GEN) \
+	$(MKDIR_P) data; \
+	sed -e 's&@VERSION@&$(VERSION)&g' \
+	    -e 's&bindir&${bindir}&g' \
+	    -e 's&pkglibexecdir&${pkglibexecdir}&g' $< > $@
 
 desktop_in_in_files = \
 	data/ibus-setup-cangjie.desktop.in.in \
@@ -39,16 +43,6 @@ desktop_in_files = $(desktop_in_in_files:.desktop.in.in=.desktop.in)
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 desktopdir = $(datadir)/applications
 @INTLTOOL_DESKTOP_RULE@
-
-%.xml: %.xml.in
-	$(AM_V_GEN) \
-	( \
-		bindir=${bindir}; \
-		pkglibexecdir=${pkglibexecdir}; \
-		s=`cat $<`; \
-		eval "echo \"$${s}\""; \
-	) > $@
-
 %.desktop.in: %.desktop.in.in
 	$(AM_V_GEN) \
 	( \
@@ -94,10 +88,7 @@ AUTHORS:
 	fi
 
 CLEANFILES = \
-	data/cangjie.xml \
-	data/cangjie.xml.in \
-	data/quick.xml \
-	data/quick.xml.in \
+	$(component_DATA) \
 	$(desktop_DATA) \
 	$(desktop_in_files) \
 	scripts/ibus-engine-cangjie \
@@ -110,6 +101,7 @@ CLEANFILES = \
 EXTRA_DIST = \
 	autogen.sh \
 	data/setup.ui \
+	$(component_in_files) \
 	$(desktop_in_in_files) \
 	scripts/ibus-engine-cangjie.in \
 	scripts/ibus-setup-cangjie.in \
