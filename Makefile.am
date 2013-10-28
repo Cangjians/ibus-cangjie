@@ -31,14 +31,12 @@ component_DATA = \
 	$(NULL)
 componentdir = $(COMPONENT_DIR)
 
-desktop_in_files = \
-	data/ibus-setup-cangjie.desktop.in \
-	data/ibus-setup-quick.desktop.in \
+desktop_in_in_files = \
+	data/ibus-setup-cangjie.desktop.in.in \
+	data/ibus-setup-quick.desktop.in.in \
 	$(NULL)
-desktop_DATA = \
-	data/ibus-setup-cangjie.desktop \
-	data/ibus-setup-quick.desktop \
-	$(NULL)
+desktop_in_files = $(desktop_in_in_files:.desktop.in.in=.desktop.in)
+desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 desktopdir = $(datadir)/applications
 @INTLTOOL_DESKTOP_RULE@
 
@@ -100,10 +98,8 @@ CLEANFILES = \
 	data/cangjie.xml.in \
 	data/quick.xml \
 	data/quick.xml.in \
-	data/ibus-setup-cangjie.desktop \
-	data/ibus-setup-cangjie.desktop.in \
-	data/ibus-setup-quick.desktop \
-	data/ibus-setup-quick.desktop.in \
+	$(desktop_DATA) \
+	$(desktop_in_files) \
 	scripts/ibus-engine-cangjie \
 	scripts/ibus-setup-cangjie \
 	src/*.pyc \
@@ -114,8 +110,7 @@ CLEANFILES = \
 EXTRA_DIST = \
 	autogen.sh \
 	data/setup.ui \
-	data/ibus-setup-cangjie.desktop.in.in \
-	data/ibus-setup-quick.desktop.in.in \
+	$(desktop_in_in_files) \
 	scripts/ibus-engine-cangjie.in \
 	scripts/ibus-setup-cangjie.in \
 	tests/run_tests.in \
