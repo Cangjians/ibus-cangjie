@@ -16,7 +16,8 @@ pkglibexec_SCRIPTS = \
 libexecdir = $(prefix)/lib
 
 scripts/ibus-%-cangjie: scripts/ibus-%-cangjie.in Makefile
-	$(MKDIR_P) scripts
+	$(AM_V_GEN) \
+	$(MKDIR_P) scripts; \
 	sed -e 's&@PYTHON_PATH@&$(PYTHON)&g' \
 	    -e 's&@CANGJIE_GETTEXT_PACKAGE@&$(GETTEXT_PACKAGE)&g' \
 	    -e 's&@LOCALEDIR@&$(localedir)&g' \
