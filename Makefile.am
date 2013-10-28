@@ -35,7 +35,6 @@ component_DATA = $(component_in_in_files:.xml.in.in=.xml)
 componentdir = $(COMPONENT_DIR)
 %.xml.in: %.xml.in.in
 	$(AM_V_GEN) \
-	$(MKDIR_P) data; \
 	sed -e 's&@VERSION@&$(VERSION)&g' \
 	    -e 's&bindir&${bindir}&g' \
 	    -e 's&pkglibexecdir&${pkglibexecdir}&g' $< > $@
