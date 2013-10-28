@@ -6,13 +6,9 @@ SUBDIRS = po
 
 
 # -- scripts/ ------------------------
-bin_SCRIPTS = \
-	scripts/ibus-setup-cangjie \
-	$(NULL)
+bin_SCRIPTS = scripts/ibus-setup-cangjie
 
-pkglibexec_SCRIPTS = \
-	scripts/ibus-engine-cangjie \
-	$(NULL)
+pkglibexec_SCRIPTS = scripts/ibus-engine-cangjie
 libexecdir = $(prefix)/lib
 
 scripts/ibus-%-cangjie: scripts/ibus-%-cangjie.in Makefile
@@ -26,9 +22,7 @@ scripts/ibus-%-cangjie: scripts/ibus-%-cangjie.in Makefile
 
 
 # -- data/ ---------------------------
-ibus_cangjie_data_DATA = \
-	data/setup.ui \
-	$(NULL)
+ibus_cangjie_data_DATA = data/setup.ui
 ibus_cangjie_datadir = $(pkgdatadir)
 
 component_DATA = \
@@ -75,9 +69,7 @@ ibus_cangjie_PYTHON = \
 ibus_cangjiedir = $(pythondir)/ibus_cangjie
 nodist_ibus_cangjie_PYTHON = src/config.py
 
-ibus_cangjie_setup_PYTHON = \
-	src/setup/__init__.py \
-	$(NULL)
+ibus_cangjie_setup_PYTHON = src/setup/__init__.py
 ibus_cangjie_setupdir = $(ibus_cangjiedir)/setup
 
 
