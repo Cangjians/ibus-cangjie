@@ -25,10 +25,10 @@ scripts/ibus-%-cangjie: scripts/ibus-%-cangjie.in Makefile
 ibus_cangjie_data_DATA = data/setup.ui
 ibus_cangjie_datadir = $(pkgdatadir)
 
-component_in_files = data/cangjie.xml.in data/quick.xml.in
-component_DATA = $(component_in_files:.xml.in=.xml)
+component_in_in_files = data/cangjie.xml.in.in data/quick.xml.in.in
+component_DATA = $(component_in_in_files:.xml.in.in=.xml)
 componentdir = $(COMPONENT_DIR)
-%.xml: %.xml.in
+%.xml.in: %.xml.in.in
 	$(AM_V_GEN) \
 	$(MKDIR_P) data; \
 	sed -e 's&@VERSION@&$(VERSION)&g' \
@@ -89,6 +89,7 @@ AUTHORS:
 
 CLEANFILES = \
 	$(component_DATA) \
+	$(component_in_files) \
 	$(desktop_DATA) \
 	$(desktop_in_files) \
 	$(bin_SCRIPTS) \
@@ -101,7 +102,7 @@ CLEANFILES = \
 EXTRA_DIST = \
 	autogen.sh \
 	data/setup.ui \
-	$(component_in_files) \
+	$(component_in_in_files) \
 	$(desktop_in_in_files) \
 	$(wildcard $(srcdir)/scripts/*.in) \
 	tests/run_tests.in \

@@ -27,6 +27,8 @@ ltmain.sh
 data/*.desktop
 data/*.desktop.in
 data/*.xml
+data/cangjie.xml.in
+data/quick.xml.in
 *.swp
 *~
 .intltool-merge-cache
