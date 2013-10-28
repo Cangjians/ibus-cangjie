@@ -59,7 +59,6 @@ ibus_cangjie_PYTHON = \
 	src/engine.py \
 	$(NULL)
 ibus_cangjiedir = $(pythondir)/ibus_cangjie
-nodist_ibus_cangjie_PYTHON = src/config.py
 
 ibus_cangjie_setup_PYTHON = src/setup/__init__.py
 ibus_cangjie_setupdir = $(ibus_cangjiedir)/setup
