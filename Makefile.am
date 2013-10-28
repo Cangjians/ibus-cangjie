@@ -91,8 +91,8 @@ CLEANFILES = \
 	$(component_DATA) \
 	$(desktop_DATA) \
 	$(desktop_in_files) \
-	scripts/ibus-engine-cangjie \
-	scripts/ibus-setup-cangjie \
+	$(bin_SCRIPTS) \
+	$(pkglibexec_SCRIPTS) \
 	src/*.pyc \
 	src/setup/*.pyc \
 	tests/run_tests \
@@ -103,8 +103,7 @@ EXTRA_DIST = \
 	data/setup.ui \
 	$(component_in_files) \
 	$(desktop_in_in_files) \
-	scripts/ibus-engine-cangjie.in \
-	scripts/ibus-setup-cangjie.in \
+	$(wildcard $(srcdir)/scripts/*.in) \
 	tests/run_tests.in \
 	tests/__init__.py \
 	$(wildcard $(srcdir)/tests/test_*.py) \
