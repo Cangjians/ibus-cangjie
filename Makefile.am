@@ -25,6 +25,11 @@ scripts/ibus-%-cangjie: scripts/ibus-%-cangjie.in Makefile
 ibus_cangjie_data_DATA = data/setup.ui
 ibus_cangjie_datadir = $(pkgdatadir)
 
+@INTLTOOL_XML_RULE@
+appdata_in_files = data/cangjie.appdata.xml.in data/quick.appdata.xml.in
+appdata_DATA = $(appdata_in_files:.xml.in=.xml)
+appdatadir = $(datadir)/appdata
+
 component_in_in_files = data/cangjie.xml.in.in data/quick.xml.in.in
 component_DATA = $(component_in_in_files:.xml.in.in=.xml)
 componentdir = $(COMPONENT_DIR)
@@ -87,7 +92,14 @@ AUTHORS:
 	    || ( rm -f $@.tmp ; echo Failed to generate $@ >&2 ); \
 	fi
 
+# The INTLTOOL_XML_RULE stuff doesn't create that directory properly, so let's
+# help it a bit
+BUILT_SOURCES = $(top_builddir)/data
+$(top_builddir)/data:
+	$(AM_V_GEN) $(MKDIR_P) $(top_builddir)/data
+
 CLEANFILES = \
+	$(appdata_DATA) \
 	$(component_DATA) \
 	$(component_in_files) \
 	$(desktop_DATA) \
@@ -102,6 +114,7 @@ CLEANFILES = \
 EXTRA_DIST = \
 	autogen.sh \
 	data/setup.ui \
+	$(appdata_in_files) \
 	$(component_in_in_files) \
 	$(desktop_in_in_files) \
 	$(wildcard $(srcdir)/scripts/*.in) \
@@ -110,4 +123,4 @@ EXTRA_DIST = \
 	$(wildcard $(srcdir)/tests/test_*.py) \
 	$(NULL)
 
-.PHONY: AUTHORS
+.PHONY: AUTHORS $(top_builddir)/data
