@@ -42,8 +42,6 @@ EXPANDED_COMPONENT_DIR=`eval echo $COMPONENT_DIR`
 # OUTPUT files
 AC_CONFIG_FILES([
   Makefile
-  data/cangjie.xml.in
-  data/quick.xml.in
   po/Makefile.in
 ])
 

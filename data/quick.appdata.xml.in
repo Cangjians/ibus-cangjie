@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application>
+  <id type="inputmethod">quick.xml</id>
+  <licence>CC0</licence>
+  <_name>Quick</_name>
+  <_summary>Quick input method</_summary>
+  <description>
+    <_p>Quick (also known as “Simplified Cangjie”) is a radical-based input
+       method, designed to input both Traditional and Simplified Chinese, as
+       well as Japanese.</_p>
+    <_p>As it is rarely used outside of Hong Kong (where it is one of the two
+       most used input methods), we strive to provide the best input
+       experience for people of the SAR by default, but provide useful options
+       for others.</_p>
+  </description>
+  <url type="homepage">http://cangjians.github.io/ibus-cangjie</url>
+  <updatecontact>hklug@googlegroups.com</updatecontact>
+</application>
