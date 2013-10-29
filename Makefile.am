@@ -35,9 +35,9 @@ component_DATA = $(component_in_in_files:.xml.in.in=.xml)
 componentdir = $(COMPONENT_DIR)
 %.xml.in: %.xml.in.in
 	$(AM_V_GEN) \
-	sed -e 's&@VERSION@&$(VERSION)&g' \
-	    -e 's&bindir&${bindir}&g' \
-	    -e 's&pkglibexecdir&${pkglibexecdir}&g' $< > $@
+	sed -e 's&@_VERSION@&$(VERSION)&g' \
+	    -e 's&@BINDIR@&$(bindir)&g' \
+	    -e 's&@PKGLIBEXECDIR@&$(pkglibexecdir)&g' $< > $@
 
 desktop_in_in_files = \
 	data/ibus-setup-cangjie.desktop.in.in \

@@ -22,8 +22,8 @@ along with ibus-cangjie.  If not, see <http://www.gnu.org/licenses/>.
 <component>
   <name>org.freedesktop.IBus.Quick</name>
   <description>Quick Component</description>
-  <exec>${pkglibexecdir}/ibus-engine-cangjie --ibus quick</exec>
-  <version>@VERSION@</version>
+  <exec>@PKGLIBEXECDIR@}/ibus-engine-cangjie --ibus quick</exec>
+  <version>@_VERSION@</version>
   <author>The IBus Cangjie authors</author>
   <license>GPLv3+</license>
   <homepage>https://github.com/bochecha/ibus-cangjie</homepage>
@@ -39,7 +39,7 @@ along with ibus-cangjie.  If not, see <http://www.gnu.org/licenses/>.
       <symbol>速成</symbol>
       <license>GPLv3+</license>
       <author>The IBus Cangjie authors</author>
-      <setup>${bindir}/ibus-setup-cangjie quick</setup>
+      <setup>@BINDIR@/ibus-setup-cangjie quick</setup>
       <rank>0</rank>
     </engine>
   </engines>
