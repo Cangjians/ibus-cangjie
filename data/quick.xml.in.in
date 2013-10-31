@@ -22,7 +22,7 @@ along with ibus-cangjie.  If not, see <http://www.gnu.org/licenses/>.
 <component>
   <name>org.freedesktop.IBus.Quick</name>
   <description>Quick Component</description>
-  <exec>@PKGLIBEXECDIR@}/ibus-engine-cangjie --ibus quick</exec>
+  <exec>@PKGLIBEXECDIR@/ibus-engine-cangjie --ibus quick</exec>
   <version>@_VERSION@</version>
   <author>The IBus Cangjie authors</author>
   <license>GPLv3+</license>
