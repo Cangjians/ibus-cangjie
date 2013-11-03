@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="ibus-cangjie">
+  <schema path="/org/cangjians/ibus/cangjie/" id="org.cangjians.ibus.cangjie">
+    <key type="i" name="version">
+      <default>3</default>
+      <summary>Input Method version</summary>
+      <description>The version of the Cangjie input method.</description>
+    </key>
+    <key type="b" name="include-allzh">
+      <default>false</default>
+      <summary>Include all Chinese characters</summary>
+      <description>Include all Chinese characters in addition to the characters part of the default set.</description>
+    </key>
+    <key type="b" name="include-jp">
+      <default>false</default>
+      <summary>Include Japanese characters</summary>
+      <description>Include Japanese characters in addition to the characters part of the default set.</description>
+    </key>
+    <key type="b" name="include-zhuyin">
+      <default>false</default>
+      <summary>Include the Zhuyin / Bopomofo alphabet</summary>
+      <description>Include characters part of the Zhuyin / Bopomofo alphabet in addition to the characters part of the default set.</description>
+    </key>
+    <key type="b" name="include-symbols">
+      <default>false</default>
+      <summary>Include miscellaneous symbols</summary>
+      <description>Include various symbols in addition to the characters part of the default set.</description>
+    </key>
+    <key type="b" name="halfwidth-chars">
+      <default>false</default>
+      <summary>Use half-width characters</summary>
+      <description>Use half-width variants of numbers, punctuation and other characters.</description>
+    </key>
+  </schema>
+</schemalist>

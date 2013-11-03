@@ -26,6 +26,7 @@ ABOUT-NLS
 ltmain.sh
 data/*.desktop
 data/*.desktop.in
+data/*.valid
 data/*.xml
 data/cangjie.xml.in
 data/quick.xml.in

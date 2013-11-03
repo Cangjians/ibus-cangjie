@@ -39,6 +39,10 @@ componentdir = $(COMPONENT_DIR)
 	    -e 's&@BINDIR@&$(bindir)&g' \
 	    -e 's&@PKGLIBEXECDIR@&$(pkglibexecdir)&g' $< > $@
 
+gsettings_in_files = data/org.cangjians.ibus.cangjie.gschema.xml.in data/org.cangjians.ibus.quick.gschema.xml.in
+gsettings_SCHEMAS = $(gsettings_in_files:.xml.in=.xml)
+@GSETTINGS_RULES@
+
 desktop_in_in_files = \
 	data/ibus-setup-cangjie.desktop.in.in \
 	data/ibus-setup-quick.desktop.in.in \
@@ -103,6 +107,7 @@ CLEANFILES = \
 	$(component_in_files) \
 	$(desktop_DATA) \
 	$(desktop_in_files) \
+	$(gsettings_SCHEMAS) \
 	$(bin_SCRIPTS) \
 	$(pkglibexec_SCRIPTS) \
 	src/*.pyc \
@@ -116,6 +121,7 @@ EXTRA_DIST = \
 	$(appdata_in_files) \
 	$(component_in_in_files) \
 	$(desktop_in_in_files) \
+	$(gsettings_in_files) \
 	$(wildcard $(srcdir)/scripts/*.in) \
 	tests/run_tests.in \
 	tests/__init__.py \
