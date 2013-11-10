@@ -19,9 +19,10 @@
 __all__ = ["EngineCangjie", "EngineQuick"]
 
 
+import gettext
 from operator import attrgetter
 
-from gi.repository import GLib
+from gi.repository import Gio
 from gi.repository import IBus
 
 try:
@@ -32,7 +33,9 @@ except ImportError:
 
 import cangjie
 
-from .config import Config, properties
+
+# FIXME: Find a way to de-hardcode the gettext package
+_ = lambda x: gettext.dgettext("ibus-cangjie", x)
 
 
 def is_inputnumber(keyval):
@@ -45,8 +48,8 @@ class Engine(IBus.Engine):
     def __init__(self):
         super(Engine, self).__init__()
 
-        self.config = Config(IBus.Bus(), self.config_name,
-                             self.on_value_changed)
+        self.settings = Gio.Settings("org.cangjians.ibus.%s" % self.__name__)
+        self.settings.connect("changed", self.on_value_changed)
 
         self.current_input = ""
         self.current_radicals = ""
@@ -63,17 +66,16 @@ class Engine(IBus.Engine):
     def init_properties(self):
         self.prop_list = IBus.PropList()
 
-        for p in properties:
-            key = p["name"]
-
-            stored_value = self.config.read(key)
+        for (key, label) in (("halfwidth-chars", _("Half-Width Characters")),
+                             ):
+            stored_value = self.settings.get_boolean(key)
             state = IBus.PropState.CHECKED if stored_value else IBus.PropState.UNCHECKED
 
             try:
                 # Try the new constructor from IBus >= 1.5
                 prop = IBus.Property(key=key,
                                      prop_type=IBus.PropType.TOGGLE,
-                                     label=p["label"],
+                                     label=label,
                                      icon='',
                                      sensitive=True,
                                      visible=True,
@@ -86,7 +88,7 @@ class Engine(IBus.Engine):
                 #   IBus.Property.new(key, type, label, icon, tooltip,
                 #                     sensitive, visible, state, sub_props)
                 prop = IBus.Property.new(key, IBus.PropType.TOGGLE,
-                                         IBus.Text.new_from_string(p["label"]),
+                                         IBus.Text.new_from_string(label),
                                          '', IBus.Text.new_from_string(''),
                                          True, True, state, None)
 
@@ -94,38 +96,37 @@ class Engine(IBus.Engine):
 
     def do_property_activate(self, prop_name, state):
         active = state == IBus.PropState.CHECKED
-        self.config.write(prop_name, GLib.Variant("b", active))
+        self.settings.set_boolean(prop_name, active)
 
     def do_focus_in(self):
         self.register_properties(self.prop_list)
 
     def init_cangjie(self):
-        version = self.config.read("version").unpack()
+        version = self.settings.get_int("version")
         version = getattr(cangjie.versions, "CANGJIE%d"%version)
 
         filters = (cangjie.filters.BIG5 | cangjie.filters.HKSCS
                                         | cangjie.filters.PUNCTUATION)
 
-        if self.config.read("include_allzh"):
+        if self.settings.get_boolean("include-allzh"):
             filters |= cangjie.filters.CHINESE
-        if self.config.read("include_jp"):
+        if self.settings.get_boolean("include-jp"):
             filters |= cangjie.filters.KANJI
             filters |= cangjie.filters.HIRAGANA
             filters |= cangjie.filters.KATAKANA
-        if self.config.read("include_zhuyin"):
+        if self.settings.get_boolean("include-zhuyin"):
             filters |= cangjie.filters.ZHUYIN
-        if self.config.read("include_symbols"):
+        if self.settings.get_boolean("include-symbols"):
             filters |= cangjie.filters.SYMBOLS
 
         self.cangjie = cangjie.Cangjie(version, filters)
 
-    def on_value_changed(self, config, section, name, value, data):
-        if section != self.config.config_section:
-            return
+    def on_value_changed(self, settings, key):
+        # Only recreate the Cangjie object if necessary
+        if key not in ("halfwidth-chars", ):
+            self.init_cangjie()
 
-        self.init_cangjie()
-
-    def do_focus_out (self):
+    def do_focus_out(self):
         """Handle focus out event
 
         This happens, for example, when switching between application windows
@@ -258,7 +259,7 @@ class Engine(IBus.Engine):
 
     def do_fullwidth_char(self, inputchar):
         """Commit the full-width version of an input character."""
-        if self.config.read("halfwidth_chars"):
+        if self.settings.get_boolean("halfwidth-chars"):
             return False
 
         self.update_current_input(append=inputchar)
@@ -447,7 +448,7 @@ class Engine(IBus.Engine):
 class EngineCangjie(Engine):
     """The Cangjie engine."""
     __gtype_name__ = "EngineCangjie"
-    config_name = "cangjie"
+    __name__ = "cangjie"
     input_max_len = 5
 
     def do_inputchar(self, inputchar):
@@ -473,7 +474,7 @@ class EngineCangjie(Engine):
 class EngineQuick(Engine):
     """The Quick engine."""
     __gtype_name__ = "EngineQuick"
-    config_name = "quick"
+    __name__ = "quick"
     input_max_len = 2
 
     def do_inputchar(self, inputchar):

@@ -160,7 +160,7 @@ be inputted. You can enable additional character groups below.</property>
               </packing>
             </child>
             <child>
-              <object class="GtkSwitch" id="include_allzh">
+              <object class="GtkSwitch" id="include-allzh">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="halign">end</property>
@@ -173,7 +173,7 @@ be inputted. You can enable additional character groups below.</property>
               </packing>
             </child>
             <child>
-              <object class="GtkSwitch" id="include_jp">
+              <object class="GtkSwitch" id="include-jp">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="halign">end</property>
@@ -186,7 +186,7 @@ be inputted. You can enable additional character groups below.</property>
               </packing>
             </child>
             <child>
-              <object class="GtkSwitch" id="include_zhuyin">
+              <object class="GtkSwitch" id="include-zhuyin">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="halign">end</property>
@@ -199,7 +199,7 @@ be inputted. You can enable additional character groups below.</property>
               </packing>
             </child>
             <child>
-              <object class="GtkSwitch" id="include_symbols">
+              <object class="GtkSwitch" id="include-symbols">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="halign">end</property>
