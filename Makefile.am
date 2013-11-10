@@ -64,11 +64,9 @@ desktopdir = $(datadir)/applications
 ibus_cangjie_PYTHON = \
 	src/__init__.py \
 	src/engine.py \
+	src/setup.py \
 	$(NULL)
 ibus_cangjiedir = $(pythondir)/ibus_cangjie
-
-ibus_cangjie_setup_PYTHON = src/setup/__init__.py
-ibus_cangjie_setupdir = $(ibus_cangjiedir)/setup
 
 
 # -- Testing -------------------------
@@ -111,7 +109,6 @@ CLEANFILES = \
 	$(bin_SCRIPTS) \
 	$(pkglibexec_SCRIPTS) \
 	src/*.pyc \
-	src/setup/*.pyc \
 	tests/run_tests \
 	$(NULL)
 

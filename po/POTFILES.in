@@ -4,4 +4,4 @@ data/ibus-setup-cangjie.desktop.in.in
 data/ibus-setup-quick.desktop.in.in
 [type: gettext/glade]data/setup.ui
 src/engine.py
-src/setup/__init__.py
+src/setup.py
