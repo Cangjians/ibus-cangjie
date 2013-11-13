@@ -19,6 +19,7 @@
 
 
 import os
+import subprocess
 import sys
 import unittest
 
@@ -30,26 +31,6 @@ sys.modules["ibus_cangjie"] = src
 
 
 # -- Define some mock classes for the tests ----------------------------------
-class MockIBusConfig:
-    def __init__(self):
-        self._mock_configs = {}
-
-    def connect(self, *args):
-        pass
-
-    def get_value(self, section, name):
-        try:
-            return self._mock_configs[section][name]
-        except KeyError:
-            return None
-
-    def set_value(self, section, name, value):
-        if not section in self._mock_configs:
-            self._mock_configs[section] = {}
-
-        self._mock_configs[section][name] = value
-
-
 class MockEngine:
     def __init__(self):
         self._mock_auxiliary_text = ""
@@ -64,11 +45,6 @@ class MockEngine:
     def update_lookup_table(self, table, visible):
         # We don't need anything here for the unit tests
         pass
-
-
-class MockBus:
-    def get_config(self):
-        return MockIBusConfig()
 
 
 class MockLookupTable:
@@ -127,7 +103,6 @@ class MockCanberra:
 
 # -- Monkey patch the environment with the mock classes ----------------------
 from gi.repository import IBus
-sys.modules["gi.repository.IBus"].Bus = MockBus
 sys.modules["gi.repository.IBus"].Engine = MockEngine
 sys.modules["gi.repository.IBus"].LookupTable = MockLookupTable
 sys.modules["gi.repository.IBus"].Property = MockProperty
@@ -141,6 +116,10 @@ except ImportError:
     # Let the tests know that they shouldn't try pycanberra
     os.environ["IBUS_CANGJIE_TESTS_HAVE_PYCANBERRA"] = "false"
 
+
+# The unit tests will need this to find the settings schemas
+os.environ["GSETTINGS_SCHEMA_DIR"] = "@BUILDDIR@/data"
+subprocess.check_call(["glib-compile-schemas", os.environ["GSETTINGS_SCHEMA_DIR"]])
 
 # -- Load and run our unit tests ---------------------------------------------
 loader = unittest.TestLoader()
