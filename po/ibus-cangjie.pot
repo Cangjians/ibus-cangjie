@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-10 20:55+0800\n"
+"POT-Creation-Date: 2013-11-23 15:58+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,38 +17,114 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../data/ibus-setup-cangjie.desktop.in.in.h:1 ../src/setup/__init__.py:30
+#: ../data/cangjie.appdata.xml.in.h:1
+msgid "Cangjie"
+msgstr ""
+
+#: ../data/cangjie.appdata.xml.in.h:2
+msgid "Cangjie input method"
+msgstr ""
+
+#: ../data/cangjie.appdata.xml.in.h:3
+msgid ""
+"Cangjie is a radical-based input method, designed to input both Traditional "
+"and Simplified Chinese, as well as Japanese."
+msgstr ""
+
+#: ../data/cangjie.appdata.xml.in.h:4 ../data/quick.appdata.xml.in.h:4
+msgid ""
+"As it is rarely used outside of Hong Kong (where it is one of the two most "
+"used input methods), we strive to provide the best input experience for "
+"people of the SAR by default, but provide useful options for others."
+msgstr ""
+
+#: ../data/quick.appdata.xml.in.h:1
+msgid "Quick"
+msgstr ""
+
+#: ../data/quick.appdata.xml.in.h:2
+msgid "Quick input method"
+msgstr ""
+
+#: ../data/quick.appdata.xml.in.h:3
+msgid ""
+"Quick (also known as “Simplified Cangjie”) is a radical-based input method, "
+"designed to input both Traditional and Simplified Chinese, as well as "
+"Japanese."
+msgstr ""
+
+#. The title of the preferences window for Cangjie
+#: ../data/ibus-setup-cangjie.desktop.in.in.h:2 ../src/setup.py:55
 msgid "Cangjie Preferences"
 msgstr ""
 
-#: ../data/ibus-setup-cangjie.desktop.in.in.h:2
+#. Tooltip for the preferences "app" for Cangjie
+#: ../data/ibus-setup-cangjie.desktop.in.in.h:4
 msgid "Set preferences for the Cangjie input method"
 msgstr ""
 
-#: ../data/ibus-setup-quick.desktop.in.in.h:1 ../src/setup/__init__.py:31
+#. The title of the preferences window for Quick
+#: ../data/ibus-setup-quick.desktop.in.in.h:2 ../src/setup.py:57
 msgid "Quick Preferences"
 msgstr ""
 
-#: ../data/ibus-setup-quick.desktop.in.in.h:2
+#. Tooltip for the preferences "app" for Quick
+#: ../data/ibus-setup-quick.desktop.in.in.h:4
 msgid "Set preferences for the Quick input method"
 msgstr ""
 
-#: ../data/setup.ui.h:1
+#. We support versions 3 and 5 of Cangjie. Most people will think version 3 is
+#. the 'standard' one as it is the one used on Windows
+#: ../data/setup.ui.h:3
 msgid "Standard (Version 3)"
 msgstr ""
 
-#: ../data/setup.ui.h:2
+#. We support versions 3 and 5 of Cangjie. Version 5 is the newer, supposedly
+#. better version, but most people use version 3.
+#: ../data/setup.ui.h:6
 msgid "Updated (Version 5)"
 msgstr ""
 
-#: ../data/setup.ui.h:3
+#. We support versions 3 and 5 of Cangjie, this option lets users choose the one
+#. they prefer using.
+#: ../data/setup.ui.h:9
 msgid "Input Method Version"
 msgstr ""
 
-#: ../data/setup.ui.h:4
-msgid "Simplified Chinese"
+#. This is just some text to explain what the other options do.
+#: ../data/setup.ui.h:11
+msgid ""
+"By default, only the characters that are common in Hong Kong can be "
+"inputted. You can enable additional character groups below."
 msgstr ""
 
-#: ../src/config.py:36
+#. This should tell the user that if they enable this option, we will return them
+#. some rarer Chinese characters which they most likely don't need, in addition
+#. to the ones we return by default. It should be clear that most users don't
+#. need to enable this option.
+#: ../data/setup.ui.h:16
+msgid "Use the extended Chinese character set"
+msgstr ""
+
+#. This should tell the user that if they enable this option, we will return them
+#. Japanese characters in addition to the ones we return by default.
+#: ../data/setup.ui.h:19
+msgid "Include Japanese characters"
+msgstr ""
+
+#. This should tell the user that if they enable this option, we will return them
+#. characters from the Zhuyin/Bopomofo alphabet in addition to the ones we return
+#. by default.
+#: ../data/setup.ui.h:23
+msgid "Include the Zhuyin / Bopomofo alphabet"
+msgstr ""
+
+#. This should tell the user that if they enable this option, we will return them
+#. some miscellaneous symbols in addition to the ones we return by default.
+#: ../data/setup.ui.h:26
+msgid "Include miscelleaneous symbols"
+msgstr ""
+
+#: ../src/engine.py:69
 msgid "Half-Width Characters"
 msgstr ""
