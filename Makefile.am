@@ -59,9 +59,11 @@ desktopdir = $(datadir)/applications
 		eval "echo \"$${s}\""; \
 	) > $@
 
+icon16dir = $(datadir)/icons/hicolor/16x16/intl
+icon16_DATA = data/icons/16x16/cangjie.png data/icons/16x16/quick.png
 iconscalabledir = $(datadir)/icons/hicolor/scalable/intl
 iconscalable_DATA = data/icons/scalable/cangjie.svg data/icons/scalable/quick.svg
-icon_files = $(iconscalable_DATA)
+icon_files = $(icon16_DATA) $(iconscalable_DATA)
 
 
 # -- src/ ----------------------------
