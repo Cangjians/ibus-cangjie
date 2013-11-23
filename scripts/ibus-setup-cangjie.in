@@ -59,4 +59,4 @@ except:
     import sys
     sys.exit(1)
 
-Setup(bus, args.engine, datadir, gettext_package).run()
+Setup(args.engine, datadir, gettext_package).run()

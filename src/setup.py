@@ -21,28 +21,38 @@ import gettext
 _ = lambda x: gettext.dgettext("ibus-cangjie", x)
 
 from gi.repository import Gdk
+from gi.repository import Gio
 from gi.repository import GLib
 from gi.repository import Gtk
-
-from ibus_cangjie.config import options, Config
-
 
 titles = {"cangjie": _("Cangjie Preferences"),
           "quick": _("Quick Preferences")}
 
 
 class Setup(object):
-    def __init__ (self, bus, engine, datadir, gettext_package):
-        self.__config = Config(bus, engine, self.on_value_changed)
+    def __init__ (self, engine, datadir, gettext_package):
+        self.settings = Gio.Settings("org.cangjians.ibus.%s" % engine)
+        self.settings.connect("changed", self.on_value_changed)
 
         ui_file = GLib.build_filenamev([datadir, "setup.ui"])
         self.__builder = Gtk.Builder()
         self.__builder.set_translation_domain(gettext_package)
         self.__builder.add_from_file(ui_file)
 
-        for option in options:
-            prepare_func = getattr(self, "prepare_%s" % option["widget"])
-            prepare_func(option)
+        for key in ("version", ):
+            combo = self.__builder.get_object(key)
+            active = self.__get_active_combo_index(combo.get_model(),
+                                                   self.settings.get_int(key))
+            combo.set_active(active)
+            combo.connect("changed", self.on_combo_changed, key)
+            setattr(self, "widget_%s" % key, combo)
+
+        for key in ("include-allzh", "include-jp",
+                    "include-zhuyin", "include-symbols"):
+            switch = self.__builder.get_object(key)
+            switch.set_active(self.settings.get_boolean(key))
+            switch.connect("notify::active", self.on_switch_toggled, key)
+            setattr(self, "widget_%s" % key, combo)
 
         self.__window = self.__builder.get_object("setup_dialog")
         self.__window.set_title(titles[engine])
@@ -72,43 +82,7 @@ class Setup(object):
         if parent != None:
             window.set_transient_for(parent)
 
-    def prepare_switch(self, option):
-        """Prepare a Gtk.Switch
-
-        Set the switch named `option["name"]` (in)active based on the current
-        engine config value.
-        """
-        name = option["name"]
-
-        switch = self.__builder.get_object(name)
-
-        v = self.__config.read(name)
-        switch.set_active(v.unpack())
-        switch.connect("notify::active", self.on_switch_toggled,
-                       name, option["type"])
-
-        setattr(self, name, switch)
-
-    def prepare_combo(self, option):
-        """Prepare a Gtk.ComboBox
-
-        Set the combobox named `option['name']` to the current engine config
-        value.
-        """
-        name = option["name"]
-        current_value = self.__config.read(name).unpack()
-
-        combo = self.__builder.get_object(name)
-
-        store = combo.get_model()
-        active_index = self.__get_active_index(store, current_value)
-        combo.set_active(active_index)
-
-        combo.connect("changed", self.on_combo_changed, name, option)
-
-        setattr(self, name, combo)
-
-    def __get_active_index(self, store, value):
+    def __get_active_combo_index(self, store, value):
         for i, n in enumerate(store):
             v = store.get_value(store.get_iter(i), 0)
             if v == value:
@@ -118,37 +92,36 @@ class Setup(object):
         res = self.__window.run()
         self.__window.destroy()
 
-    def on_value_changed(self, config, section, name, value, data):
+    def on_value_changed(self, settings, key):
         """Callback when the value of a widget is changed.
 
         We need to react, in case the value was changed from somewhere else,
         for example from another setup UI.
         """
-        if section != self.__config.config_section:
-            return
+        if key == "version":
+            new_value = self.settings.get_int(key)
 
-        try:
-            widget = getattr(self, name)
-        except AttributeError:
-            return
+        else:
+            new_value = self.settings.get_boolean(key)
 
-        value = value.unpack()
+        widget = getattr(self, "widget_%s" % name)
 
         if isinstance(widget, Gtk.ComboBox):
             store = widget.get_model()
             v = store.get_value(store.get_iter(widget.get_active()), 0)
-            if v != value:
-                widget.set_active(self.__get_active_index(widget.get_model(),
-                                                          value))
+            if v != new_value:
+                active = self.__get_active_combo_index(widget.get_model(),
+                                                       new_value)
+                widget.set_active(active)
 
         else:
-            if widget.get_active() != value:
-                widget.set_active(value)
+            if widget.get_active() != new_value:
+                widget.set_active(new_value)
 
-    def on_switch_toggled(self, widget, active, setting_name, variant_type):
-        self.__config.write(setting_name, GLib.Variant(variant_type, widget.get_active()))
+    def on_switch_toggled(self, widget, active, key):
+        self.settings.set_boolean(key, widget.get_active())
 
-    def on_combo_changed(self, widget, setting_name, option):
+    def on_combo_changed(self, widget, key):
         store = widget.get_model()
         value = store.get_value(store.get_iter(widget.get_active()), 0)
-        self.__config.write(setting_name, GLib.Variant(option["type"], value))
+        self.settings.set_int(key, value)

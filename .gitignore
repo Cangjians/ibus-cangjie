@@ -26,8 +26,10 @@ ABOUT-NLS
 ltmain.sh
 data/*.desktop
 data/*.desktop.in
+data/*.valid
 data/*.xml
 data/cangjie.xml.in
+data/gschemas.compiled
 data/quick.xml.in
 *.swp
 *~
