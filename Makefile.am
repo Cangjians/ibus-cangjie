@@ -59,6 +59,10 @@ desktopdir = $(datadir)/applications
 		eval "echo \"$${s}\""; \
 	) > $@
 
+iconscalabledir = $(datadir)/icons/hicolor/scalable/intl
+iconscalable_DATA = data/icons/scalable/cangjie.svg data/icons/scalable/quick.svg
+icon_files = $(iconscalable_DATA)
+
 
 # -- src/ ----------------------------
 ibus_cangjie_PYTHON = \
@@ -119,6 +123,7 @@ EXTRA_DIST = \
 	$(component_in_in_files) \
 	$(desktop_in_in_files) \
 	$(gsettings_in_files) \
+	$(icon_files) \
 	$(wildcard $(srcdir)/scripts/*.in) \
 	tests/run_tests.in \
 	tests/__init__.py \
