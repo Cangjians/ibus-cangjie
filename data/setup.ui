@@ -30,11 +30,15 @@
     <data>
       <row>
         <col id="0">3</col>
-        <col id="1" translatable="yes">Standard (Version 3)</col>
+        <col id="1" translatable="yes"
+             comments="We support versions 3 and 5 of Cangjie. Most people will think version 3 is
+                       the 'standard' one as it is the one used on Windows">Standard (Version 3)</col>
       </row>
       <row>
         <col id="0">5</col>
-        <col id="1" translatable="yes">Updated (Version 5)</col>
+        <col id="1" translatable="yes"
+             comments="We support versions 3 and 5 of Cangjie. Version 5 is the newer, supposedly
+                       better version, but most people use version 3.">Updated (Version 5)</col>
       </row>
     </data>
   </object>
@@ -82,7 +86,9 @@
               <object class="GtkLabel" id="version_label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Input Method Version</property>
+                <property name="label" translatable="yes"
+                          comments="We support versions 3 and 5 of Cangjie, this option lets users choose the one
+                                    they prefer using.">Input Method Version</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -130,8 +136,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
-                <property name="label" translatable="yes">By default, only the characters that are common in Hong Kong can
-be inputted. You can enable additional character groups below.</property>
+                <property name="label" translatable="yes" comments="This is just some text to explain what the other options do.">By default, only the characters that are common in Hong Kong can be inputted. You can enable additional character groups below.</property>
                 <property name="max_width_chars">200</property>
                 <attributes>
                   <attribute name="style" value="italic"/>
@@ -150,7 +155,11 @@ be inputted. You can enable additional character groups below.</property>
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
                 <property name="xalign">0</property>
-                <property name="label" translatable="yes">Use the extended Chinese character set</property>
+                <property name="label" translatable="yes"
+                          comments="This should tell the user that if they enable this option, we will return them
+                                    some rarer Chinese characters which they most likely don't need, in addition
+                                    to the ones we return by default. It should be clear that most users don't
+                                    need to enable this option.">Use the extended Chinese character set</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -217,7 +226,9 @@ be inputted. You can enable additional character groups below.</property>
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
                 <property name="xalign">0</property>
-                <property name="label" translatable="yes">Include Japanese characters</property>
+                <property name="label" translatable="yes"
+                          comments="This should tell the user that if they enable this option, we will return them
+                                    Japanese characters in addition to the ones we return by default.">Include Japanese characters</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -231,7 +242,10 @@ be inputted. You can enable additional character groups below.</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
-                <property name="label" translatable="yes">Include the Zhuyin / Bopomofo alphabet</property>
+                <property name="label" translatable="yes"
+                          comments="This should tell the user that if they enable this option, we will return them
+                                    characters from the Zhuyin/Bopomofo alphabet in addition to the ones we return
+                                    by default.">Include the Zhuyin / Bopomofo alphabet</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -246,7 +260,9 @@ be inputted. You can enable additional character groups below.</property>
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
                 <property name="xalign">0</property>
-                <property name="label" translatable="yes">Include miscelleaneous symbols</property>
+                <property name="label" translatable="yes"
+                          comments="This should tell the user that if they enable this option, we will return them
+                                    some miscellaneous symbols in addition to the ones we return by default.">Include miscelleaneous symbols</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
