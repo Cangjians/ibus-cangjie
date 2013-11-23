@@ -37,6 +37,7 @@ componentdir = $(COMPONENT_DIR)
 	$(AM_V_GEN) \
 	sed -e 's&@_VERSION@&$(VERSION)&g' \
 	    -e 's&@BINDIR@&$(bindir)&g' \
+	    -e 's&@ICON16DIR@&$(icon16dir)&g' \
 	    -e 's&@PKGLIBEXECDIR@&$(pkglibexecdir)&g' $< > $@
 
 gsettings_in_files = data/org.cangjians.ibus.cangjie.gschema.xml.in data/org.cangjians.ibus.quick.gschema.xml.in
