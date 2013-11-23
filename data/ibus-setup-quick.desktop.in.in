@@ -1,6 +1,8 @@
 [Desktop Entry]
 Encoding=UTF-8
+# The title of the preferences window for Quick
 _Name=Quick Preferences
+# Tooltip for the preferences "app" for Quick
 _Comment=Set preferences for the Quick input method
 Exec=${bindir}/ibus-setup-cangjie quick
 Icon=ibus-setup-quick
