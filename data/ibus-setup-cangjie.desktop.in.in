@@ -1,6 +1,8 @@
 [Desktop Entry]
 Encoding=UTF-8
+# The title of the preferences window for Cangjie
 _Name=Cangjie Preferences
+# Tooltip for the preferences "app" for Cangjie
 _Comment=Set preferences for the Cangjie input method
 Exec=${bindir}/ibus-setup-cangjie cangjie
 Icon=ibus-setup-cangjie
