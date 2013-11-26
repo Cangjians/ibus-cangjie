@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="48px"
+   height="48px"
+   id="svg4217"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="新文件 17">
+  <defs
+     id="defs4219" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8284271"
+     inkscape:cx="6.5451161"
+     inkscape:cy="27.346582"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:grid-bbox="true"
+     inkscape:document-units="px"
+     inkscape:window-width="731"
+     inkscape:window-height="431"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata4222">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer">
+    <rect
+       style="fill:#241f1c;stroke:none"
+       id="rect2995-3"
+       width="48.008625"
+       height="48.008625"
+       x="0.016937939"
+       y="-0.01227719"
+       ry="5.1358061" />
+    <g
+       transform="scale(0.94074527,1.062987)"
+       style="font-size:11.16875076px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#b3b3b3;fill-opacity:1;stroke:none;font-family:'文泉驛正黑';-inkscape-font-specification:'文泉驛正黑 Medium'"
+       id="text2997-1">
+      <path
+         d="m 18.877893,7.7123535 10.365999,0 0,-3.1412115 2.984151,0 0,3.1412115 10.523058,0 0,2.8270905 -10.523058,0 0,3.141212 8.952453,0 0,10.523058 -8.952453,0 0,11.465422 -2.984151,0 0,-10.837179 c -2.408284,3.769462 -5.497139,6.75361 -9.266574,8.952453 l -2.198849,-2.827091 c 3.664731,-1.780012 6.544172,-4.031211 8.638332,-6.753605 l -6.125362,0 0,-10.523058 8.952453,0 0,-3.141212 -10.365999,0 0,-2.8270905 m 4.240636,13.6642705 6.125363,0 0,-4.868878 -6.125363,0 0,4.868878 m 9.109514,-4.868878 0,4.868878 5.968302,0 0,-4.868878 -5.968302,0 m 3.141211,9.109513 c 2.931765,1.570616 5.601792,3.402988 8.01009,5.497121 l -2.198848,2.355908 c -2.303589,-2.198842 -4.868909,-4.031213 -7.695969,-5.49712 l 1.884727,-2.355909 M 10.239562,5.670566 c 2.094134,1.3612219 3.978859,2.9841796 5.65418,4.868878 l -2.198848,2.67003 C 11.914868,11.115359 10.030143,9.3876942 8.0407135,8.0264747 L 10.239562,5.670566 m -2.6700302,13.036028 7.8530292,0 0,15.077816 c 1.256473,0.942366 2.853254,1.622961 4.790347,2.041787 1.937064,0.418829 6.151519,0.628243 12.643377,0.628242 l 10.99424,0 -1.570605,3.455333 -12.564847,0 c -4.60713,-3e-6 -7.957752,-0.314123 -10.051877,-0.942363 -2.094153,-0.628244 -3.926524,-1.62296 -5.49712,-2.984151 L 9.6113193,40.538014 7.4124712,37.239742 C 9.0877805,36.29738 10.710738,35.302664 12.281349,34.255591 l 0,-12.564846 -4.7118172,0 0,-2.984151"
+         style="font-size:40.20750809px;font-weight:normal;fill:#b3b3b3;font-family:'文泉驛等寬微米黑';-inkscape-font-specification:'文泉驛等寬微米黑'"
+         id="path4240" />
+    </g>
+  </g>
+</svg>

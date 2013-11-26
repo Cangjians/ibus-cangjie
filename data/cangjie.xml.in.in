@@ -37,6 +37,7 @@ along with ibus-cangjie.  If not, see <http://www.gnu.org/licenses/>.
       <language>zh_HK</language>
       <layout>us</layout>
       <symbol>倉頡</symbol>
+      <icon>@ICON16DIR@/cangjie.png</icon>
       <license>GPLv3+</license>
       <author>The IBus Cangjie authors</author>
       <setup>@BINDIR@/ibus-setup-cangjie cangjie</setup>

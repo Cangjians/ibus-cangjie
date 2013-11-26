@@ -37,6 +37,7 @@ along with ibus-cangjie.  If not, see <http://www.gnu.org/licenses/>.
       <language>zh_HK</language>
       <layout>us</layout>
       <symbol>速成</symbol>
+      <icon>@ICON16DIR@/quick.png</icon>
       <license>GPLv3+</license>
       <author>The IBus Cangjie authors</author>
       <setup>@BINDIR@/ibus-setup-cangjie quick</setup>

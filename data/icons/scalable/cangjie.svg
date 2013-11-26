@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="48px"
+   height="48px"
+   id="svg4129"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="cangjie_icon.svg">
+  <defs
+     id="defs4131" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="-121.83836"
+     inkscape:cy="-130.08959"
+     inkscape:current-layer="layer3"
+     showgrid="true"
+     inkscape:grid-bbox="true"
+     inkscape:document-units="px"
+     inkscape:window-width="791"
+     inkscape:window-height="431"
+     inkscape:window-x="379"
+     inkscape:window-y="103"
+     inkscape:window-maximized="0"
+     showguides="true"
+     inkscape:guide-bbox="true" />
+  <metadata
+     id="metadata4134">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer">
+    <rect
+       style="fill:#241f1c;stroke:none"
+       id="rect2995"
+       width="48.035294"
+       height="48.035294"
+       x="0.010605275"
+       y="-0.0029392394"
+       ry="5.138659" />
+    <g
+       transform="scale(0.94074527,1.062987)"
+       style="font-size:11.17495537px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#b3b3b3;fill-opacity:1;stroke:none;font-family:'文泉驛等寬微米黑';-inkscape-font-specification:'文泉驛等寬微米黑'"
+       id="text2997" />
+    <g
+       inkscape:groupmode="layer"
+       id="layer3"
+       inkscape:label="text_fine"
+       style="display:inline">
+      <g
+         style="font-size:44.13543700999999686px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#b3b3b3;fill-opacity:1;stroke:none;font-family:'文泉驛點陣正黑';-inkscape-font-specification:'文泉驛點陣正黑 Medium'"
+         id="text3005">
+        <path
+           d="m 17.940131,44.06285 c -1.063172,-0.08621 -2.140696,-0.08621 -3.232576,0 0.08619,-1.83898 0.129291,-5.272691 0.129303,-10.301142 -1.580381,3.850358 -4.094604,6.795591 -7.5426771,8.835707 -0.5459499,-1.120629 -1.4079692,-1.867712 -2.5860607,-2.241252 2.3274506,-0.976957 4.2238933,-2.499858 5.6893338,-4.568708 2.155041,-2.930863 3.103262,-6.66628 2.844667,-11.206263 l -0.0431,-6.982364 10.861455,0 c -1.494188,-1.609082 -3.06019,-3.131983 -4.698011,-4.568708 l 2.11195,-2.456757 c 2.2987,1.982672 4.439382,4.123354 6.422051,6.422051 l -0.732717,0.603414 9.568425,0 0,12.240687 -20.81779,0 c -0.143682,1.034433 -0.387921,2.025755 -0.732717,2.97397 l 22.714234,0 0,11.163163 -2.97397,0 0,-2.413657 -17.0249,0 c -1.5e-5,1.005686 0.01435,1.838972 0.0431,2.499859 m 16.981799,-9.094314 -17.111102,0 c -1.5e-5,1.666574 0.01435,3.160741 0.0431,4.482505 l 17.068001,0 0,-4.482505 m -18.74894,-7.284071 17.585213,0 0,-3.146374 -17.585213,0 0,3.146374 m 17.585213,-5.258324 0,-2.715364 -17.585213,0.0431 0,2.672263 17.585213,0 M 23.974273,2.7720795 c 1.063136,0.5172475 2.198128,0.9626241 3.40498,1.3361314 l -1.034424,1.5947374 c 0.948198,1.1493922 2.097557,2.3993203 3.448081,3.7497881 2.528563,2.6148216 5.617466,4.7555026 9.266717,6.4220506 2.011343,0.948244 4.094556,1.767163 6.249647,2.456758 -1.034465,0.517232 -1.781549,1.278682 -2.241253,2.284354 C 38.959022,19.236686 35.324174,17.297142 32.163465,14.797262 29.261304,12.584769 26.775815,10.286051 24.70699,7.9011 21.373827,12.211228 17.451638,15.802975 12.940414,18.676353 10.756621,20.02687 8.4148019,21.176229 5.9149485,22.124434 5.5126699,21.061293 4.8086874,20.213641 3.8029989,19.581474 c 2.4998555,-0.919468 4.8847758,-2.011359 7.1547681,-3.275677 3.677941,-2.04009 6.479505,-4.252606 8.404697,-6.6375555 1.695289,-2.1550195 3.232557,-4.4537379 4.611809,-6.896162"
+           style="font-family:'文泉驛正黑';-inkscape-font-specification:'文泉驛正黑 Medium';fill:#b3b3b3;fill-opacity:1"
+           id="path3010"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+  </g>
+</svg>

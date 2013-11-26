@@ -37,6 +37,7 @@ componentdir = $(COMPONENT_DIR)
 	$(AM_V_GEN) \
 	sed -e 's&@_VERSION@&$(VERSION)&g' \
 	    -e 's&@BINDIR@&$(bindir)&g' \
+	    -e 's&@ICON16DIR@&$(icon16dir)&g' \
 	    -e 's&@PKGLIBEXECDIR@&$(pkglibexecdir)&g' $< > $@
 
 gsettings_in_files = data/org.cangjians.ibus.cangjie.gschema.xml.in data/org.cangjians.ibus.quick.gschema.xml.in
@@ -58,6 +59,12 @@ desktopdir = $(datadir)/applications
 		s=`cat $<`; \
 		eval "echo \"$${s}\""; \
 	) > $@
+
+icon16dir = $(datadir)/icons/hicolor/16x16/intl
+icon16_DATA = data/icons/16x16/cangjie.png data/icons/16x16/quick.png
+iconscalabledir = $(datadir)/icons/hicolor/scalable/intl
+iconscalable_DATA = data/icons/scalable/cangjie.svg data/icons/scalable/quick.svg
+icon_files = $(icon16_DATA) $(iconscalable_DATA)
 
 
 # -- src/ ----------------------------
@@ -119,6 +126,7 @@ EXTRA_DIST = \
 	$(component_in_in_files) \
 	$(desktop_in_in_files) \
 	$(gsettings_in_files) \
+	$(icon_files) \
 	$(wildcard $(srcdir)/scripts/*.in) \
 	tests/run_tests.in \
 	tests/__init__.py \
