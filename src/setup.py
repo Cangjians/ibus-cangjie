@@ -105,7 +105,7 @@ class Setup(object):
         else:
             new_value = self.settings.get_boolean(key)
 
-        widget = getattr(self, "widget_%s" % name)
+        widget = getattr(self, "widget_%s" % key)
 
         if isinstance(widget, Gtk.ComboBox):
             store = widget.get_model()
