@@ -47,7 +47,7 @@ class Setup(object):
             switch = self.__builder.get_object(key)
             switch.set_active(self.settings.get_boolean(key))
             switch.connect("notify::active", self.on_switch_toggled, key)
-            setattr(self, "widget_%s" % key, combo)
+            setattr(self, "widget_%s" % key, switch)
 
         self.__window = self.__builder.get_object("setup_dialog")
 
@@ -105,7 +105,7 @@ class Setup(object):
         else:
             new_value = self.settings.get_boolean(key)
 
-        widget = getattr(self, "widget_%s" % name)
+        widget = getattr(self, "widget_%s" % key)
 
         if isinstance(widget, Gtk.ComboBox):
             store = widget.get_model()
