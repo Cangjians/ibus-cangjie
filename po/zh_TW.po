@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the ibus-cangjie package.
 # 
 # Translators:
-# Cheng-Chia Tseng <pswo10680@gmail.com>, 2013.
+# Cheng-Chia Tseng <pswo10680@gmail.com>, 2013
+# bochecha <bochecha@fedoraproject.org>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: ibus-cangjie\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-10 20:55+0800\n"
-"PO-Revision-Date: 2013-03-10 07:31+0000\n"
-"Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
+"POT-Creation-Date: 2013-12-10 14:58+0800\n"
+"PO-Revision-Date: 2013-12-21 12:10+0000\n"
+"Last-Translator: bochecha <bochecha@fedoraproject.org>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/ibus-cangjie/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,38 +19,124 @@ msgstr ""
 "Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../data/ibus-setup-cangjie.desktop.in.in.h:1 ../src/setup/__init__.py:30
+#: ../data/cangjie.appdata.xml.in.h:1
+msgid "Cangjie"
+msgstr "倉頡"
+
+#: ../data/cangjie.appdata.xml.in.h:2
+msgid "Cangjie input method"
+msgstr "倉頡輸入法"
+
+#: ../data/cangjie.appdata.xml.in.h:3
+msgid ""
+"Cangjie is a radical-based input method, designed to input both Traditional "
+"and Simplified Chinese, as well as Japanese."
+msgstr "倉頡是個字根輸入法，設計用來輸入正體中文、簡體中文，甚至日文。"
+
+#: ../data/cangjie.appdata.xml.in.h:4 ../data/quick.appdata.xml.in.h:4
+msgid ""
+"As it is rarely used outside of Hong Kong (where it is one of the two most "
+"used input methods), we strive to provide the best input experience for "
+"people of the SAR by default, but provide useful options for others."
+msgstr "由於香港 (倉頡是最常用的兩個輸入法之一) 以外地區很少使用倉頡輸入法，我們努力為香港特別行政區的用戶提供最佳的預設輸入體驗，不過我們也同時為其他族群使用者提供些有用的選項。"
+
+#: ../data/quick.appdata.xml.in.h:1
+msgid "Quick"
+msgstr "速成"
+
+#: ../data/quick.appdata.xml.in.h:2
+msgid "Quick input method"
+msgstr "速成輸入法"
+
+#: ../data/quick.appdata.xml.in.h:3
+msgid ""
+"Quick (also known as “Simplified Cangjie”) is a radical-based input method, "
+"designed to input both Traditional and Simplified Chinese, as well as "
+"Japanese."
+msgstr "速成 (也被稱為「簡易倉頡」) 是個字根輸入法，設計用來輸入正體中文、簡體中文，甚至日文。"
+
+#. The title of the preferences window for Cangjie
+#: ../data/ibus-setup-cangjie.desktop.in.in.h:2 ../src/setup.py:55
 msgid "Cangjie Preferences"
 msgstr "倉頡偏好設定"
 
-#: ../data/ibus-setup-cangjie.desktop.in.in.h:2
+#. Tooltip for the preferences "app" for Cangjie
+#: ../data/ibus-setup-cangjie.desktop.in.in.h:4
 msgid "Set preferences for the Cangjie input method"
 msgstr "設定倉頡輸入法的偏好設定"
 
-#: ../data/ibus-setup-quick.desktop.in.in.h:1 ../src/setup/__init__.py:31
+#. The title of the preferences window for Quick
+#: ../data/ibus-setup-quick.desktop.in.in.h:2 ../src/setup.py:57
 msgid "Quick Preferences"
 msgstr "速成偏好設定"
 
-#: ../data/ibus-setup-quick.desktop.in.in.h:2
+#. Tooltip for the preferences "app" for Quick
+#: ../data/ibus-setup-quick.desktop.in.in.h:4
 msgid "Set preferences for the Quick input method"
 msgstr "設定速成輸入法的偏好設定"
 
-#: ../data/setup.ui.h:1
+#. We support versions 3 and 5 of Cangjie. Most people will think version 3 is
+#. the 'standard' one as it is the one used on Windows
+#: ../data/setup.ui.h:2
 msgid "Standard (Version 3)"
 msgstr "標準 (倉三)"
 
-#: ../data/setup.ui.h:2
+#. We support versions 3 and 5 of Cangjie. Version 5 is the newer, supposedly
+#. better version, but most people use version 3.
+#: ../data/setup.ui.h:4
 msgid "Updated (Version 5)"
 msgstr "新版 (倉五)"
 
-#: ../data/setup.ui.h:3
+#. We support versions 3 and 5 of Cangjie, this option lets users choose the
+#. one they prefer using.
+#: ../data/setup.ui.h:6
 msgid "Input Method Version"
 msgstr "輸入法版本"
 
-#: ../data/setup.ui.h:4
-msgid "Simplified Chinese"
-msgstr "簡體中文"
+#. This is just some text to explain what the other options do.
+#: ../data/setup.ui.h:8
+msgid ""
+"Only characters common in Hong Kong can be inputted by default.\n"
+"The following additional characters can be enabled:"
+msgstr "預設情況下只能輸入香港常用字。\n可以額外啟用下列額字元："
 
-#: ../src/config.py:36
+#. The Taiwanese Zhuyin alphabet is known under two names in English.
+#. Obviously, if it only has one name in your language, don't try to keep two
+#. alternative names here.
+#: ../data/setup.ui.h:11
+msgid "Zhuyin / Bopomofo"
+msgstr "注音符號"
+
+#: ../data/setup.ui.h:12
+msgid "Japanese"
+msgstr "日文"
+
+#. If they enable this option, we will return to the users some rarer Chinese
+#. characters which they most likely don't need, in addition to the ones we
+#. return by default. It should be clear that most users don't need to enable
+#. this option.
+#: ../data/setup.ui.h:14
+msgid "Rare Chinese characters"
+msgstr "罕見漢字"
+
+#. This is a list of examples. Do not translate the characters themselves,
+#. only translate it so it looks like a list of examples in your own language,
+#. but keep these characters as examples.
+#: ../data/setup.ui.h:16
+msgid "Eg. 诉, 䜣, 㻹"
+msgstr "例：诉，䜣，㻹"
+
+#: ../data/setup.ui.h:17
+msgid "Symbols"
+msgstr "符號"
+
+#. This is a list of examples. Do not translate the characters themselves,
+#. only translate it so it looks like a list of examples in your own language,
+#. but keep these characters as examples.
+#: ../data/setup.ui.h:19
+msgid "Eg. ○, ㈤, →"
+msgstr "例：○，㈤，→"
+
+#: ../src/engine.py:69
 msgid "Half-Width Characters"
 msgstr "半形字元"
