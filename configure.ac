@@ -28,6 +28,12 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE",
 # check for Python
 AM_PATH_PYTHON([3.2.3])
 
+# check for the cangjie Python module
+AC_MSG_CHECKING([the cangjie Python module])
+FOUND_PY_CANGJIE=$($PYTHON -c 'import cangjie' 2>/dev/null; echo $?)
+AS_IF([test "$FOUND_PY_CANGJIE" != 0], [AC_MSG_RESULT([no]); AC_MSG_ERROR([Please install the cangjie Python module])])
+AC_MSG_RESULT([yes])
+
 # check for IBus
 PKG_CHECK_MODULES(IBUS, [ibus-1.0 >= 1.4.1])
 AC_MSG_CHECKING(for ibus component dir)
