@@ -35,8 +35,8 @@ AS_IF([test "$FOUND_PY_CANGJIE" != 0], [AC_MSG_RESULT([no]); AC_MSG_ERROR([Pleas
 AC_MSG_RESULT([yes])
 
 # check for IBus
-PKG_CHECK_MODULES(IBUS, [ibus-1.0 >= 1.4.1])
-AC_MSG_CHECKING(for ibus component dir)
+PKG_CHECK_MODULES(IBus, [ibus-1.0 >= 1.4.1])
+AC_MSG_CHECKING(for IBus component dir)
 IBUS_COMPONENT_DIR="`$PKG_CONFIG --variable=pkgdatadir ibus-1.0`/component"
 AC_MSG_RESULT($IBUS_COMPONENT_DIR)
 
