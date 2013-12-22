@@ -40,6 +40,12 @@ AC_MSG_CHECKING(for ibus component dir)
 IBUS_COMPONENT_DIR="`$PKG_CONFIG --variable=pkgdatadir ibus-1.0`/component"
 AC_MSG_RESULT($IBUS_COMPONENT_DIR)
 
+# check for the IBus bindings
+AC_MSG_CHECKING([the IBus introspection-based bindings])
+FOUND_PY_IBUS=$($PYTHON -c 'from gi.repository import IBus' 2>/dev/null; echo $?)
+AS_IF([test "$FOUND_PY_IBUS" != 0], [AC_MSG_RESULT([no]); AC_MSG_ERROR([Please install the IBus introspection-based bindings])])
+AC_MSG_RESULT([yes])
+
 COMPONENT_DIR="${datadir}/ibus/component"
 AC_SUBST(COMPONENT_DIR)
 
