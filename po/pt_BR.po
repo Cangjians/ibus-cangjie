@@ -3,114 +3,112 @@
 # This file is distributed under the same license as the ibus-cangjie package.
 # 
 # Translators:
-# Cheng-Chia Tseng <pswo10680@gmail.com>, 2013
-# CasperLi_HK <li_waikin@hotmail.com>, 2013
-# bochecha <bochecha@fedoraproject.org>, 2013
+# Enrico Nicoletto <enrico.BR@gmx.co.uk>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: ibus-cangjie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-12-10 14:58+0800\n"
-"PO-Revision-Date: 2013-12-21 12:11+0000\n"
-"Last-Translator: bochecha <bochecha@fedoraproject.org>\n"
-"Language-Team: Chinese (Hong Kong) (http://www.transifex.com/projects/p/ibus-cangjie/language/zh_HK/)\n"
+"PO-Revision-Date: 2013-12-15 15:29+0000\n"
+"Last-Translator: Enrico Nicoletto <enrico.BR@gmx.co.uk>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/ibus-cangjie/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: zh_HK\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: ../data/cangjie.appdata.xml.in.h:1
 msgid "Cangjie"
-msgstr "倉頡"
+msgstr "Cangjie"
 
 #: ../data/cangjie.appdata.xml.in.h:2
 msgid "Cangjie input method"
-msgstr "倉頡輸入法"
+msgstr "Método de entrada Cangjie"
 
 #: ../data/cangjie.appdata.xml.in.h:3
 msgid ""
 "Cangjie is a radical-based input method, designed to input both Traditional "
 "and Simplified Chinese, as well as Japanese."
-msgstr "倉頡是分部型輸入法，專為輸入繁體和簡體中文而設，也可用來輸入日文。"
+msgstr "Cangjie é um método de entrada baseado no radical da palavra, projetado para permitir a entrada de caracteres tanto de Chinês Tradicional quanto de Chinês Simplificado, bem como de Japonês."
 
 #: ../data/cangjie.appdata.xml.in.h:4 ../data/quick.appdata.xml.in.h:4
 msgid ""
 "As it is rarely used outside of Hong Kong (where it is one of the two most "
 "used input methods), we strive to provide the best input experience for "
 "people of the SAR by default, but provide useful options for others."
-msgstr "由於它很少被使用在香港之外 (在香港，它是兩種最常用的輸入方法之一) ，种以我們努力提供最佳的默認輸入體驗給大部分香港人，但你也可透過改變選項來得到你想要的輸入體驗。"
+msgstr "Já que tal método é dificilmente usado fora de Hong Kong (onde este é um dos dois métodos de entrada mais usados), nos empenhamos a oferecer, por padrão, a melhor experiência de método de entrada para as pessoas desta região administrativa especial, mas também é oferecido opções úteis para os outros."
 
 #: ../data/quick.appdata.xml.in.h:1
 msgid "Quick"
-msgstr "速成"
+msgstr "Rápido"
 
 #: ../data/quick.appdata.xml.in.h:2
 msgid "Quick input method"
-msgstr "速成輸入法"
+msgstr "Método rápido de entrada"
 
 #: ../data/quick.appdata.xml.in.h:3
 msgid ""
 "Quick (also known as “Simplified Cangjie”) is a radical-based input method, "
 "designed to input both Traditional and Simplified Chinese, as well as "
 "Japanese."
-msgstr "速成 (又名\"快速倉頡\") 是分部型輸入法，專為輸入繁體和簡體中文而設，也可用來輸入日文。"
+msgstr "Rápido (também conhecido como “Cangjie Simplificado”) é um método de entrada baseado no radical da palavra, projetado para permitir a entrada de caracteres tanto de Chinês Tradicional quanto de Chinês Simplificado, bem como de Japonês."
 
 #. The title of the preferences window for Cangjie
 #: ../data/ibus-setup-cangjie.desktop.in.in.h:2 ../src/setup.py:55
 msgid "Cangjie Preferences"
-msgstr "倉頡偏好設定"
+msgstr "Preferências do Cangjie"
 
 #. Tooltip for the preferences "app" for Cangjie
 #: ../data/ibus-setup-cangjie.desktop.in.in.h:4
 msgid "Set preferences for the Cangjie input method"
-msgstr "設定倉頡輸入法的偏好設定"
+msgstr "Define as preferências para o método de entrada Cangjie"
 
 #. The title of the preferences window for Quick
 #: ../data/ibus-setup-quick.desktop.in.in.h:2 ../src/setup.py:57
 msgid "Quick Preferences"
-msgstr "速成偏好設定"
+msgstr "Preferências rápidas"
 
 #. Tooltip for the preferences "app" for Quick
 #: ../data/ibus-setup-quick.desktop.in.in.h:4
 msgid "Set preferences for the Quick input method"
-msgstr "設定速成輸入法的偏好設定"
+msgstr "Define as preferências para o método de entrada rápido"
 
 #. We support versions 3 and 5 of Cangjie. Most people will think version 3 is
 #. the 'standard' one as it is the one used on Windows
 #: ../data/setup.ui.h:2
 msgid "Standard (Version 3)"
-msgstr "標準 (倉三)"
+msgstr "Padrão (Versão 3)"
 
 #. We support versions 3 and 5 of Cangjie. Version 5 is the newer, supposedly
 #. better version, but most people use version 3.
 #: ../data/setup.ui.h:4
 msgid "Updated (Version 5)"
-msgstr "新版 (倉五)"
+msgstr "Atualizado (Versão 5)"
 
 #. We support versions 3 and 5 of Cangjie, this option lets users choose the
 #. one they prefer using.
 #: ../data/setup.ui.h:6
 msgid "Input Method Version"
-msgstr "輸入法版本"
+msgstr "Versão do método de entrada"
 
 #. This is just some text to explain what the other options do.
 #: ../data/setup.ui.h:8
 msgid ""
 "Only characters common in Hong Kong can be inputted by default.\n"
 "The following additional characters can be enabled:"
-msgstr "只有常見於香港的字符可以被默認輸入。\n以下附加字符可以被啟用："
+msgstr "Por padrão, apenas caracteres comuns em Hong Kong podem ser inseridos.\nOs seguintes caracteres adicionais podem ser habilitados:"
 
 #. The Taiwanese Zhuyin alphabet is known under two names in English.
 #. Obviously, if it only has one name in your language, don't try to keep two
 #. alternative names here.
 #: ../data/setup.ui.h:11
 msgid "Zhuyin / Bopomofo"
-msgstr "注音 / 漢語拼音"
+msgstr "Zhuyin / Bopomofo"
 
 #: ../data/setup.ui.h:12
 msgid "Japanese"
-msgstr "日文"
+msgstr "Japonês"
 
 #. If they enable this option, we will return to the users some rarer Chinese
 #. characters which they most likely don't need, in addition to the ones we
@@ -118,26 +116,26 @@ msgstr "日文"
 #. this option.
 #: ../data/setup.ui.h:14
 msgid "Rare Chinese characters"
-msgstr "罕見的中文字"
+msgstr "Caracteres chineses raros"
 
 #. This is a list of examples. Do not translate the characters themselves,
 #. only translate it so it looks like a list of examples in your own language,
 #. but keep these characters as examples.
 #: ../data/setup.ui.h:16
 msgid "Eg. 诉, 䜣, 㻹"
-msgstr "例如：诉，䜣，㻹"
+msgstr "Ex.: 诉, 䜣, 㻹"
 
 #: ../data/setup.ui.h:17
 msgid "Symbols"
-msgstr "符號"
+msgstr "Símbolos"
 
 #. This is a list of examples. Do not translate the characters themselves,
 #. only translate it so it looks like a list of examples in your own language,
 #. but keep these characters as examples.
 #: ../data/setup.ui.h:19
 msgid "Eg. ○, ㈤, →"
-msgstr "例如：○，㈤，→"
+msgstr "Ex.: ○, ㈤, →"
 
 #: ../src/engine.py:69
 msgid "Half-Width Characters"
-msgstr "半形字元"
+msgstr "Caracteres de meia largura"
