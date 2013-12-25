@@ -127,6 +127,7 @@ EXTRA_DIST = \
 	$(desktop_in_in_files) \
 	$(gsettings_in_files) \
 	$(icon_files) \
+	README.md \
 	$(wildcard $(srcdir)/scripts/*.in) \
 	tests/run_tests.in \
 	tests/__init__.py \

@@ -1,5 +1,5 @@
 AC_PREREQ(2.63)
-AC_INIT([ibus-cangjie], [1.0], [https://github.com/bochecha/ibus-cangjie], [ibus-cangjie])
+AC_INIT([ibus-cangjie], [2.0], [https://github.com/Cangjians/ibus-cangjie/issues], [ibus-cangjie], [https://github.com/Cangjians/ibus-cangjie])
 
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
@@ -28,11 +28,23 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE",
 # check for Python
 AM_PATH_PYTHON([3.2.3])
 
+# check for the cangjie Python module
+AC_MSG_CHECKING([the cangjie Python module])
+FOUND_PY_CANGJIE=$($PYTHON -c 'import cangjie' 2>/dev/null; echo $?)
+AS_IF([test "$FOUND_PY_CANGJIE" != 0], [AC_MSG_RESULT([no]); AC_MSG_ERROR([Please install the cangjie Python module])])
+AC_MSG_RESULT([yes])
+
 # check for IBus
-PKG_CHECK_MODULES(IBUS, [ibus-1.0 >= 1.4.1])
-AC_MSG_CHECKING(for ibus component dir)
+PKG_CHECK_MODULES(IBus, [ibus-1.0 >= 1.4.1])
+AC_MSG_CHECKING(for IBus component dir)
 IBUS_COMPONENT_DIR="`$PKG_CONFIG --variable=pkgdatadir ibus-1.0`/component"
 AC_MSG_RESULT($IBUS_COMPONENT_DIR)
+
+# check for the IBus bindings
+AC_MSG_CHECKING([the IBus introspection-based bindings])
+FOUND_PY_IBUS=$($PYTHON -c 'from gi.repository import IBus' 2>/dev/null; echo $?)
+AS_IF([test "$FOUND_PY_IBUS" != 0], [AC_MSG_RESULT([no]); AC_MSG_ERROR([Please install the IBus introspection-based bindings])])
+AC_MSG_RESULT([yes])
 
 COMPONENT_DIR="${datadir}/ibus/component"
 AC_SUBST(COMPONENT_DIR)
