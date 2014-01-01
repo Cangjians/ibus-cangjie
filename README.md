@@ -9,7 +9,10 @@ Note that the actual input logic is handled by
 [libcangjie](https://github.com/Cangjians/libcangjie).
 
 Development happens [on github](https://github.com/Cangjians/ibus-cangjie),
-and stable release tarballs will be available when we reach that point.
+table release tarballs can be found in
+[the download section](http://cangjians.github.io/downloads/ibus-cangjie/) of
+our website.
+
 
 ## Legalities
 
