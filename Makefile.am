@@ -82,7 +82,7 @@ TESTS = tests/run_tests
 tests/run_tests: tests/run_tests.in
 	$(MKDIR_P) tests
 	sed -e 's&@PYTHON_BIN@&$(PYTHON)&g' \
-	    -e 's&@SRCDIR@&$(srcdir)&g' $< > $@
+	    -e 's&@SRCDIR@&$(srcdir)&g' \
 	    -e 's&@BUILDDIR@&$(builddir)&g' $< > $@
 	chmod +x $@
 
