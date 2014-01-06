@@ -119,6 +119,10 @@ CLEANFILES = \
 	tests/run_tests \
 	$(NULL)
 
+clean-local:
+	-rm -rf src/__pycache__
+	-rm -rf tests/__pycache__
+
 EXTRA_DIST = \
 	autogen.sh \
 	data/setup.ui \
