@@ -117,6 +117,7 @@ CLEANFILES = \
 	$(pkglibexec_SCRIPTS) \
 	src/*.pyc \
 	tests/run_tests \
+	data/gschemas.compiled \
 	$(NULL)
 
 clean-local:
