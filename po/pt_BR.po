@@ -4,13 +4,14 @@
 # 
 # Translators:
 # Enrico Nicoletto <enrico.BR@gmx.co.uk>, 2013
+# bochecha <bochecha@fedoraproject.org>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: ibus-cangjie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-12-10 14:58+0800\n"
-"PO-Revision-Date: 2013-12-15 15:29+0000\n"
-"Last-Translator: Enrico Nicoletto <enrico.BR@gmx.co.uk>\n"
+"PO-Revision-Date: 2014-01-11 10:14+0000\n"
+"Last-Translator: bochecha <bochecha@fedoraproject.org>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/ibus-cangjie/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,18 +42,18 @@ msgstr "Já que tal método é dificilmente usado fora de Hong Kong (onde este �
 
 #: ../data/quick.appdata.xml.in.h:1
 msgid "Quick"
-msgstr "Rápido"
+msgstr "Quick"
 
 #: ../data/quick.appdata.xml.in.h:2
 msgid "Quick input method"
-msgstr "Método rápido de entrada"
+msgstr "Método de entrada Quick"
 
 #: ../data/quick.appdata.xml.in.h:3
 msgid ""
 "Quick (also known as “Simplified Cangjie”) is a radical-based input method, "
 "designed to input both Traditional and Simplified Chinese, as well as "
 "Japanese."
-msgstr "Rápido (também conhecido como “Cangjie Simplificado”) é um método de entrada baseado no radical da palavra, projetado para permitir a entrada de caracteres tanto de Chinês Tradicional quanto de Chinês Simplificado, bem como de Japonês."
+msgstr "Quick (também conhecido como “Cangjie Simplificado”) é um método de entrada baseado no radical da palavra, projetado para permitir a entrada de caracteres tanto de Chinês Tradicional quanto de Chinês Simplificado, bem como de Japonês."
 
 #. The title of the preferences window for Cangjie
 #: ../data/ibus-setup-cangjie.desktop.in.in.h:2 ../src/setup.py:55
@@ -67,12 +68,12 @@ msgstr "Define as preferências para o método de entrada Cangjie"
 #. The title of the preferences window for Quick
 #: ../data/ibus-setup-quick.desktop.in.in.h:2 ../src/setup.py:57
 msgid "Quick Preferences"
-msgstr "Preferências rápidas"
+msgstr "Preferências do Quick"
 
 #. Tooltip for the preferences "app" for Quick
 #: ../data/ibus-setup-quick.desktop.in.in.h:4
 msgid "Set preferences for the Quick input method"
-msgstr "Define as preferências para o método de entrada rápido"
+msgstr "Define as preferências para o método de entrada Quick"
 
 #. We support versions 3 and 5 of Cangjie. Most people will think version 3 is
 #. the 'standard' one as it is the one used on Windows
