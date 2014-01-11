@@ -94,9 +94,7 @@ class QuickTestCase(unittest.TestCase):
         self.assertEqual(len(self.engine._mock_auxiliary_text), 2)
         self.assertEqual(len(self.engine._mock_committed_text), 0)
         self.assertEqual(self.engine.lookuptable.get_number_of_candidates(), 0)
-
-        if os.environ["IBUS_CANGJIE_TESTS_HAVE_PYCANBERRA"] == "true":
-            self.assertEqual(len(self.engine.canberra._mock_played_events), 1)
+        self.assertEqual(len(self.engine.canberra._mock_played_events), 1)
 
     def test_nowildcard(self):
         self.engine.do_process_key_event(IBus.d, 0, 0)
