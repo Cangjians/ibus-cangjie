@@ -25,13 +25,9 @@ from operator import attrgetter
 from gi.repository import Gio
 from gi.repository import IBus
 
-try:
-    import pycanberra
-except ImportError:
-    # Too bad, the user won't get sound feedback on errors
-    pass
-
 import cangjie
+
+from .canberra import Canberra
 
 
 # FIXME: Find a way to de-hardcode the gettext package
@@ -47,6 +43,8 @@ class Engine(IBus.Engine):
     """The base class for Cangjie and Quick engines."""
     def __init__(self):
         super(Engine, self).__init__()
+
+        self.canberra = Canberra()
 
         self.settings = Gio.Settings("org.cangjians.ibus.%s" % self.__name__)
         self.settings.connect("changed", self.on_value_changed)
@@ -433,16 +431,7 @@ class Engine(IBus.Engine):
 
     def play_error_bell(self):
         """Play an error sound, to notify the user of invalid input."""
-        try:
-            if not hasattr(self, "canberra"):
-                self.canberra = pycanberra.Canberra()
-
-            self.canberra.play(1, pycanberra.CA_PROP_EVENT_ID, "dialog-error",
-                               pycanberra.CA_PROP_MEDIA_ROLE, "error", None)
-        except:
-            # Playing a sound is a nice indication for the user, but if it
-            # fails, it should never take down the input system
-            pass
+        self.canberra.play_error()
 
 
 class EngineCangjie(Engine):
