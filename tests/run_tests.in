@@ -112,9 +112,14 @@ import ibus_cangjie.canberra
 sys.modules["ibus_cangjie.canberra"].Canberra = MockCanberra
 
 
+# -- Set some environment variables for the tests ----------------------------
 # The unit tests will need this to find the settings schemas
 os.environ["GSETTINGS_SCHEMA_DIR"] = "@BUILDDIR@/data"
 subprocess.check_call(["glib-compile-schemas", os.environ["GSETTINGS_SCHEMA_DIR"]])
+
+# The unit tests will need this to find the preferences UI
+os.environ["PREFERENCES_UI_DIR"] = "@SRCDIR@/data"
+
 
 # -- Load and run our unit tests ---------------------------------------------
 loader = unittest.TestLoader()
