@@ -28,6 +28,7 @@ import unittest
 sys.path.insert(0, "@SRCDIR@")
 import src
 sys.modules["ibus_cangjie"] = src
+sys.path.pop(0)
 
 
 # -- Define some mock classes for the tests ----------------------------------
