@@ -36,3 +36,23 @@ class PrefsTestCase(unittest.TestCase):
 
         except ET.ParseError as e:
             raise AssertionError(e)
+
+    def test_ui_file_is_valid_gtk_builder(self):
+        try:
+            from gi.repository import Gtk
+
+        except RuntimeError as e:
+            # It seems on some platforms (notably, Ubuntu 12.04 where are CI
+            # is running) we can't import Gtk without a display, but on others
+            # (e.g Fedora 20) we can. There isn't much we can do except
+            # skipping this test if importing Gtk fails, but the test is still
+            # useful on those platforms where it works.
+            self.skipTest("Could not import Gtk: %s" % e)
+
+        b = Gtk.Builder()
+
+        try:
+            b.add_from_file(self.ui_file)
+
+        except Exception as e:
+            raise AssertionError(e)
