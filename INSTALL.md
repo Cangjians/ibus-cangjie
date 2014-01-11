@@ -1,7 +1,10 @@
-At the moment, ibus-cangjie is not included in any operating system, so you'll
-have to build it from source.
+## Fedora
 
-We will update these instructions as that changes.
+IBus Cangjie is included in the default Fedora repositories, so you can just
+install it with `yum`:
+```
+$ sudo yum install ibus-cangjie
+```
 
 ## Build from the sources
 
