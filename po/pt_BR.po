@@ -136,6 +136,6 @@ msgstr "Símbolos"
 msgid "Eg. ○, ㈤, →"
 msgstr "Ex.: ○, ㈤, →"
 
-#: ../src/engine.py:69
+#: ../src/engine.py:68
 msgid "Half-Width Characters"
 msgstr "Caracteres de meia largura"

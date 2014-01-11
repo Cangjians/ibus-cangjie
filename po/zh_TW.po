@@ -137,6 +137,6 @@ msgstr "符號"
 msgid "Eg. ○, ㈤, →"
 msgstr "例：○，㈤，→"
 
-#: ../src/engine.py:69
+#: ../src/engine.py:68
 msgid "Half-Width Characters"
 msgstr "半形字元"
