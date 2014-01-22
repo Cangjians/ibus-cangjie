@@ -96,9 +96,8 @@ class MockCanberra:
     def __init__(self):
         self._mock_played_events = []
 
-    def play(self, playId, *args):
-        if "dialog-error" in args:
-            self._mock_played_events.append("dialog-error")
+    def play_error(self):
+        self._mock_played_events.append("error")
 
 
 # -- Monkey patch the environment with the mock classes ----------------------
@@ -108,13 +107,8 @@ sys.modules["gi.repository.IBus"].LookupTable = MockLookupTable
 sys.modules["gi.repository.IBus"].Property = MockProperty
 sys.modules["gi.repository.IBus"].PropList = MockPropList
 
-try:
-    import pycanberra
-    sys.modules["pycanberra"].Canberra = MockCanberra
-    os.environ["IBUS_CANGJIE_TESTS_HAVE_PYCANBERRA"] = "true"
-except ImportError:
-    # Let the tests know that they shouldn't try pycanberra
-    os.environ["IBUS_CANGJIE_TESTS_HAVE_PYCANBERRA"] = "false"
+import ibus_cangjie.canberra
+sys.modules["ibus_cangjie.canberra"].Canberra = MockCanberra
 
 
 # The unit tests will need this to find the settings schemas

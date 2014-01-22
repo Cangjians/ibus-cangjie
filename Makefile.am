@@ -70,6 +70,7 @@ icon_files = $(icon16_DATA) $(iconscalable_DATA)
 # -- src/ ----------------------------
 ibus_cangjie_PYTHON = \
 	src/__init__.py \
+	src/canberra.py \
 	src/engine.py \
 	src/setup.py \
 	$(NULL)
