@@ -1,9 +1,28 @@
+## Debian Unstable / Sid
+
+IBus Cangjie is included in the default Debian repositories, so you can just
+install it with `apt-get`, as the root user:
+
+```
+# apt-get install ibus-cangjie
+```
+
 ## Fedora
 
 IBus Cangjie is included in the default Fedora repositories, so you can just
 install it with `yum`:
+
 ```
 $ sudo yum install ibus-cangjie
+```
+
+## Ubuntu 14.04
+
+IBus Cangjie is included in the default Ubuntu repositories, **starting with
+the 14.04 release**, so you can install it with `apt-get`:
+
+```
+$ sudo apt-get install ibus-cangjie
 ```
 
 ## Build from the sources
