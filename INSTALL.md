@@ -11,6 +11,7 @@ install it with `apt-get`, as the root user:
 
 IBus Cangjie is included in the default Fedora repositories, so you can just
 install it with `yum`:
+
 ```
 $ sudo yum install ibus-cangjie
 ```
