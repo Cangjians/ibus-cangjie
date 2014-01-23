@@ -123,6 +123,6 @@ msgstr ""
 msgid "Eg. ○, ㈤, →"
 msgstr ""
 
-#: ../src/engine.py:68
+#: ../src/engine.py:67
 msgid "Half-Width Characters"
 msgstr ""

@@ -202,7 +202,6 @@ The following additional characters can be enabled:</property>
                     <property name="can_focus">False</property>
                     <property name="xalign">0</property>
                     <property name="xpad">25</property>
-                    <property name="label" translatable="yes">
                     <property name="label" translatable="yes" comments="This is a list of examples. Do not translate the characters themselves, only translate it so it looks like a list of examples in your own language, but keep these characters as examples.">Eg. 诉, 䜣, 㻹</property>
                     <attributes>
                       <attribute name="foreground" value="#88888a8a8484"/>
