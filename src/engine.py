@@ -36,7 +36,8 @@ _ = lambda x: gettext.dgettext("ibus-cangjie", x)
 
 def is_inputnumber(keyval):
     """Is the `keyval` param a numeric input, e.g to select a candidate."""
-    return keyval in range(getattr(IBus, "0"), getattr(IBus, "9")+1)
+    return ((keyval in range(getattr(IBus, "0"), getattr(IBus, "9")+1)) or
+            (keyval in range(IBus.KP_0, IBus.KP_9+1)))
 
 
 class Engine(IBus.Engine):

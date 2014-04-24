@@ -182,3 +182,27 @@ class QuickTestCase(unittest.TestCase):
         self.assertEqual(len(self.engine._mock_auxiliary_text), 1)
         self.assertEqual(len(self.engine._mock_committed_text), 1)
         self.assertTrue(self.engine.lookuptable.get_number_of_candidates() > 1)
+
+    def test_commit_with_numpad(self):
+        self.engine.do_process_key_event(IBus.h, 0, 0)
+        self.engine.do_process_key_event(IBus.i, 0, 0)
+        self.engine.do_process_key_event(getattr(IBus, "7"), 0, 0)
+
+        self.assertEqual(len(self.engine._mock_auxiliary_text), 0)
+        self.assertEqual(len(self.engine._mock_committed_text), 1)
+        self.assertEqual(self.engine.lookuptable.get_number_of_candidates(), 0)
+
+        # Reset the committed text, but keep the value first
+        expected = self.engine._mock_committed_text[:]
+        self.engine._mock_committed_text = ''
+
+        self.engine.do_process_key_event(IBus.h, 0, 0)
+        self.engine.do_process_key_event(IBus.i, 0, 0)
+        self.engine.do_process_key_event(IBus.KP_7, 0, 0)
+
+        self.assertEqual(len(self.engine._mock_auxiliary_text), 0)
+        self.assertEqual(len(self.engine._mock_committed_text), 1)
+        self.assertEqual(self.engine.lookuptable.get_number_of_candidates(), 0)
+
+        # Now check that the same character was committed
+        self.assertEqual(expected, self.engine._mock_committed_text)
