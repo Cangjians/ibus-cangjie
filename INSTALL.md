@@ -1,3 +1,14 @@
+## Arch Linux
+
+ibus-cangjie has not been included in official repository yet, but only in AUR.
+If it works for you and you like it, please don't hesitate to vote it on
+[upvote it](https://aur.archlinux.org/packages/ibus-cangjie/).
+So you can install it with `yaourt`:
+
+```
+$ yaourt ibus-cangjie
+```
+
 ## Debian Unstable / Sid
 
 IBus Cangjie is included in the default Debian repositories, so you can just
@@ -42,7 +53,9 @@ To build IBus Cangjie, you will need the following:
 
 ### Install from a release tarball
 
-_**Note:** There are no release tarballs at this point._
+Download a release tarball from
+[the download section](http://cangjians.github.io/downloads/ibus-cangjie/) of
+our website.
 
 From the root folder of the unpacked tarball, do the usual Autotools dance:
 

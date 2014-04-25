@@ -5,13 +5,13 @@ before_install:
   # First install libcangjie
   - sudo apt-get install libsqlite3-dev
   - git clone git://github.com/Cangjians/libcangjie
-  - cd libcangjie && ./autogen.sh --prefix=/usr && make && sudo make install && cd ..
+  - cd libcangjie && git checkout 1.x && ./autogen.sh --prefix=/usr && make && sudo make install && cd ..
   - git clean -dfx
 
   # Next install pycangjie
   - sudo apt-get install cython python3-dev
   - git clone git://github.com/Cangjians/pycangjie
-  - cd pycangjie && ./autogen.sh --prefix=/usr && make && sudo make install && cd ..
+  - cd pycangjie && git checkout 1.x && ./autogen.sh --prefix=/usr && make && sudo make install && cd ..
   - git clean -dfx
 
   - sudo apt-get install autopoint intltool libibus-1.0-dev python3-gobject
