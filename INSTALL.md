@@ -27,6 +27,16 @@ install it with `yum`:
 $ sudo yum install ibus-cangjie
 ```
 
+## Gentoo
+
+IBus Cangjie is included in the Gentoo repositories. Its currently masked.
+You will need to add "app-i18n/ibus-cangjie" to your /etc/portage/package.accept_keywords 
+or use autounmask. Once unmasked install as root with :
+
+```
+$ emerge app-i18n/ibus-cangjie
+```
+
 ## Ubuntu 14.04
 
 IBus Cangjie is included in the default Ubuntu repositories, **starting with
