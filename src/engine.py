@@ -47,7 +47,8 @@ class Engine(IBus.Engine):
 
         self.canberra = Canberra()
 
-        self.settings = Gio.Settings("org.cangjians.ibus.%s" % self.__name__)
+        schema_id = "org.cangjians.ibus.%s" % self.__name__
+        self.settings = Gio.Settings(schema_id=schema_id)
         self.settings.connect("changed", self.on_value_changed)
 
         self.current_input = ""
