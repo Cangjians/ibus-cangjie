@@ -47,7 +47,8 @@ class Engine(IBus.Engine):
 
         self.canberra = Canberra()
 
-        self.settings = Gio.Settings("org.cangjians.ibus.%s" % self.__name__)
+        schema_id = "org.cangjians.ibus.%s" % self.__name__
+        self.settings = Gio.Settings(schema_id=schema_id)
         self.settings.connect("changed", self.on_value_changed)
 
         self.current_input = ""
@@ -249,7 +250,12 @@ class Engine(IBus.Engine):
                 self.get_candidates(by_shortcode=True)
 
             else:
-                self.get_candidates()
+                try:
+                    self.get_candidates()
+
+                except cangjie.errors.CangjieNoCharsError:
+                    self.play_error_bell()
+                    return True
 
         if self.lookuptable.get_number_of_candidates():
             self.do_select_candidate(1)
