@@ -20,6 +20,38 @@ import os
 import unittest
 
 
+def has_graphical():
+    """Detect if we have graphical capabilities
+
+    It is very common to run the unit tests in an environment which does not
+    have any graphical capabilities.
+
+    This is for example the case in a CI server, or when building RPMs for
+    Fedora.
+
+    This function is useful to detect these situation, so that we can
+    automatically skip the tests which can't run without.
+    """
+    try:
+        from gi.repository import Gtk
+
+    except RuntimeError as e:
+        # On some platforms (e.g Ubuntu 12.04 where our CI is running) we
+        # can't import Gtk without a display.
+        return False
+
+    # But other platforms (e.g Fedora 21) can import Gtk just fine even
+    # without a display...
+
+    from gi.repository import Gdk
+
+    if Gdk.Display.get_default() is None:
+        # ... We don't have a display
+        return False
+
+    return True
+
+
 class PrefsTestCase(unittest.TestCase):
     def setUp(self):
         self.ui_file = os.path.join(os.environ["PREFERENCES_UI_DIR"],
@@ -37,18 +69,9 @@ class PrefsTestCase(unittest.TestCase):
         except ET.ParseError as e:
             raise AssertionError(e)
 
+    @unittest.skipUnless(has_graphical(), "Can't use GtkBuilder")
     def test_ui_file_is_valid_gtk_builder(self):
-        try:
-            from gi.repository import Gtk
-
-        except RuntimeError as e:
-            # It seems on some platforms (notably, Ubuntu 12.04 where are CI
-            # is running) we can't import Gtk without a display, but on others
-            # (e.g Fedora 20) we can. There isn't much we can do except
-            # skipping this test if importing Gtk fails, but the test is still
-            # useful on those platforms where it works.
-            self.skipTest("Could not import Gtk: %s" % e)
-
+        from gi.repository import Gtk
         b = Gtk.Builder()
 
         try:

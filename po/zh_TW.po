@@ -98,7 +98,7 @@ msgstr "輸入法版本"
 msgid ""
 "Only characters common in Hong Kong can be inputted by default.\n"
 "The following additional characters can be enabled:"
-msgstr "預設情況下只能輸入香港常用字。\n可以額外啟用下列額字元："
+msgstr "預設情況下只能輸入香港常用字。\n可以額外啟用下列字元："
 
 #. The Taiwanese Zhuyin alphabet is known under two names in English.
 #. Obviously, if it only has one name in your language, don't try to keep two

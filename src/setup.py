@@ -99,6 +99,9 @@ class Setup(object):
         We need to react, in case the value was changed from somewhere else,
         for example from another setup UI.
         """
+        if key == "halfwidth-chars":
+            return
+
         if key == "version":
             new_value = self.settings.get_int(key)
 

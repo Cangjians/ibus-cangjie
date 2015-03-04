@@ -47,7 +47,8 @@ class Engine(IBus.Engine):
 
         self.canberra = Canberra()
 
-        self.settings = Gio.Settings("org.cangjians.ibus.%s" % self.__name__)
+        schema_id = "org.cangjians.ibus.%s" % self.__name__
+        self.settings = Gio.Settings(schema_id=schema_id)
         self.settings.connect("changed", self.on_value_changed)
 
         self.current_input = ""
@@ -249,7 +250,12 @@ class Engine(IBus.Engine):
                 self.get_candidates(by_shortcode=True)
 
             else:
-                self.get_candidates()
+                try:
+                    self.get_candidates()
+
+                except cangjie.errors.CangjieNoCharsError:
+                    self.play_error_bell()
+                    return True
 
         if self.lookuptable.get_number_of_candidates():
             self.do_select_candidate(1)
@@ -394,9 +400,16 @@ class Engine(IBus.Engine):
         else:
             chars = self.cangjie.get_characters_by_shortcode(code)
 
+        # Finding an element in a dict is **much** faster than in a list
+        seen = {}
+
         for c in sorted(chars, key=attrgetter("frequency"), reverse=True):
+            if c.chchar in seen:
+                continue
+
             self.lookuptable.append_candidate(IBus.Text.new_from_string(c.chchar))
             num_candidates += 1
+            seen[c.chchar] = True
 
         if num_candidates == 1:
             self.do_select_candidate(1)
