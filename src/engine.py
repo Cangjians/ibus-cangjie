@@ -434,6 +434,20 @@ class Engine(IBus.Engine):
         text = IBus.Text.new_from_string(self.current_radicals)
         super(Engine, self).update_auxiliary_text(text, len(self.current_radicals)>0)
 
+        # We don't use pre-edit at all for Cangjie or Quick
+        #
+        # However, some applications (most notably Firefox) fail to correctly
+        # position the candidate popup, as if they got confused by the absence
+        # of a pre-edit text. :(
+        #
+        # This is a horrible hack, but it fixes the immediate problem.
+        if self.current_radicals:
+            super(Engine, self).update_preedit_text(IBus.Text.new_from_string('\u200B'), 0, True)
+
+        else:
+            super(Engine, self).update_preedit_text(IBus.Text.new_from_string(''), 0, False)
+        # End of the horrible workaround
+
     def update_lookup_table(self):
         """Update the lookup table."""
         if not self.current_input:

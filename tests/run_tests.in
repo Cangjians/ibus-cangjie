@@ -47,6 +47,12 @@ class MockEngine:
         # We don't need anything here for the unit tests
         pass
 
+    def update_preedit_text(self, text, cursor_pos, visible):
+        # We don't need anything here for the unit tests
+        #
+        # We only have this for an ugly workaround.
+        pass
+
 
 class MockLookupTable:
     def __init__(self):
