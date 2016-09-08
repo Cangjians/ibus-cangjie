@@ -417,6 +417,8 @@ class Engine(IBus.Engine):
         else:
             # More than one candidate, display them
             self.update_lookup_table()
+            # Update one more to make sure the table is adjusted properly
+            self.update_lookup_table()
 
     def update_preedit_text(self):
         """Update the preedit text.
