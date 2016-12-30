@@ -1,18 +1,75 @@
 language: python
-before_install:
-  - sudo apt-get update
+sudo: required
+services:
+  - docker
+env:
+  # prevent local build until it can be properly tested in
+  # virtualenv environment
+  #- TARGET=local
+  - TARGET=docker OS=ubuntu-16.04
+  - TARGET=docker OS=fedora-25
+install:
+  - |
+    # install packages for building ibus-cangjie
+    if [ "${TARGET}" = "local" ]; then
+      sudo apt-get update
 
-  # First install libcangjie
-  - sudo apt-get install libsqlite3-dev
-  - git clone git://github.com/Cangjians/libcangjie
-  - cd libcangjie && git checkout 1.x && ./autogen.sh --prefix=/usr && make && sudo make install && cd ..
-  - git clean -dfx
+      # First install libcangjie
+      sudo apt-get install libsqlite3-dev
+      git clone git://github.com/Cangjians/libcangjie
+      cd libcangjie && git checkout 1.x && ./autogen.sh --prefix=/usr && make && sudo make install && cd ..
+      git clean -dfx
 
-  # Next install pycangjie
-  - sudo apt-get install cython python3-dev
-  - git clone git://github.com/Cangjians/pycangjie
-  - cd pycangjie && git checkout 1.x && ./autogen.sh --prefix=/usr && make && sudo make install && cd ..
-  - git clean -dfx
+      # Next install pycangjie
+      sudo apt-get install cython python3-dev
+      git clone git://github.com/Cangjians/pycangjie
+      cd pycangjie && git checkout 1.x && ./autogen.sh --prefix=/usr && make && sudo make install && cd ..
+      git clean -dfx
 
-  - sudo apt-get install autopoint intltool libibus-1.0-dev python3-gobject
-script: ./autogen.sh && make && make check && make distcheck
+      sudo apt-get install autopoint intltool libibus-1.0-dev python3-gobject
+    else
+      echo "skipped"
+    fi
+  - |
+    # build the docker image
+    if [ "${TARGET}" = "docker" ]; then
+
+      # create folder for local docker build
+      mkdir tmp
+
+      # get build-essential image of the specified OS
+      sudo docker pull "cangjians/build-essential:${OS}"
+      sudo docker tag "cangjians/build-essential:${OS}" "cangjians/build-essential:latest"
+      echo
+      echo OS=$(sudo docker run -it --rm "cangjians/build-essential:latest" -c "cat /var/version")
+      echo ---------------
+
+      # build libcangjie image
+      git clone -b docker https://github.com/Cangjians/libcangjie.git tmp/libcangjie
+      sudo docker build -t "cangjians/libcangjie" tmp/libcangjie/.
+
+      # build pycangjie image
+      git clone -b docker https://github.com/Cangjians/pycangjie.git tmp/pycangjie
+      sudo docker build -t "cangjians/pycangjie" tmp/pycangjie/.
+
+      # build ibus-cangjie image
+      sudo docker build -t "cangjians/ibus-cangjie" .
+    else
+      echo "skipped";
+    fi
+
+script:
+  - |
+    # build and test ibus-cangjie
+    if [ "${TARGET}" = "local" ]; then
+      ./autogen.sh && make && make check && make distcheck
+    else
+      echo "skipped";
+    fi
+  - |
+    # test ibus-cangjie in docker
+    if [ "${TARGET}" = "docker" ]; then
+      sudo docker run -it --rm "cangjians/ibus-cangjie" make check distcheck
+    else
+      echo "skipped";
+    fi
