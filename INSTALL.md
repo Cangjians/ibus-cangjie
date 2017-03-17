@@ -36,7 +36,22 @@ or use autounmask. Once unmasked install as root with :
 ```
 $ emerge app-i18n/ibus-cangjie
 ```
+## OpenSUSE
 
+IBus Cangjie in openSUSE is currently in M17N devel repository. We'll push it
+to the official products when time is ready.
+### openSUSE Leap 42.2
+```
+$ sudo zypper ar -f  http://download.opensuse.org/repositories/M17N/openSUSE_Leap_42.2/ M17N
+$ sudo zypper ref M17N
+$ sudo zypper in ibus-cangjie
+```
+### openSUSE Tumbleweed
+```
+$ sudo zypper ar -f http://download.opensuse.org/repositories/M17N/openSUSE_Tumbleweed/ M17N
+$ sudo zypper ref M17N
+$ sudo zypper in ibus-cangjie
+```
 ## Ubuntu 14.04
 
 IBus Cangjie is included in the default Ubuntu repositories, **starting with
