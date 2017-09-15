@@ -1,4 +1,5 @@
-FROM cangjians/pycangjie:latest
+ARG OS
+FROM cangjians/pycangjie:${OS}
 MAINTAINER Cangjians (https://cangjians.github.io)
 
 # basic environment for building
@@ -10,6 +11,3 @@ COPY "." "./"
 # build the library
 RUN ./autogen.sh --prefix=/usr && \
   make && make install
-
-ENTRYPOINT []
-CMD ["make", "check", "distcheck"]
