@@ -3,9 +3,10 @@ sudo: required
 services:
   - docker
 env:
-  - OS=ubuntu-16.04
-  - OS=fedora-25
-  - OS=opensuse-leap
+  - OS=fedora-latest
+  - OS=ubuntu-devel
+  - OS=ubuntu-latest
+  - OS=ubuntu-lts
 install:
   - sudo apt-get update && sudo apt-get -y install docker-ce
   - sudo docker pull "cangjians/pycangjie:${OS}"
