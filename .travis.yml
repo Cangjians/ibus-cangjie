@@ -12,4 +12,4 @@ install:
   - sudo docker tag "cangjians/pycangjie:${OS}" "cangjians/pycangjie:latest"
   - sudo docker build --build-arg OS=${OS} -t "cangjians/ibus-cangjie:${OS}" .
 script:
-  - sudo docker run -it --rm "cangjians/ibus-cangjie:${OS}" make check distcheck
+  - sudo docker run -it --rm "cangjians/ibus-cangjie:${OS}" make distcheck
