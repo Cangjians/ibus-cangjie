@@ -1,5 +1,8 @@
 language: c
 sudo: required
+branches:
+  only:
+    - master
 services:
   - docker
 env:
