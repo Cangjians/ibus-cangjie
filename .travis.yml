@@ -3,18 +3,17 @@ sudo: required
 branches:
   only:
     - master
-services:
-  - docker
 env:
   - OS=fedora-latest
   - OS=ubuntu-devel
   - OS=ubuntu-latest
   - OS=ubuntu-lts
-install:
+services:
+  - docker
+before_install:
   - sudo apt-get update && sudo apt-get -y install docker-ce
-  - sudo docker pull "cangjians/pycangjie:${OS}"
-  - sudo docker tag "cangjians/pycangjie:${OS}" "cangjians/pycangjie:latest"
-  - sudo docker build --build-arg OS=${OS} -t "cangjians/ibus-cangjie:${OS}" .
+  - docker pull "cangjians/pycangjie:${OS}"
+  - docker build --build-arg OS=${OS} --tag "cangjians/ibus-cangjie:${OS}" .
 script:
   - docker run --rm "cangjians/ibus-cangjie:${OS}" bash -c '. /usr/lib/os-release && echo $PRETTY_NAME'
-  - sudo docker run -it --rm "cangjians/ibus-cangjie:${OS}" make distcheck
+  - docker run --rm "cangjians/ibus-cangjie:${OS}" make distcheck
