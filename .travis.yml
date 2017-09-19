@@ -1,18 +1,19 @@
-language: python
+language: c
+sudo: required
+branches:
+  only:
+    - master
+env:
+  - OS=fedora-latest
+  - OS=ubuntu-devel
+  - OS=ubuntu-latest
+  - OS=ubuntu-lts
+services:
+  - docker
 before_install:
-  - sudo apt-get update
-
-  # First install libcangjie
-  - sudo apt-get install libsqlite3-dev
-  - git clone git://github.com/Cangjians/libcangjie
-  - cd libcangjie && git checkout 1.x && ./autogen.sh --prefix=/usr && make && sudo make install && cd ..
-  - git clean -dfx
-
-  # Next install pycangjie
-  - sudo apt-get install cython python3-dev
-  - git clone git://github.com/Cangjians/pycangjie
-  - cd pycangjie && git checkout 1.x && ./autogen.sh --prefix=/usr && make && sudo make install && cd ..
-  - git clean -dfx
-
-  - sudo apt-get install autopoint intltool libibus-1.0-dev python3-gobject
-script: ./autogen.sh && make && make check && make distcheck
+  - sudo apt-get update && sudo apt-get -y install docker-ce
+  - docker pull "cangjians/pycangjie:${OS}"
+  - docker build --build-arg OS=${OS} --tag "cangjians/ibus-cangjie:${OS}" .
+script:
+  - docker run --rm "cangjians/ibus-cangjie:${OS}" bash -c '. /usr/lib/os-release && echo $PRETTY_NAME'
+  - docker run --rm "cangjians/ibus-cangjie:${OS}" make distcheck
