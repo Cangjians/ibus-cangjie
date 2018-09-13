@@ -10,4 +10,4 @@ Terminal=false
 Type=Application
 StartupNotify=true
 Categories=Settings;
-NotShowIn=GNOME;
+NoDisplay=true
