@@ -33,6 +33,8 @@ def has_graphical():
     automatically skip the tests which can't run without.
     """
     try:
+        import gi
+        gi.require_version('Gtk', '3.0')
         from gi.repository import Gtk
 
     except RuntimeError as e:
@@ -43,6 +45,7 @@ def has_graphical():
     # But other platforms (e.g Fedora 21) can import Gtk just fine even
     # without a display...
 
+    gi.require_version('Gdk', '3.0')
     from gi.repository import Gdk
 
     if Gdk.Display.get_default() is None:

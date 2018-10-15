@@ -22,6 +22,9 @@ __all__ = ["EngineCangjie", "EngineQuick"]
 import gettext
 from operator import attrgetter
 
+import gi
+gi.require_version('IBus','1.0')
+
 from gi.repository import Gio
 from gi.repository import IBus
 
