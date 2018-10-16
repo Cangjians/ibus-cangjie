@@ -16,6 +16,9 @@
 # along with ibus-cangjie.  If not, see <http://www.gnu.org/licenses/>.
 
 
+import gi
+gi.require_version('IBus','1.0')
+
 from gi.repository import GLib
 from gi.repository import GObject
 from gi.repository import IBus
