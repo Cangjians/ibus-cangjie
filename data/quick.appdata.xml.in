@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<application>
-  <id type="inputmethod">quick.xml</id>
-  <licence>CC0</licence>
+<component type="inputmethod">
+  <id>quick.xml</id>
+  <metadata_license>CC0-1.0</metadata_license>
   <_name>Quick</_name>
   <_summary>Quick input method</_summary>
   <description>
@@ -13,6 +13,6 @@
        experience for people of the SAR by default, but provide useful options
        for others.</_p>
   </description>
-  <url type="homepage">http://cangjians.github.io/ibus-cangjie</url>
-  <updatecontact>hklug@googlegroups.com</updatecontact>
-</application>
+  <url type="homepage">https://cangjians.github.io/projects/ibus-cangjie/</url>
+  <update_contact>hklug@googlegroups.com</update_contact>
+</component>

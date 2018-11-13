@@ -28,7 +28,7 @@ ibus_cangjie_datadir = $(pkgdatadir)
 @INTLTOOL_XML_RULE@
 appdata_in_files = data/cangjie.appdata.xml.in data/quick.appdata.xml.in
 appdata_DATA = $(appdata_in_files:.xml.in=.xml)
-appdatadir = $(datadir)/appdata
+appdatadir = $(datadir)/metainfo
 
 component_in_in_files = data/cangjie.xml.in.in data/quick.xml.in.in
 component_DATA = $(component_in_in_files:.xml.in.in=.xml)
