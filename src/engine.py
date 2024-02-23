@@ -292,7 +292,8 @@ class Engine(IBus.Engine):
         """
         page_index = self.lookuptable.get_cursor_pos()
         selected = self.lookuptable.get_candidate(page_index+index-1)
-        self.commit_text(selected)
+        selected_text = selected.get_text()
+        self.commit_text(IBus.Text.new_from_string(selected_text[0]))
         self.clear_current_input()
         return True
 
@@ -410,7 +411,22 @@ class Engine(IBus.Engine):
             if c.chchar in seen:
                 continue
 
-            self.lookuptable.append_candidate(IBus.Text.new_from_string(c.chchar))
+            if (self.__name__ == "cangjie") \
+               and (len(code) == 3) and code[1] == '*':
+                 long_code = ""
+                 try:
+                     for ch in c.code:
+                          long_code += self.cangjie.get_radical(ch)
+                     self.lookuptable.append_candidate(
+                         IBus.Text.new_from_string(c.chchar +"  "+long_code))
+                        
+                 except cangjie.errors.CangjieInvalidInputError:
+                         self.lookuptable.append_candidate(
+                             IBus.Text.new_from_string(c.chchar))
+            else:
+                 self.lookuptable.append_candidate(
+                     IBus.Text.new_from_string(c.chchar))
+                 
             num_candidates += 1
             seen[c.chchar] = True
 
