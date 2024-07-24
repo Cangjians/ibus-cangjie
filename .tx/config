@@ -1,8 +1,0 @@
-[main]
-host = https://www.transifex.com
-
-[ibus-cangjie.ibus-cangjie]
-host = https://www.transifex.com
-source_lang = en_US
-file_filter = po/<lang>.po
-source_file = po/ibus-cangjie.pot

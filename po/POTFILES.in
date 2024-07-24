@@ -1,7 +1,0 @@
-data/cangjie.appdata.xml.in
-data/quick.appdata.xml.in
-data/ibus-setup-cangjie.desktop.in.in
-data/ibus-setup-quick.desktop.in.in
-[type: gettext/glade]data/setup.ui
-src/engine.py
-src/setup.py

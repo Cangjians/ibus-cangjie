@@ -1,3 +1,0 @@
-#!/bin/sh
-
-docker build --build-arg OS=${DOCKER_TAG} -t ${IMAGE_NAME} .
