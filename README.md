@@ -16,8 +16,6 @@ escape=toggle off on engine
 
 left shift=change caps (workaround)
 
-type "'" = ,+right shift
-
 
 But let me show you that on camera: 
 
